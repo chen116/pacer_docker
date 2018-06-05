@@ -1,7 +1,7 @@
 import os
 from ctypes import cdll
 # import ctypes
-import sysv_ipc
+#import sysv_ipc
 import sys
 import docker
 import time
@@ -25,8 +25,10 @@ for x in (client.containers.list(all=True)):
 	print("rm:",x.name)
 	x.remove(force=True)
 vicid={"VIC_SHM_ID":str(1024)}
-container = client.containers.run('pyopcl',runtime='nvidia',environment=vicid,ipc_mode='host',cpu_period=int(1e5),cpu_quota=int(1e5),name="v1",detach=False)
+container = client.containers.run('pyopcl',runtime='nvidia',environment=vicid,ipc_mode='host',cpu_period=int(1e5),cpu_quota=int(1e5),name="v1",detach=False)#,tty=True)
+#container.logs()
+#,detach=True)
 
 
-
+# to see stdout... $ docker logs v1(or whatever the name is)
 
