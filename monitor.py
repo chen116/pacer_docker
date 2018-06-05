@@ -15,6 +15,25 @@ import _thread
 # hb.heartbeat_finish()
 # bodytrack /benches/parsec-vic/sequenceB_261/ 4 261 3000 8 2 4 1
 
+
+
+client = docker.from_env()
+cs=[]
+# remove container with same name
+for x in (client.containers.list(all=True)):
+	print("rm:",x.name)
+	x.remove(force=True)
+vicid={"VIC_SHM_ID":str(1024)}
+container = client.containers.run('pyopcl',runtime='nvidia',environment=vicid,ipc_mode='host',cpu_period=int(1e5),cpu_quota=int(1e5),name="v1",detach=False)#,tty=True)
+#container.logs()
+#,detach=True)
+
+
+# to see stdout... $ docker logs v1(or whatever the name is)
+
+
+
+
 shmlib = cdll.LoadLibrary('./shmlib.so')
 ids = [1024]#, 4000, 5000]
 lenn = len(ids)
@@ -55,20 +74,6 @@ for i in range(lenn):
 		hr = shmlib.get_hr(p,tmp_index)/1e6
 		shmlib.get_ts.restype = ctypes.c_int64
 		ts = shmlib.get_ts(p,tmp_index)
-		print("meow",ts,hr,tmp_index)
+		print("meow",ts,1/hr,tmp_index)
 
-exit()
-client = docker.from_env()
-cs=[]
-# remove container with same name
-for x in (client.containers.list(all=True)):
-	print("rm:",x.name)
-	x.remove(force=True)
-vicid={"VIC_SHM_ID":str(1024)}
-container = client.containers.run('pyopcl',runtime='nvidia',environment=vicid,ipc_mode='host',cpu_period=int(1e5),cpu_quota=int(1e5),name="v1",detach=False)#,tty=True)
-#container.logs()
-#,detach=True)
-
-
-# to see stdout... $ docker logs v1(or whatever the name is)
 
