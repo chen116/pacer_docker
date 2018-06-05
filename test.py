@@ -8,19 +8,24 @@ import os
 import heartbeat
 shm_id = int(os.environ['VIC_SHM_ID'])
 window_size_hr=5
+print('creating hb')
+ts=time.time()
 hb = heartbeat.Heartbeat(shm_id,window_size_hr,100,"vic.log",10,100)
+print('time took to create hb',time.time()-ts)
 #hb.heartbeat_beat()
 #print(hb.get_instant_heartrate())
 
 
 #this line would create a context
-cntxt = cl.create_some_context(answers=['0'])
+cntxt = cl.create_some_context(answers=['0'],interactive=False)
 #now create a command queue in the context
 queue = cl.CommandQueue(cntxt)
+num_ele=1001
 # create some data array to give as input to Kernel and get output
-num1 = np.array(range(1000), dtype=np.int32)
-num2 = np.array(range(1000), dtype=np.int32)
+num1 = np.array(range(num_ele), dtype=np.int32)
+num2 = np.array(range(num_ele), dtype=np.int32)
 out = np.empty(num1.shape, dtype=np.int32)
+print("correct answer",num1[-1]**3+num2[-1]**3)
 ts=time.time()
 ans=[]
 hb.heartbeat_beat()
