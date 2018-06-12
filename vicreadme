@@ -1,0 +1,11 @@
+ Ubuntu 16.04:
+
+
+ Docker:
+
+ Version:      18.03.1-ce
+ API version:  1.37
+ Go version:   go1.9.5
+
+
+ Go read Dockerfile to see how to run
