@@ -26,6 +26,7 @@ RUN apt update && apt install -y freeglut3-dev && apt -y install libxmu-dev libx
 
 RUN apt-get -y install python3-pip && pip3 install numpy && pip3 install pycuda
 
+COPY test.py test.py
 
 
 RUN mkdir /tmp/gpu-deployment-kit && cd /tmp/gpu-deployment-kit && \
