@@ -6,6 +6,7 @@ LABEL maintainer "NVIDIA CORPORATION <cudatools@nvidia.com>"
 
 #RUN apt-get update && apt-get install -y git && git clone https://github.com/welcheb/CUDA_examples.git && git clone https://github.com/zchee/cuda-sample.git
 #RUN apt-get install nano
+RUN apt update && apt install -y freeglut3-dev && apt -y install libxmu-dev libxi-dev
 
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
