@@ -22,7 +22,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         cuda-driver-dev-$CUDA_PKG_VERSION && \
     cd /tmp && apt-get download gpu-deployment-kit && \
     rm -rf /var/lib/apt/lists/*
-RUN apt update && apt install -y freeglut3-dev && apt -y install libxmu-dev libxi-dev && apt-get -y install python3-pip && pip3 install numpy && pip3 install pycuda && apt -y install nano
+RUN apt update && apt install -y freeglut3-dev && apt -y install libxmu-dev libxi-dev && apt -y install nano
+
+RUN apt-get -y install python3-pip && pip3 install numpy && pip3 install pycuda
 
 
 
