@@ -8,6 +8,14 @@ LABEL maintainer "NVIDIA CORPORATION <cudatools@nvidia.com>"
 #RUN apt-get install nano
 
 
+RUN apt update && apt install -y freeglut3-dev && apt -y install libxmu-dev libxi-dev && apt -y install nano
+
+RUN apt-get -y install python3-pip && pip3 install numpy && pip3 install pycuda
+
+COPY test.py test.py
+
+
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
         cuda-core-$CUDA_PKG_VERSION \
         cuda-misc-headers-$CUDA_PKG_VERSION \
@@ -22,11 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         cuda-driver-dev-$CUDA_PKG_VERSION && \
     cd /tmp && apt-get download gpu-deployment-kit && \
     rm -rf /var/lib/apt/lists/*
-RUN apt update && apt install -y freeglut3-dev && apt -y install libxmu-dev libxi-dev && apt -y install nano
 
-RUN apt-get -y install python3-pip && pip3 install numpy && pip3 install pycuda
-
-COPY test.py test.py
 
 
 RUN mkdir /tmp/gpu-deployment-kit && cd /tmp/gpu-deployment-kit && \
