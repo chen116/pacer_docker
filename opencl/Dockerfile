@@ -22,10 +22,18 @@ RUN apt -y install python3-dev && wget http://semanchuk.com/philip/sysv_ipc/sysv
 RUN apt-get update
 RUN apt -y install git
 RUN git clone https://github.com/libheartbeats/heartbeats.git
+
+
 #COPY heartbeats /heartbeats
 RUN cd heartbeats && mkdir hbed
 ENV HEARTBEAT_ENABLED_DIR /heartbeats/hbed
 RUN cd heartbeats && make clean && make uninstall && make && make install && ldconfig 
+
+
+RUN apt -y install cmake-gui
+RUN git clone https://github.com/intel/opencl-intercept-layer.git
+RUN cd opencl-intercept-layer && cmake . && make
+
 
 
 COPY shmlib.c shmlib.c
