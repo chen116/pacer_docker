@@ -25,9 +25,10 @@ RUN apt -y install wget
 RUN apt -y install python3-dev && wget http://semanchuk.com/philip/sysv_ipc/sysv_ipc-1.0.0.tar.gz && tar -xzf sysv_ipc-1.0.0.tar.gz && cd sysv_ipc-1.0.0 && python3 setup.py install
 RUN apt-get update
 RUN apt -y install git
+
+
+# HEARTBEATS
 RUN git clone https://github.com/libheartbeats/heartbeats.git
-
-
 #COPY heartbeats /heartbeats
 RUN cd heartbeats && mkdir hbed
 ENV HEARTBEAT_ENABLED_DIR /heartbeats/hbed
@@ -58,7 +59,7 @@ COPY test.py test.py
 #COPY openclcuda /openclcuda
 
 
-
+#OPENCL-INTERPCEPT
 
 
 RUN git clone https://github.com/chen116/opencl-intercept-layer.git && cd opencl-intercept-layer && mkdir build && cd build && cmake .. && make
