@@ -114,7 +114,14 @@ int main(void){
     /* Send data back to the connected socket */
     /******************************************/
     memset(buf, 0, 256);
-    strcpy(buf, DATA);      
+    strcpy(buf, DATA);    
+
+char vic;
+puts ("Enter text. Include a dot ('.') in a sentence to exit:");
+do {
+vic=getchar();
+putchar(vic);
+} while (vic != '.');               // for loop execution
     printf("Sending data...\n");
     rc = send(client_sock, buf, strlen(buf), 0);
     if (rc == -1) {
