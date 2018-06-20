@@ -123,10 +123,10 @@ int main(void){
 
     puts ("Enter text. Include a dot ('.') in a sentence to exit:");
     
-    do {
-    vic=getchar();
-    putchar(vic);
-    } while (vic != '.');               // for loop execution
+    // do {
+    // vic=getchar();
+    // putchar(vic);
+    // } while (vic != '.');               // for loop execution
         printf("Sending data...\n");
         rc = send(client_sock, buf, strlen(buf), 0);
         if (rc == -1) {
