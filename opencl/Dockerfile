@@ -62,7 +62,7 @@ RUN make
 #OPENCL-INTERPCEPT
 
 
-RUN pwd 
+RUN ls /usr/
 RUN git clone https://github.com/chen116/opencl-intercept-layer.git && cd opencl-intercept-layer && mkdir build && cd build && cmake .. && make 
 
 RUN cp /opencl-intercept-layer/vic/clintercept.conf ~/
