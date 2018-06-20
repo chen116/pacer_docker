@@ -10,6 +10,10 @@
 # to have a bash in container, rmb to change CMD below
 # nano Dockerfile && sudo docker build -t pyopcl . && sudo docker run --runtime=nvidia -e "VIC_SHM_ID=1024" -ti --rm pyopcl /bin/bash
 
+
+
+# sudo docker build -t pyopcl .  && sudo docker run --runtime=nvidia -v /home/eeb205/unixsoc/:/foo -e "VIC_SHM_ID=1024" -ti --rm pyopcl /bin/bash
+
 FROM nvidia/opencl:runtime-ubuntu16.04
 RUN apt-get update
 RUN apt -y install apt-utils
