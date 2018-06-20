@@ -32,7 +32,7 @@ mnt = docker.types.IPAMPool('/foo', '/home/eeb205/pacer_docker/ipc/')
 
 
 # container = client.containers.run('pyopcl',runtime='nvidia',environment=vicid,ipc_mode='host',cpu_period=int(1e5),cpu_quota=int(1e5),name="v1",detach=False)#,tty=True)
-container = client.containers.run('pyopcl',mounts=mnt,runtime='nvidia',environment=vicid,ipc_mode='host',cpu_period=int(1e5),cpu_quota=int(1e5),name="v1",detach=True)#,tty=True)
+container = client.containers.run('pyopcl',mounts=[mnt],runtime='nvidia',environment=vicid,ipc_mode='host',cpu_period=int(1e5),cpu_quota=int(1e5),name="v1",detach=True)#,tty=True)
 # https://docker-py.readthedocs.io/en/stable/containers.html
 
 #container.logs()
