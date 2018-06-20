@@ -87,23 +87,23 @@ int main(void){
         /****************************************/
         /* Get the name of the connected socket */
         /****************************************/
-        len = sizeof(client_sockaddr);
-        rc = getpeername(client_sock, (struct sockaddr *) &client_sockaddr, &len);
-        if (rc == -1){
-            printf("GETPEERNAME ERROR: %d\n", 99);
-            close(server_sock);
-            close(client_sock);
-            exit(1);
-        }
-        else {
-            printf("Client socket filepath: %s\n", client_sockaddr.sun_path);
-        }
+        // len = sizeof(client_sockaddr);
+        // rc = getpeername(client_sock, (struct sockaddr *) &client_sockaddr, &len);
+        // if (rc == -1){
+        //     printf("GETPEERNAME ERROR: %d\n", 99);
+        //     close(server_sock);
+        //     close(client_sock);
+        //     exit(1);
+        // }
+        // else {
+        //     printf("Client socket filepath: %s\n", client_sockaddr.sun_path);
+        // }
         
         /************************************/
         /* Read and print the data          */
         /* incoming on the connected socket */
         /************************************/
-        printf("waiting to read...\n");
+        // printf("waiting to read...\n");
         bytes_rec = recv(client_sock, buf, sizeof(buf), 0);
         if (bytes_rec == -1){
             printf("RECV ERROR: %d\n", 99);
@@ -111,9 +111,9 @@ int main(void){
             close(client_sock);
             exit(1);
         }
-        else {
-            printf("DATA RECEIVED = %s\n", buf);
-        }
+        // else {
+        //     printf("DATA RECEIVED = %s\n", buf);
+        // }
         
         /******************************************/
         /* Send data back to the connected socket */
@@ -122,13 +122,13 @@ int main(void){
         strcpy(buf, DATA);    
 
 
-    puts ("Enter text. Include a dot ('.') in a sentence to exit:");
+    // puts ("Enter text. Include a dot ('.') in a sentence to exit:");
 
     // do {
     // vic=getchar();
     // putchar(vic);
     // } while (vic != '.');               // for loop execution
-        printf("Sending data...\n");
+        // printf("Sending data...\n");
         rc = send(client_sock, buf, strlen(buf), 0);
         if (rc == -1) {
             printf("SEND ERROR: %d", 99);
