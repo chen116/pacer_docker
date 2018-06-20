@@ -35,7 +35,7 @@ RUN cd heartbeats && make clean && make uninstall && make && make install && ldc
 
 
 RUN apt -y install cmake-gui
-RUN git clone https://github.com/intel/opencl-intercept-layer.git
+RUN git clone https://github.com/chen116/opencl-intercept-layer.git
 #RUN cd opencl-intercept-layer && mkdir build && cd build && cmake .. && make
 
 VOLUME /foo
