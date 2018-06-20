@@ -29,6 +29,7 @@ container = client.containers.run('pyopcl',runtime='nvidia',environment=vicid,ip
 #,detach=True)
 
 
+
 # to see stdout... $ docker logs v1(or whatever the name is)
 
 
