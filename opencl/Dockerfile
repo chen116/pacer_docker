@@ -42,7 +42,7 @@ RUN apt -y install cmake-gui
 
 RUN apt -y install nano
 
-RUN git clone https://github.com/smistad/OpenCL-Getting-Started.git && cd OpenCL-Getting-Started && make
+RUN git clone https://github.com/smistad/OpenCL-Getting-Started.git && cd OpenCL-Getting-Started && make 
 
 
 VOLUME /foo
@@ -61,8 +61,8 @@ COPY test.py test.py
 
 #OPENCL-INTERPCEPT
 
-
-RUN git clone https://github.com/chen116/opencl-intercept-layer.git && cd opencl-intercept-layer && mkdir build && cd build && cmake .. && make
+RUN ls
+RUN git clone https://github.com/chen116/opencl-intercept-layer.git && cd opencl-intercept-layer && mkdir build && cd build && cmake .. && make 
 
 RUN cp /opencl-intercept-layer/vic/clintercept.conf ~/
 RUN mv /usr/lib/x86_64-linux-gnu/libOpenCL.so.1.0.0 /usr/lib/x86_64-linux-gnu/real_libOpenCL.so.1.0.0 && ln -sf /opencl-intercept-layer/build/libOpenCL.so.1 /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 && ln -sf /opencl-intercept-layer/build/libOpenCL.so /usr/lib/x86_64-linux-gnu/libOpenCL.so
