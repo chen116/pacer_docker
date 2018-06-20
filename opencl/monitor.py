@@ -24,9 +24,21 @@ for x in (client.containers.list(all=True)):
 	print("rm:",x.name)
 	x.remove(force=True)
 vicid={"VIC_SHM_ID":str(1024)}
-container = client.containers.run('pyopcl',runtime='nvidia',environment=vicid,ipc_mode='host',cpu_period=int(1e5),cpu_quota=int(1e5),name="v1",detach=False)#,tty=True)
+
+mnt = docker.types.IPAMPool('/foo', '/home/eeb205/pacer_docker/ipc/', type='volume', read_only=False)
+# https://docker-py.readthedocs.io/en/stable/api.html#docker.types.Mount
+
+
+
+
+# container = client.containers.run('pyopcl',runtime='nvidia',environment=vicid,ipc_mode='host',cpu_period=int(1e5),cpu_quota=int(1e5),name="v1",detach=False)#,tty=True)
+container = client.containers.run('pyopcl',mounts=mnt,runtime='nvidia',environment=vicid,ipc_mode='host',cpu_period=int(1e5),cpu_quota=int(1e5),name="v1",detach=True)#,tty=True)
+# https://docker-py.readthedocs.io/en/stable/containers.html
+
 #container.logs()
 #,detach=True)
+
+#docker run --runtime=nvidia -v /home/eeb205/pacer_docker/ipc/:/foo -e "VIC_SHM_ID=1024" -ti --rm pyopcl /bin/bash
 
 
 

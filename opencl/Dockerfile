@@ -70,4 +70,4 @@ RUN mv /usr/lib/x86_64-linux-gnu/libOpenCL.so.1.0.0 /usr/lib/x86_64-linux-gnu/re
 
 WORKDIR /
 
-#CMD ["python3","test.py"]
+CMD ["python3","test.py"]
