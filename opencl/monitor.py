@@ -25,7 +25,7 @@ for x in (client.containers.list(all=True)):
 	x.remove(force=True)
 vicid={"VIC_SHM_ID":str(1024)}
 
-mnt = docker.types.IPAMPool('/foo', '/home/eeb205/pacer_docker/ipc/', type='volume', read_only=False)
+mnt = docker.types.IPAMPool('/foo', '/home/eeb205/pacer_docker/ipc/')
 # https://docker-py.readthedocs.io/en/stable/api.html#docker.types.Mount
 
 
