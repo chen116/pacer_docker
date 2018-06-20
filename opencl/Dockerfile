@@ -12,7 +12,7 @@
 
 
 
-# sudo docker build -t pyopcl .  && sudo docker run --runtime=nvidia -v /home/eeb205/unixsoc/:/foo -e "VIC_SHM_ID=1024" -ti --rm pyopcl /bin/bash
+# sudo docker build -t pyopcl .  && sudo docker run --runtime=nvidia -v /home/eeb205/pacer_docker/ipc/:/foo -e "VIC_SHM_ID=1024" -ti --rm pyopcl /bin/bash
 
 FROM nvidia/opencl:runtime-ubuntu16.04
 RUN apt-get update
