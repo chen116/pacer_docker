@@ -23,9 +23,11 @@ cs=[]
 for x in (client.containers.list(all=True)):
 	print("rm:",x.name)
 	x.remove(force=True)
-vicid={"VIC_SHM_ID":str(1024)}
+vicid={"VIC_SHM_ID":str(1000)}
+vicid2={"VIC_SHM_ID":str(3000)}
 
 mnt = docker.types.Mount('/foo', '/home/eeb205/pacer_docker/ipc/',type='bind')
+mnt2 = docker.types.Mount('/foo', '/home/eeb205/pacer_docker/ipc/',type='bind')
 # https://docker-py.readthedocs.io/en/stable/api.html#docker.types.Mount
 
 
@@ -33,6 +35,7 @@ mnt = docker.types.Mount('/foo', '/home/eeb205/pacer_docker/ipc/',type='bind')
 
 # container = client.containers.run('pyopcl',runtime='nvidia',environment=vicid,ipc_mode='host',cpu_period=int(1e5),cpu_quota=int(1e5),name="v1",detach=False)#,tty=True)
 container = client.containers.run('pyopcl',mounts=[mnt],runtime='nvidia',environment=vicid,ipc_mode='host',cpu_period=int(1e5),cpu_quota=int(1e5),name="v1",detach=False)#,tty=True)
+container2 = client.containers.run('pyopcl',mounts=[mnt2],runtime='nvidia',environment=vicid2,ipc_mode='host',cpu_period=int(1e5),cpu_quota=int(1e5),name="v2",detach=False)#,tty=True)
 # https://docker-py.readthedocs.io/en/stable/containers.html
 
 # container.logs()
@@ -48,7 +51,7 @@ container = client.containers.run('pyopcl',mounts=[mnt],runtime='nvidia',environ
 
 
 shmlib = cdll.LoadLibrary('./shmlib.so')
-ids = [1024]#, 4000, 5000]
+ids = [1000, 3000]
 lenn = len(ids)
 
 logids=[]
@@ -87,6 +90,6 @@ for i in range(lenn):
 		hr = shmlib.get_hr(p,tmp_index)/1e6
 		shmlib.get_ts.restype = ctypes.c_int64
 		ts = shmlib.get_ts(p,tmp_index)
-		print("meow",ts,1/hr,tmp_index)
+		print("v",i,"meow",ts,1/hr,tmp_index)
 
 
