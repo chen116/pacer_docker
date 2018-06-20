@@ -66,23 +66,23 @@ int main(void){
     while(vic!='q')
     {
         rc = listen(server_sock, backlog);
-        if (rc == -1){ 
-            printf("LISTEN ERROR: %d\n", 99);
-            close(server_sock);
-            exit(1);
-        }
+        // if (rc == -1){ 
+        //     printf("LISTEN ERROR: %d\n", 99);
+        //     close(server_sock);
+        //     exit(1);
+        // }
         printf("socket listening...\n");
         
         /*********************************/
         /* Accept an incoming connection */
         /*********************************/
         client_sock = accept(server_sock, (struct sockaddr *) &client_sockaddr, &len);
-        if (client_sock == -1){
-            printf("ACCEPT ERROR: %d\n", 99);
-            close(server_sock);
-            close(client_sock);
-            exit(1);
-        }
+        // if (client_sock == -1){
+        //     printf("ACCEPT ERROR: %d\n", 99);
+        //     close(server_sock);
+        //     close(client_sock);
+        //     exit(1);
+        // }
         
         /****************************************/
         /* Get the name of the connected socket */
@@ -105,12 +105,12 @@ int main(void){
         /************************************/
         // printf("waiting to read...\n");
         bytes_rec = recv(client_sock, buf, sizeof(buf), 0);
-        if (bytes_rec == -1){
-            printf("RECV ERROR: %d\n", 99);
-            close(server_sock);
-            close(client_sock);
-            exit(1);
-        }
+        // if (bytes_rec == -1){
+        //     printf("RECV ERROR: %d\n", 99);
+        //     close(server_sock);
+        //     close(client_sock);
+        //     exit(1);
+        // }
         // else {
         //     printf("DATA RECEIVED = %s\n", buf);
         // }
