@@ -29,12 +29,12 @@ print("correct answer",num1[-1]**3+num2[-1]**3)
 ts=time.time()
 ans=[]
 hb.heartbeat_beat()
-print(hb.get_instant_heartrate())
+print('hb init hr:',hb.get_instant_heartrate())
 for i in range(len(num1)):
 	ans.append(num1[i]**3+num2[i]**3)
-print(time.time()-ts)
+print('cpu exec time:',time.time()-ts)
 hb.heartbeat_beat()
-print(1/hb.get_instant_heartrate())
+print('hb: cpu exec time:',1/hb.get_instant_heartrate())
 
 # create the buffers to hold the values of the input
 num1_buf = cl.Buffer(cntxt, cl.mem_flags.READ_ONLY | cl.mem_flags.COPY_HOST_PTR,hostbuf=num1)
@@ -61,8 +61,8 @@ launch.wait()
 cl.enqueue_read_buffer(queue, out_buf, out).wait()
 hb.heartbeat_beat()
 tts=time.time()
-print(1/hb.get_instant_heartrate())
-print('time spent',tts-ts)
+print('hb: gpu exec time:',1/hb.get_instant_heartrate())
+print('gpu exec time',tts-ts)
 # print the output
 print("Number1:", num1[-1])
 print("Number2:", num2[-1])
