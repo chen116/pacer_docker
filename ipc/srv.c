@@ -1,3 +1,4 @@
+//https://www.ibm.com/support/knowledgecenter/en/SSB23S_1.1.0.14/gtpc1/unixsock.html
 /************************************************************/
 /* This is a stream socket server sample program for UNIX   */
 /* domain sockets. This program listens for a connection    */
@@ -122,7 +123,7 @@ int main(void){
 
 
     puts ("Enter text. Include a dot ('.') in a sentence to exit:");
-    
+
     // do {
     // vic=getchar();
     // putchar(vic);
