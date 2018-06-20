@@ -56,7 +56,7 @@ COPY Makefile Makefile
 RUN make
 
 COPY test.py test.py
-COPY openclcuda /openclcuda
+#COPY openclcuda /openclcuda
 WORKDIR /
 
 #CMD ["python3","test.py"]
