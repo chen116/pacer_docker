@@ -15,6 +15,7 @@ time.sleep(2)
 while True: # realvid
 
 	frame = vs.read()
+	frame = imutils.resize(frame, width=400)
 	cv2.imshow("Frame", frame)
 	key = cv2.waitKey(1) & 0xFF
 	# if the `q` key was pressed, break from the loop
