@@ -9,9 +9,11 @@ import imutils
 
 
 
-mycam = FoscamCamera('65.114.169.151',88,'admin','admin',daemon=False)
+# mycam = FoscamCamera('65.114.169.151',88,'admin','admin',daemon=False)
+mycam = FoscamCamera('65.114.169.139',88,'arittenbach','8mmhamcgt16!',daemon=False)
 mycam.ptz_reset()
-vs = VideoStream('rtsp://admin:admin@65.114.169.151:88/videoMain').start() # realvid
+# vs = VideoStream('rtsp://admin:admin@65.114.169.151:88/videoMain').start() # realvid
+vs = VideoStream('rtsp://arittenbach:8mmhamcgt16!@65.114.169.139:88/videoMain').start() # realvid
 time.sleep(2)
 while True: # realvid
 
