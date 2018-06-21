@@ -90,6 +90,6 @@ for i in range(lenn):
 		hr = shmlib.get_hr(p,tmp_index)/1e6
 		shmlib.get_ts.restype = ctypes.c_int64
 		ts = shmlib.get_ts(p,tmp_index)
-		print("v",i,"meow",ts,1/hr,tmp_index)
+		print("v",i,"meow",ts/1e9,1/hr,tmp_index)
 
 
