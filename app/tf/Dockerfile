@@ -69,6 +69,7 @@ RUN mv /usr/lib/x86_64-linux-gnu/libOpenCL.so.1.0.0 /usr/lib/x86_64-linux-gnu/re
 
 
 #https://github.com/hughperkins/tf-coriander/blob/master/docker/Dockerfile
+apt -y install sudo
 ARG GIT_BRANCH=master
 RUN echo building branch ${GIT_BRANCH}
 RUN apt-get update && apt-get install -y git
