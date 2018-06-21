@@ -11,7 +11,7 @@ import cv2
 mycam = FoscamCamera('65.114.169.151',88,'admin','admin',daemon=False)
 mycam.ptz_reset()
 vs = VideoStream('rtsp://admin:admin@65.114.169.151:88/videoMain').start() # realvid
-time.sleep()
+time.sleep(2)
 while True: # realvid
 
 	frame = vs.read()
