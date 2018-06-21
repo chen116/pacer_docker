@@ -70,4 +70,4 @@ COPY test.py test.py
 
 WORKDIR /
 
-CMD ["python3","test.py"]
+# CMD ["python3","test.py"]
