@@ -26,8 +26,8 @@ for x in (client.containers.list(all=True)):
 vicid={"VIC_SHM_ID":str(1000)}
 vicid2={"VIC_SHM_ID":str(3000)}
 
-mnt = docker.types.Mount('/foo', '/home/eeb205/pacer_docker/ipc/',type='bind')
-mnt2 = docker.types.Mount('/foo', '/home/eeb205/pacer_docker/ipc/',type='bind')
+mnt = docker.types.Mount('/foo', '~/pacer_docker/ipc/',type='bind')
+mnt2 = docker.types.Mount('/foo', '~/pacer_docker/ipc/',type='bind')
 # https://docker-py.readthedocs.io/en/stable/api.html#docker.types.Mount
 
 
