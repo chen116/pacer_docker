@@ -12,7 +12,7 @@
 
 
 
-# sudo docker build -t pyopcl .  && sudo docker run --runtime=nvidia -v /home/eeb205/pacer_docker/ipc/:/foo -e "VIC_SHM_ID=1024" -ti --rm pyopcl /bin/bash
+# sudo docker build -t pyopcl .  && sudo docker run --runtime=nvidia -v /root/pacer_docker/ipc/:/foo -e "VIC_SHM_ID=1024" -ti --rm pyopcl /bin/bash
 
 FROM nvidia/opencl:runtime-ubuntu16.04
 RUN apt-get update
@@ -49,14 +49,12 @@ VOLUME /foo
 
 
 
-COPY shmlib.c shmlib.c
-COPY heartbeat.py heartbeat.py
-COPY heartbeat_python_lib.c heartbeat_python_lib.c
-COPY Makefile Makefile
-RUN make
+# COPY shmlib.c shmlib.c
+# COPY heartbeat.py heartbeat.py
+# COPY heartbeat_python_lib.c heartbeat_python_lib.c
+# COPY Makefile Makefile
+# RUN make
 
-
-#COPY openclcuda /openclcuda
 
 
 #OPENCL-INTERPCEPT
@@ -66,8 +64,20 @@ RUN git clone https://github.com/chen116/opencl-intercept-layer.git && cd opencl
 RUN cp /opencl-intercept-layer/vic/clintercept.conf ~/
 RUN mv /usr/lib/x86_64-linux-gnu/libOpenCL.so.1.0.0 /usr/lib/x86_64-linux-gnu/real_libOpenCL.so.1.0.0 && ln -sf /opencl-intercept-layer/build/libOpenCL.so.1 /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 && ln -sf /opencl-intercept-layer/build/libOpenCL.so /usr/lib/x86_64-linux-gnu/libOpenCL.so
 
-COPY test.py test.py
+# COPY test.py test.py
+
+
+
+#https://github.com/hughperkins/tf-coriander/blob/master/docker/Dockerfile
+ARG GIT_BRANCH=master
+RUN echo building branch ${GIT_BRANCH}
+RUN apt-get update && apt-get install -y git
+RUN git clone --recursive https://github.com/hughperkins/tf-coriander -b ${GIT_BRANCH}
+RUN cd tf-coriander && git status && git log -n 3 && ./install_deps.sh
+RUN cd tf-coriander && LOCALRESOURCES=" --local_resources 4000,2,1.0" ./build.sh
+RUN cd tf-coriander && . env3/bin/activate && pip install soft/tensorflowpkg/tensorflow-0.11.0rc0-py3-none-any.whl
+RUN cd tf-coriander && . env3/bin/activate && cd && python -c 'import tensorflow'
 
 WORKDIR /
 
-CMD ["python3","test.py"]
+# CMD ["python3","test.py"]
