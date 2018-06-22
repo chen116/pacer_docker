@@ -47,12 +47,12 @@ time.sleep(2)
 
 hb.heartbeat_beat()
 print('		hb init hr:',hb.get_instant_heartrate())	
+frame = vs.read()
 
 while vs.more(): # outvid
 
 
 
-	frame = vs.read()
 	resized_frame = imutils.resize(frame, width=400)
 	(h, w) = resized_frame.shape[:2]
 
