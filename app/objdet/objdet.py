@@ -134,7 +134,8 @@ while cnt<int(sys.argv[3]): # outvid
 		break
 	hb.heartbeat_beat()
 	print('		hb: gpu exec time:',1/hb.get_instant_heartrate())
-
+	print(time.time()-tn,'exec time')
+	tn=time.time()
 cv2.destroyAllWindows()
 vs.stop()
 hb.heartbeat_finish()
