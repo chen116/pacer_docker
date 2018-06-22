@@ -1,9 +1,13 @@
 #include "opencv2/opencv.hpp"
+#include <ctime>// include this header
+#include <iostream>
 using namespace cv;
  
 int main(int argc, char** argv)
 {
     Mat img, gray;
+	int start_s=clock();
+
     img = imread("image.jpeg", IMREAD_COLOR);
      
     cvtColor(img, gray, COLOR_BGR2GRAY);
@@ -12,5 +16,9 @@ int main(int argc, char** argv)
      
     imshow("edges", gray);
     waitKey();
+
+	// the code you wish to time goes here
+	int stop_s=clock();
+	std::cout << "time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << endl;
     return 0;
 }
