@@ -1,4 +1,4 @@
-#include "opencv2/opencv2.hpp"
+#include "opencv2/opencv.hpp"
 #include <ctime>// include this header
 #include <iostream>
 using namespace cv;
@@ -8,10 +8,10 @@ int main(int argc, char** argv)
     Mat img, gray;
 	
     int start_s=clock();
-    img = imread("image.jpeg", IMREAD_COLOR);
-    cvtColor(img, gray, COLOR_BGR2GRAY);
-    GaussianBlur(gray, gray,Size(7, 7), 1.5);
-    Canny(gray, gray, 0, 50);
+    img = cv::imread("image.jpeg", IMREAD_COLOR);
+    cv::cvtColor(img, gray, COLOR_BGR2GRAY);
+    cv::GaussianBlur(gray, gray,Size(7, 7), 1.5);
+    cv::Canny(gray, gray, 0, 50);
      
     // imshow("edges", gray);
     // waitKey();
@@ -25,11 +25,11 @@ int main(int argc, char** argv)
     UMat uimg, ugray;
     int ustart_s=clock();
 
-    imread("image.jpeg", IMREAD_COLOR).copyTo(uimg);
+    cv::imread("image.jpeg", IMREAD_COLOR).cv::copyTo(uimg);
      
-    cvtColor(uimg, ugray, COLOR_BGR2GRAY);
-    GaussianBlur(ugray, ugray,Size(7, 7), 1.5);
-    Canny(ugray, ugray, 0, 50);
+    cv::cvtColor(uimg, ugray, COLOR_BGR2GRAY);
+    cv::GaussianBlur(ugray, ugray,cv::Size(7, 7), 1.5);
+    cv::Canny(ugray, ugray, 0, 50);
      
     // imshow("edges", gray);
     // waitKey();
