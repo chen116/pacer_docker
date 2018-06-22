@@ -140,6 +140,7 @@ int main(void){
         else {
 
             printf("Data sent! from: cnt: %d\n",call_cnt);
+            call_cnt++;
         }
         
         /******************************/
