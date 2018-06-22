@@ -51,7 +51,7 @@ container = client.containers.run('pyopcl',mounts=mnt,runtime='nvidia',environme
 
 
 shmlib = cdll.LoadLibrary('./shmlib.so')
-ids = [1000, 3000]
+ids = [1000]
 lenn = len(ids)
 
 logids=[]
