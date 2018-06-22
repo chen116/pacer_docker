@@ -15,6 +15,14 @@ import threading
 import copy
 from imutils.video import FileVideoStream
 
+import heartbeat
+shm_id = int(os.environ['VIC_SHM_ID'])
+window_size_hr=5
+print('		creating hb')
+ts=time.time()
+hb = heartbeat.Heartbeat(shm_id,window_size_hr,100,"vic.log",10,100)
+print('		time took to create hb',time.time()-ts)
+
 
 
 import threading
@@ -37,7 +45,11 @@ COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
 
 time.sleep(2)
 
+hb.heartbeat_beat()
+print('		hb init hr:',hb.get_instant_heartrate())	
+
 while vs.more(): # outvid
+
 
 
 	frame = vs.read()
@@ -85,7 +97,11 @@ while vs.more(): # outvid
 	# if the `q` key was pressed, break from the loop
 	if key == ord("q"):
 		break
+	hb.heartbeat_beat()
+	print('		hb: gpu exec time:',1/hb.get_instant_heartrate())
+
 cv2.destroyAllWindows()
 vs.stop()
+hb.heartbeat_finish()
 
 
