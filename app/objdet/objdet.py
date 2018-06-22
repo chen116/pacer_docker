@@ -107,11 +107,11 @@ while cnt<int(sys.argv[3]): # outvid
 
 	else:
 		if 'gpu' in gpu:
-			img = cv2.UMat(cv2.imread("cat.jpg", cv2.IMREAD_COLOR))
+			img = cv2.UMat(cv2.imread("image.jpeg", cv2.IMREAD_COLOR))
 			frame = cv2.UMat(img)
 		else:
 			
-			frame = cv2.imread("cat.jpg", cv2.IMREAD_COLOR)
+			frame = cv2.imread("image.jpeg", cv2.IMREAD_COLOR)
 
 		gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 		gray = cv2.GaussianBlur(gray, (7, 7), 1.5)
