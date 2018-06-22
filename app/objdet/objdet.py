@@ -56,8 +56,8 @@ while vs.more(): # outvid
 	resized_frame = imutils.resize(frame, width=400)
 	(h, w) = resized_frame.shape[:2]
 
-	# frame = cv2.UMat(resized_frame)
-	frame = resized_frame
+	frame = cv2.UMat(resized_frame)
+	# frame = resized_frame
 
 
 
