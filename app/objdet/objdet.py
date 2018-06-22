@@ -57,16 +57,16 @@ while vs.more(): # outvid
 	resized_frame = imutils.resize(frame, width=300)
 	(h, w) = resized_frame.shape[:2]
 
-	frame = cv2.UMat(resized_frame)
-	# frame = resized_frame
 
-	# gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-	# gray = cv2.GaussianBlur(gray, (7, 7), 1.5)
-	# gray = cv2.Canny(gray, 0, 50)
-	# cv2.imshow("Frame", gray)
+	gpu=(sys.argv[1])
+	obj=(sys.argv[2])
+	if 'gpu' in gpu:
+		frame = cv2.UMat(resized_frame)
 
+	else:
+		frame = resized_frame
 
-	if True:
+	if 'obj' in obj:
 		blob = cv2.dnn.blobFromImage(cv2.resize(frame, (300, 300)),0.007843, (300, 300), 127.5)
 		net.setInput(blob)
 		detections = net.forward()
@@ -96,6 +96,21 @@ while vs.more(): # outvid
 				cv2.putText(frame, label, (startX, y),
 					cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLORS[idx], 2)
 		cv2.imshow("Frame", frame)
+
+	else:
+		gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+		gray = cv2.GaussianBlur(gray, (7, 7), 1.5)
+		gray = cv2.Canny(gray, 0, 50)
+		cv2.imshow("Frame", gray)
+
+
+	# gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+	# gray = cv2.GaussianBlur(gray, (7, 7), 1.5)
+	# gray = cv2.Canny(gray, 0, 50)
+	# cv2.imshow("Frame", gray)
+
+
+
 
 	key = cv2.waitKey(1) & 0xFF
 	# if the `q` key was pressed, break from the loop
