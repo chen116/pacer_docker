@@ -50,25 +50,31 @@ print('		hb init hr:',hb.get_instant_heartrate())
 xframe = vs.read()
 
 # while vs.more(): # outvid
+gpu=(sys.argv[1])
+obj=(sys.argv[2])
 cnt=0
 while cnt<int(sys.argv[3]): # outvid
+
+
 	cnt+=1
 
-	xframe = vs.read()
-	frame=xframe
-	resized_frame = imutils.resize(frame, width=300)
-	(h, w) = resized_frame.shape[:2]
 
 
-	gpu=(sys.argv[1])
-	obj=(sys.argv[2])
-	if 'gpu' in gpu:
-		frame = cv2.UMat(resized_frame)
 
-	else:
-		frame = resized_frame
+
+
 
 	if 'obj' in obj:
+		meow = vs.read()
+		frame=xframe
+		resized_frame = imutils.resize(frame, width=300)
+		if 'gpu' in gpu:
+			frame = cv2.UMat(resized_frame)
+		else:
+			frame = resized_frame
+
+
+		(h, w) = resized_frame.shape[:2]
 		blob = cv2.dnn.blobFromImage(cv2.resize(frame, (300, 300)),0.007843, (300, 300), 127.5)
 		net.setInput(blob)
 		detections = net.forward()
@@ -100,6 +106,13 @@ while cnt<int(sys.argv[3]): # outvid
 		cv2.imshow("Frame", frame)
 
 	else:
+		if 'gpu' in gpu:
+			img = cv2.UMat(cv2.imread("cat.jpg", cv2.IMREAD_COLOR))
+			frame = cv2.UMat(img)
+		else:
+			
+			frame = cv2.imread("cat.jpg", cv2.IMREAD_COLOR)
+
 		gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 		gray = cv2.GaussianBlur(gray, (7, 7), 1.5)
 		gray = cv2.Canny(gray, 0, 50)
