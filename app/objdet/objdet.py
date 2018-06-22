@@ -59,38 +59,43 @@ while vs.more(): # outvid
 	frame = cv2.UMat(resized_frame)
 	# frame = resized_frame
 
+	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+	gray = cv2.GaussianBlur(gray, (7, 7), 1.5)
+	gray = cv2.Canny(gray, 0, 50)
+	cv2.imshow("Frame", gray)
 
 
-	blob = cv2.dnn.blobFromImage(cv2.resize(frame, (300, 300)),0.007843, (300, 300), 127.5)
-	net.setInput(blob)
-	detections = net.forward()
-	#print(frame.dtype)
-	# loop over the detections
-	for i in np.arange(0, detections.shape[2]):
-		# extract the confidence (i.e., probability) associated with
-		# the prediction
-		confidence = detections[0, 0, i, 2]
-		idx2 = int(detections[0,0,i,1])
-		# filter out weak detections by ensuring the `confidence` is
-		# greater than the minimum confidence
-		if ((confidence > .5) and (CLASSES[idx2]=='person')):
-			# extract the index of the class label from the
-			# `detections`, then compute the (x, y)-coordinates of
-			# the bounding box for the object
-			idx = int(detections[0, 0, i, 1])
-			box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
-			(startX, startY, endX, endY) = box.astype("int")
-		#	print('startX=',startX)
-		#	print('endX=',endX)
-			label = "{}: {:.2f}%".format(CLASSES[idx],
-				confidence * 100)
-			cv2.rectangle(frame, (startX, startY), (endX, endY),
-				COLORS[idx], 2)
-			y = startY - 15 if startY - 15 > 15 else startY + 15
-			cv2.putText(frame, label, (startX, y),
-				cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLORS[idx], 2)
+	# if True:
+	# 	blob = cv2.dnn.blobFromImage(cv2.resize(frame, (300, 300)),0.007843, (300, 300), 127.5)
+	# 	net.setInput(blob)
+	# 	detections = net.forward()
+	# 	#print(frame.dtype)
+	# 	# loop over the detections
+	# 	for i in np.arange(0, detections.shape[2]):
+	# 		# extract the confidence (i.e., probability) associated with
+	# 		# the prediction
+	# 		confidence = detections[0, 0, i, 2]
+	# 		idx2 = int(detections[0,0,i,1])
+	# 		# filter out weak detections by ensuring the `confidence` is
+	# 		# greater than the minimum confidence
+	# 		if ((confidence > .5) and (CLASSES[idx2]=='person')):
+	# 			# extract the index of the class label from the
+	# 			# `detections`, then compute the (x, y)-coordinates of
+	# 			# the bounding box for the object
+	# 			idx = int(detections[0, 0, i, 1])
+	# 			box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
+	# 			(startX, startY, endX, endY) = box.astype("int")
+	# 		#	print('startX=',startX)
+	# 		#	print('endX=',endX)
+	# 			label = "{}: {:.2f}%".format(CLASSES[idx],
+	# 				confidence * 100)
+	# 			cv2.rectangle(frame, (startX, startY), (endX, endY),
+	# 				COLORS[idx], 2)
+	# 			y = startY - 15 if startY - 15 > 15 else startY + 15
+	# 			cv2.putText(frame, label, (startX, y),
+	# 				cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLORS[idx], 2)
+	# cv2.imshow("Frame", frame)
 
-	cv2.imshow("Frame", frame)
 	key = cv2.waitKey(1) & 0xFF
 	# if the `q` key was pressed, break from the loop
 	if key == ord("q"):
