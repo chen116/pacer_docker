@@ -47,19 +47,20 @@ time.sleep(2)
 
 hb.heartbeat_beat()
 print('		hb init hr:',hb.get_instant_heartrate())	
-frame = vs.read()
+xframe = vs.read()
 
 while vs.more(): # outvid
 
 
 	meow = vs.read()
+	frame=xframe
 	resized_frame = imutils.resize(frame, width=400)
 	(h, w) = resized_frame.shape[:2]
 
-	frame = cv2.UMat(resized_frame)
+	xframe = cv2.UMat(resized_frame)
 	# frame = resized_frame
 
-	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+	gray = cv2.cvtColor(xframe, cv2.COLOR_BGR2GRAY)
 	gray = cv2.GaussianBlur(gray, (7, 7), 1.5)
 	gray = cv2.Canny(gray, 0, 50)
 	cv2.imshow("Frame", gray)
