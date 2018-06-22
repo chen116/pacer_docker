@@ -52,7 +52,7 @@ xframe = vs.read()
 while vs.more(): # outvid
 
 
-	meow = vs.read()
+	xframe = vs.read()
 	frame=xframe
 	resized_frame = imutils.resize(frame, width=400)
 	(h, w) = resized_frame.shape[:2]
