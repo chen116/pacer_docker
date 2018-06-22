@@ -47,7 +47,7 @@ while vs.more(): # outvid
 	# img = cv2.UMat(cv2.imread(frame, cv2.IMREAD_COLOR))
 	# frame = cv2.UMat(img)
 
-
+	print(frame)
 	# frame = imutils.resize(frame, width=400)
 	# (h, w) = frame.shape[:2]
 	blob = cv2.dnn.blobFromImage(cv2.resize(frame, (300, 300)),0.007843, (300, 300), 127.5)
@@ -62,7 +62,7 @@ while vs.more(): # outvid
 		idx2 = int(detections[0,0,i,1])
 		# filter out weak detections by ensuring the `confidence` is
 		# greater than the minimum confidence
-		if ((confidence > args["confidence"]) and (CLASSES[idx2]=='person')):
+		if ((confidence > .5) and (CLASSES[idx2]=='person')):
 			# extract the index of the class label from the
 			# `detections`, then compute the (x, y)-coordinates of
 			# the bounding box for the object
