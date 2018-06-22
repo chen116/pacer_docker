@@ -8,14 +8,14 @@
 # nano Dockerfile && sudo docker build -t pyopcl . && sudo docker run --runtime=nvidia -e "VIC_SHM_ID=1024" -ti --rm pyopcl
 
 # to have a bash in container, rmb to change CMD below
-# nano Dockerfile && sudo docker build -t pyopcl . && sudo docker run --runtime=nvidia -e "VIC_SHM_ID=1024" -ti --rm pyopcl /bin/bash
+# nano Dockerfile && sudo docker build -t pyobjdet . && sudo docker run --runtime=nvidia -e "VIC_SHM_ID=1024" -ti --rm pyopcl /bin/bash
 
 
 # To run standalone :
 
 
-# sudo docker build -t pyopcltf .  &&  xhost + local:root
-# sudo docker run --runtime=nvidia -v /tmp/.X11-unix/:/tmp/.X11-unix:ro -v /root/pacer_docker/ipc/:/foo -e DISPLAY=$DISPLAY --ipc="host" -e "VIC_SHM_ID=1024" -ti --rm pyopcltf /bin/bash
+# sudo docker build  --no-cache -t pyobjdet .  &&  xhost + local:root
+# sudo docker run --runtime=nvidia -v /tmp/.X11-unix/:/tmp/.X11-unix:ro -v /root/pacer_docker/ipc/:/foo -e DISPLAY=$DISPLAY --ipc="host" -e "VIC_SHM_ID=1024" -ti --rm pyobjdet /bin/bash
 # https://groups.google.com/forum/#!topic/etetoolkit/4SrZk5fRtCM
 # https://github.com/osrf/docker_images/issues/21
 
@@ -76,7 +76,6 @@ RUN mv /usr/lib/x86_64-linux-gnu/libOpenCL.so.1.0.0 /usr/lib/x86_64-linux-gnu/re
 
 #https://github.com/hughperkins/tf-coriander/blob/master/docker/Dockerfile
 RUN apt-get -y install python3-pip python3-dev
-
 RUN git clone https://github.com/chen116/pacer_docker.git
 RUN apt -y install python3-pip && pip3 install --upgrade pip && pip install numpy && pip install opencv-python && apt -y install libsm6 libxrender1 libfontconfig1 && apt -y install python3-tk && apt -y install x11-xkb-utils && pip install imutils
 

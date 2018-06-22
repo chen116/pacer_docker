@@ -27,7 +27,8 @@ int main(void){
     int backlog = 10;
     memset(&server_sockaddr, 0, sizeof(struct sockaddr_un));
     memset(&client_sockaddr, 0, sizeof(struct sockaddr_un));
-    memset(buf, 0, 256);                
+    memset(buf, 0, 256);       
+    int call_cnt =0;         
     
     /**************************************/
     /* Create a UNIX domain stream socket */
@@ -137,7 +138,8 @@ int main(void){
             exit(1);
         }   
         else {
-            printf("Data sent!\n");
+
+            printf("Data sent! from: cnt: %d\n",call_cnt);
         }
         
         /******************************/
