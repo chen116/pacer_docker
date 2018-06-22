@@ -11,8 +11,14 @@
 # nano Dockerfile && sudo docker build -t pyopcl . && sudo docker run --runtime=nvidia -e "VIC_SHM_ID=1024" -ti --rm pyopcl /bin/bash
 
 
+# To run standalone :
 
-# sudo docker build -t pyopcltf .  && sudo docker run --runtime=nvidia -v /root/pacer_docker/ipc/:/foo -e "VIC_SHM_ID=1024" -ti --rm pyopcltf /bin/bash
+
+# sudo docker build -t pyopcltf .  &&  xhost +local:root
+# sudo docker run --runtime=nvidia -v /tmp/.X11-unix/:/tmp/.X11-unix:ro -v /root/pacer_docker/ipc/:/foo -e DISPLAY=$DSIPLAY --ipc="host" -e "VIC_SHM_ID=1024" -ti --rm pyopcltf /bin/bash
+# https://groups.google.com/forum/#!topic/etetoolkit/4SrZk5fRtCM
+# https://github.com/osrf/docker_images/issues/21
+
 
 FROM nvidia/opencl:runtime-ubuntu16.04
 RUN apt-get update
