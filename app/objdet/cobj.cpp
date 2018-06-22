@@ -25,10 +25,10 @@ int main(int argc, char** argv)
     UMat uimg, ugray;
     int ustart_s=clock();
 
-    cv::imread("image.jpeg", IMREAD_COLOR).cv::copyTo(uimg);
+    cv::imread("image.jpeg", IMREAD_COLOR).copyTo(uimg);
      
     cv::cvtColor(uimg, ugray, COLOR_BGR2GRAY);
-    cv::GaussianBlur(ugray, ugray,cv::Size(7, 7), 1.5);
+    cv::GaussianBlur(ugray, ugray,Size(7, 7), 1.5);
     cv::Canny(ugray, ugray, 0, 50);
      
     // imshow("edges", gray);
