@@ -53,6 +53,7 @@ xframe = vs.read()
 gpu=(sys.argv[1])
 obj=(sys.argv[2])
 cnt=0
+tn = time.time()
 while cnt<int(sys.argv[3]): # outvid
 
 
