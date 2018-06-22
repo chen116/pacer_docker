@@ -73,7 +73,7 @@ RUN apt-get -y install python3-pip python3-dev
 RUN pip3 install tensorflow
 
 RUN git clone https://github.com/chen116/pacer_docker.git
-RUN apt -y install python3-pip && pip3 install --upgrade pip && pip3 install numpy && pip3 install opencv-python && apt -y install libsm6 libxrender1 libfontconfig1 && apt -y install python3-tk && apt -y install x11-xkb-utils && pip3 install imutils
+RUN apt -y install python3-pip && pip3 install --upgrade pip && pip install numpy && pip install opencv-python && apt -y install libsm6 libxrender1 libfontconfig1 && apt -y install python3-tk && apt -y install x11-xkb-utils && pip install imutils
 WORKDIR /
 
 # CMD ["python3","test.py"]
