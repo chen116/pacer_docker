@@ -72,7 +72,7 @@ RUN mv /usr/lib/x86_64-linux-gnu/libOpenCL.so.1.0.0 /usr/lib/x86_64-linux-gnu/re
 RUN apt-get -y install python3-pip python3-dev
 RUN pip3 install tensorflow
 
-
+RUN git clone https://github.com/chen116/pacer_docker.git
 
 WORKDIR /
 
