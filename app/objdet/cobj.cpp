@@ -1,4 +1,4 @@
-#include "opencv2/opencv.hpp"
+#include "opencv2.hpp"
 #include <ctime>// include this header
 #include <iostream>
 using namespace cv;
