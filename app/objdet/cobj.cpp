@@ -11,10 +11,10 @@ int main(int argc, char** argv)
     Mat img, gray;
 	
     int start_s=clock();
-    img = cv::imread("image.jpeg", IMREAD_COLOR);
-    cv::cvtColor(img, gray, COLOR_BGR2GRAY);
-    cv::GaussianBlur(gray, gray,Size(7, 7), 1.5);
-    cv::Canny(gray, gray, 0, 50);
+    img = imread("image.jpeg", IMREAD_COLOR);
+    cvtColor(img, gray, COLOR_BGR2GRAY);
+    GaussianBlur(gray, gray,Size(7, 7), 1.5);
+    Canny(gray, gray, 0, 50);
      
     // imshow("edges", gray);
     // waitKey();
@@ -28,11 +28,11 @@ int main(int argc, char** argv)
     UMat uimg, ugray;
     int ustart_s=clock();
 
-    cv::imread("image.jpeg", IMREAD_COLOR).copyTo(uimg);
+    imread("image.jpeg", IMREAD_COLOR).copyTo(uimg);
      
-    cv::cvtColor(uimg, ugray, COLOR_BGR2GRAY);
-    cv::GaussianBlur(ugray, ugray,Size(7, 7), 1.5);
-    cv::Canny(ugray, ugray, 0, 50);
+    cvtColor(uimg, ugray, COLOR_BGR2GRAY);
+    GaussianBlur(ugray, ugray,Size(7, 7), 1.5);
+    Canny(ugray, ugray, 0, 50);
      
     // imshow("edges", gray);
     // waitKey();
