@@ -1,4 +1,7 @@
 #include "opencv2/opencv.hpp"
+#include "opencv2/core/ocl.hpp"
+#include "opencv2/core/utility.hpp"
+#include "opencv2/imgproc.hpp"
 #include <ctime>// include this header
 #include <iostream>
 using namespace cv;
