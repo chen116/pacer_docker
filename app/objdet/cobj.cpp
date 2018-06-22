@@ -18,7 +18,7 @@ int main(int argc, char** argv)
 
 	// the code you wish to time goes here
 	int stop_s=clock();
-	std::cout << "time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << endl;
+	std::cout << "time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
 
 
 
@@ -34,7 +34,7 @@ int main(int argc, char** argv)
     // imshow("edges", gray);
     // waitKey();
 	int ustop_s=clock();
-	std::cout << "time: " << (ustop_s-ustart_s)/double(CLOCKS_PER_SEC)*1000 << endl;
+	std::cout << "time: " << (ustop_s-ustart_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
 
 
 }
