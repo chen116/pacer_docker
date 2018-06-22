@@ -14,8 +14,8 @@
 # To run standalone :
 
 
-# sudo docker build -t pyopcltf .  &&  xhost +local:root
-# sudo docker run --runtime=nvidia -v /tmp/.X11-unix/:/tmp/.X11-unix:ro -v /root/pacer_docker/ipc/:/foo -e DISPLAY=$DSIPLAY --ipc="host" -e "VIC_SHM_ID=1024" -ti --rm pyopcltf /bin/bash
+# sudo docker build -t pyopcltf .  &&  xhost + local:root
+# sudo docker run --runtime=nvidia -v /tmp/.X11-unix/:/tmp/.X11-unix:ro -v /root/pacer_docker/ipc/:/foo -e DISPLAY=$DISPLAY --ipc="host" -e "VIC_SHM_ID=1024" -ti --rm pyopcltf /bin/bash
 # https://groups.google.com/forum/#!topic/etetoolkit/4SrZk5fRtCM
 # https://github.com/osrf/docker_images/issues/21
 
