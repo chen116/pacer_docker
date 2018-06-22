@@ -49,7 +49,7 @@ hb.heartbeat_beat()
 print('		hb init hr:',hb.get_instant_heartrate())	
 xframe = vs.read()
 
-while vs.more(): # outvid
+# while vs.more(): # outvid
 cnt=0
 while cnt<int(sys.argv[3]): # outvid
 	cnt+=1
