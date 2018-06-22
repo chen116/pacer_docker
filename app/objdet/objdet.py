@@ -42,7 +42,11 @@ while vs.more(): # outvid
 
 	frame = vs.read()
 	# img = cv2.UMat(cv2.imread("image.jpg", cv2.IMREAD_COLOR))
-	frame = cv2.UMat(frame)
+	# frame = cv2.UMat(frame)
+
+	img = cv2.UMat(cv2.imread(frame, cv2.IMREAD_COLOR))
+	frame = cv2.UMat(img)
+
 
 	# frame = imutils.resize(frame, width=400)
 	(h, w) = frame.shape[:2]
