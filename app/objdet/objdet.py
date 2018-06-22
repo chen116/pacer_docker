@@ -39,7 +39,7 @@ while vs.more(): # outvid
 	# img = cv2.UMat(cv2.imread("image.jpg", cv2.IMREAD_COLOR))
 	frame = cv2.UMat(frame)
 
-	frame = imutils.resize(frame, width=400)
+	# frame = imutils.resize(frame, width=400)
 	cv2.imshow("Frame", frame)
 	key = cv2.waitKey(1) & 0xFF
 	# if the `q` key was pressed, break from the loop
