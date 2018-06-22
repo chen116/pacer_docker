@@ -41,15 +41,15 @@ while vs.more(): # outvid
 
 
 	frame = vs.read()
-	hardframe = imutils.resize(frame, width=400)
-	(h, w) = hardframe.shape[:2]
+	resized_frame = imutils.resize(frame, width=400)
+	(h, w) = resized_frame.shape[:2]
 
-	frame = cv2.UMat(frame)
+	frame = cv2.UMat(resized_frame)
 
 	# img = cv2.UMat(cv2.imread(frame, cv2.IMREAD_COLOR))
 	# frame = cv2.UMat(img)
 
-	print(frame)
+
 
 	blob = cv2.dnn.blobFromImage(cv2.resize(frame, (300, 300)),0.007843, (300, 300), 127.5)
 	net.setInput(blob)
