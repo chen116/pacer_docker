@@ -57,10 +57,10 @@ while vs.more(): # outvid
 	resized_frame = imutils.resize(frame, width=400)
 	(h, w) = resized_frame.shape[:2]
 
-	xframe = cv2.UMat(resized_frame)
+	frame = cv2.UMat(resized_frame)
 	# frame = resized_frame
 
-	gray = cv2.cvtColor(xframe, cv2.COLOR_BGR2GRAY)
+	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 	gray = cv2.GaussianBlur(gray, (7, 7), 1.5)
 	gray = cv2.Canny(gray, 0, 50)
 	cv2.imshow("Frame", gray)
