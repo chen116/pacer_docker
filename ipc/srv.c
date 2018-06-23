@@ -72,7 +72,7 @@ int main(void){
         //     close(server_sock);
         //     exit(1);
         // }
-        printf("socket listening...cnt:%d\n",cnt);
+        printf("socket listening...call_cnt:%d\n",cnt);
         
         /*********************************/
         /* Accept an incoming connection */
