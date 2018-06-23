@@ -69,7 +69,7 @@ else:
 # else:
 # 	frame = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
 
-
+print("meow")
 while cnt<int(sys.argv[3]): # outvid
 
 
