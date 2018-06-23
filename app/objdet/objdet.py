@@ -54,12 +54,15 @@ gpu=(sys.argv[1])
 obj=(sys.argv[2])
 cnt=0
 tn = time.time()
-# if 'gpu' in gpu:
-# 	img = cv2.UMat(cv2.imread("image.jpeg", cv2.IMREAD_COLOR))
-# 	frame = cv2.UMat(img)
-# else:
-	
-# 	frame = cv2.imread("image.jpeg", cv2.IMREAD_COLOR)
+
+
+frame=xframe
+resized_frame = imutils.resize(frame, width=300)
+if 'gpu' in gpu:
+	frame = cv2.UMat(resized_frame)
+else:
+	frame = resized_frame
+
 while cnt<int(sys.argv[3]): # outvid
 
 
