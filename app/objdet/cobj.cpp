@@ -19,7 +19,7 @@ int main(int argc, char** argv)
     Mat img, gray;
 	
     int start_s=clock();
-    img = imread("cat.jpg", IMREAD_COLOR);
+    img = imread("image.jpeg", IMREAD_COLOR);
     cvtColor(img, gray, COLOR_BGR2GRAY);
     GaussianBlur(gray, gray,Size(7, 7), 1.5);
     Canny(gray, gray, 0, 50);
@@ -36,7 +36,7 @@ int main(int argc, char** argv)
     UMat uimg, ugray;
     int ustart_s=clock();
 
-    imread("cat.jpg", IMREAD_COLOR).copyTo(uimg);
+    imread("image.jpeg", IMREAD_COLOR).copyTo(uimg);
      
     cvtColor(uimg, ugray, COLOR_BGR2GRAY);
     GaussianBlur(ugray, ugray,Size(7, 7), 1.5);
