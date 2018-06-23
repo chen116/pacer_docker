@@ -38,7 +38,7 @@ vs= FileVideoStream("walkman.mp4").start() # outvid
 
 net = cv2.dnn.readNetFromCaffe("MobileNetSSD_deploy.prototxt.txt", "MobileNetSSD_deploy.caffemodel")
 
-net.setPreferableTarget(1)
+net.setPreferableTarget(2)
 
 
 CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
@@ -61,7 +61,7 @@ tn = time.time()
 
 
 frame=xframe
-resized_frame = frame#imutils.resize(frame, width=300)
+resized_frame = imutils.resize(frame, width=300)
 if 'gpu' in gpu:
 
 	frame = cv2.UMat(resized_frame)
