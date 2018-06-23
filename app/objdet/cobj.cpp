@@ -20,7 +20,7 @@ int main(int argc, char** argv)
 {
     Mat img, gray;
 	
-    img = imread("cat.jpg", IMREAD_COLOR);
+    img = imread("image.jpeg", IMREAD_COLOR);
     int start_s=clock();
 
     cvtColor(img, gray, COLOR_BGR2GRAY);
@@ -28,7 +28,7 @@ int main(int argc, char** argv)
     Canny(gray, gray, 0, 50);
 	// the code you wish to time goes here
 	int stop_s=clock();
-	std::cout << "time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
+	std::cout << "cpu time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
 
     imshow("edges", gray);
     waitKey();
@@ -38,13 +38,13 @@ int main(int argc, char** argv)
 
     UMat uimg, ugray;
 
-    imread("cat.jpg", IMREAD_COLOR).copyTo(uimg);
+    imread("image.jpeg", IMREAD_COLOR).copyTo(uimg);
     int ustart_s=clock();
     cvtColor(uimg, ugray, COLOR_BGR2GRAY);
     GaussianBlur(ugray, ugray,Size(7, 7), 1.5);
     Canny(ugray, ugray, 0, 50);
  	int ustop_s=clock();
-	std::cout << "time: " << (ustop_s-ustart_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
+	std::cout << "gpu time: " << (ustop_s-ustart_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
 
     imshow("edges", gray);
     waitKey();
