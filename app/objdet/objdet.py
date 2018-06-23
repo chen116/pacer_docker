@@ -38,7 +38,7 @@ vs= FileVideoStream("walkman.mp4").start() # outvid
 
 net = cv2.dnn.readNetFromCaffe("MobileNetSSD_deploy.prototxt.txt", "MobileNetSSD_deploy.caffemodel")
 
-net.setPreferableTarget(2)
+net.setPreferableTarget(1)
 
 
 CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
@@ -97,13 +97,13 @@ while cnt<int(sys.argv[3]): # outvid
 
 		(h, w) = resized_frame.shape[:2]
 		blob = cv2.dnn.blobFromImage(cv2.resize(frame, (300, 300)),0.007843, (300, 300), 127.5)
-		print("meow")
+		# print("meow")
 
 		net.setInput(blob)
-		print("meow2")
+		# print("meow2")
 
 		detections = net.forward()
-		print("meow3")
+		# print("meow3")
 
 		#print(frame.dtype)
 		# loop over the detections
