@@ -72,7 +72,7 @@ int main(void){
         //     close(server_sock);
         //     exit(1);
         // }
-        printf("socket listening...\n");
+        printf("socket listening...cnt:%d\n",cnt);
         
         /*********************************/
         /* Accept an incoming connection */
@@ -123,13 +123,13 @@ int main(void){
         strcpy(buf, DATA);    
 
 
-    puts ("Enter text. Include a dot ('.') in a sentence to exit:");
+    // puts ("Enter text. Include a dot ('.') in a sentence to exit:");
 
-    do {
-    vic=getchar();
-    putchar(vic);
-    } while (vic != '.');               // for loop execution
-    
+    // do {
+    // vic=getchar();
+    // putchar(vic);
+    // } while (vic != '.');               // for loop execution
+
         // printf("Sending data...\n");
         rc = send(client_sock, buf, strlen(buf), 0);
         if (rc == -1) {
@@ -140,7 +140,7 @@ int main(void){
         }   
         else {
 
-            printf("Data sent! from: cnt: %d\n",call_cnt);
+            // printf("Data sent! from: cnt: %d\n",call_cnt);
             call_cnt++;
         }
         
