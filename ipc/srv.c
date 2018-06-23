@@ -72,8 +72,8 @@ int main(void){
         //     close(server_sock);
         //     exit(1);
         // }
-        if (call_cnt == 80)
-        {printf("socket listening...call_cnt:%d\n",call_cnt);}
+
+        printf("socket listening...call_cnt:%d\n",call_cnt);
         
         /*********************************/
         /* Accept an incoming connection */
