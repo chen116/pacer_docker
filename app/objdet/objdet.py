@@ -38,7 +38,7 @@ vs= FileVideoStream("walkman.mp4").start() # outvid
 
 net = cv2.dnn.readNetFromCaffe("MobileNetSSD_deploy.prototxt.txt", "MobileNetSSD_deploy.caffemodel")
 
-net.setPreferableTarget(cv2.dnn.DNN_TARGET_OPENCL)
+# net.setPreferableTarget(cv2.dnn.DNN_TARGET_OPENCL)
 
 
 CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
