@@ -54,12 +54,12 @@ gpu=(sys.argv[1])
 obj=(sys.argv[2])
 cnt=0
 tn = time.time()
-if 'gpu' in gpu:
-	img = cv2.UMat(cv2.imread("image.jpeg", cv2.IMREAD_COLOR))
-	frame = cv2.UMat(img)
-else:
+# if 'gpu' in gpu:
+# 	img = cv2.UMat(cv2.imread("image.jpeg", cv2.IMREAD_COLOR))
+# 	frame = cv2.UMat(img)
+# else:
 	
-	frame = cv2.imread("image.jpeg", cv2.IMREAD_COLOR)
+# 	frame = cv2.imread("image.jpeg", cv2.IMREAD_COLOR)
 while cnt<int(sys.argv[3]): # outvid
 
 
@@ -114,12 +114,12 @@ while cnt<int(sys.argv[3]): # outvid
 
 	else:
 		kk=1
-		# if 'gpu' in gpu:
-		# 	img = cv2.UMat(cv2.imread("image.jpeg", cv2.IMREAD_COLOR))
-		# 	frame = cv2.UMat(img)
-		# else:
+		if 'gpu' in gpu:
+			img = cv2.UMat(cv2.imread("image.jpeg", cv2.IMREAD_COLOR))
+			frame = cv2.UMat(img)
+		else:
 			
-		# 	frame = cv2.imread("image.jpeg", cv2.IMREAD_COLOR)
+			frame = cv2.imread("image.jpeg", cv2.IMREAD_COLOR)
 
 		gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 		gray = cv2.GaussianBlur(gray, (7, 7), 1.5)
