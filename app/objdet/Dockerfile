@@ -70,9 +70,10 @@ VOLUME /foo
 
 #https://github.com/hughperkins/tf-coriander/blob/master/docker/Dockerfile
 RUN apt-get -y install python3-pip python3-dev
+RUN ls /dev/
+
 RUN git clone https://github.com/chen116/pacer_docker.git
 # RUN apt -y install python3-pip && pip3 install --upgrade pip && pip install numpy && pip install opencv-python && apt -y install libsm6 libxrender1 libfontconfig1 && apt -y install python3-tk && apt -y install x11-xkb-utils && pip install imutils
-RUN ls /tmp/
 RUN cd /pacer_docker/app/objdet/ && sh install-opencv.sh
 
 
