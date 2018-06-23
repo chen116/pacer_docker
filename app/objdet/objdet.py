@@ -69,7 +69,6 @@ else:
 # else:
 # 	frame = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
 
-print("meow")
 while cnt<int(sys.argv[3]): # outvid
 
 
@@ -93,8 +92,14 @@ while cnt<int(sys.argv[3]): # outvid
 
 		(h, w) = resized_frame.shape[:2]
 		blob = cv2.dnn.blobFromImage(cv2.resize(frame, (300, 300)),0.007843, (300, 300), 127.5)
+		print("meow")
+
 		net.setInput(blob)
+		print("meow2")
+
 		detections = net.forward()
+		print("meow3")
+
 		#print(frame.dtype)
 		# loop over the detections
 		for i in np.arange(0, detections.shape[2]):
