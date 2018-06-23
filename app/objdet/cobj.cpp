@@ -1,17 +1,19 @@
-#include "opencv2/opencv.hpp"
+#include "opencv2/core.hpp"
 #include "opencv2/core/ocl.hpp"
-#include "opencv2/core/utility.hpp"
+#include "opencv2/highgui.hpp"
+#include "opencv2/imgcodecs.hpp"
 #include "opencv2/imgproc.hpp"
-#include <ctime>// include this header
+
 #include <iostream>
+
+using namespace std;
 using namespace cv;
- 
 int main(int argc, char** argv)
 {
     Mat img, gray;
 	
     int start_s=clock();
-    img = imread("image.jpeg", IMREAD_COLOR);
+    img = imread("cat.jpg", IMREAD_COLOR);
     cvtColor(img, gray, COLOR_BGR2GRAY);
     GaussianBlur(gray, gray,Size(7, 7), 1.5);
     Canny(gray, gray, 0, 50);
@@ -28,7 +30,7 @@ int main(int argc, char** argv)
     UMat uimg, ugray;
     int ustart_s=clock();
 
-    imread("image.jpeg", IMREAD_COLOR).copyTo(uimg);
+    imread("cat.jpg", IMREAD_COLOR).copyTo(uimg);
      
     cvtColor(uimg, ugray, COLOR_BGR2GRAY);
     GaussianBlur(ugray, ugray,Size(7, 7), 1.5);
