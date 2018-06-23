@@ -37,6 +37,10 @@ from queue import Queue
 vs= FileVideoStream("walkman.mp4").start() # outvid
 
 net = cv2.dnn.readNetFromCaffe("MobileNetSSD_deploy.prototxt.txt", "MobileNetSSD_deploy.caffemodel")
+
+net.setPreferableTarget(1)
+
+
 CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
 	"bottle", "bus", "car", "cat", "chair", "cow", "diningtable",
 	"dog", "horse", "motorbike", "person", "pottedplant", "sheep",
@@ -58,18 +62,17 @@ tn = time.time()
 
 frame=xframe
 resized_frame = frame#imutils.resize(frame, width=300)
-# if 'gpu' in gpu:
-
-# 	frame = cv2.UMat(resized_frame)
-# else:
-# 	frame = resized_frame
 if 'gpu' in gpu:
 
-	mat = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
-	frame = cv2.UMat(mat)
-	# frame = cv2.UMat(img)
+	frame = cv2.UMat(resized_frame)
 else:
-	frame = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
+	frame = resized_frame
+# if 'gpu' in gpu:
+# 	mat = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
+# 	frame = cv2.UMat(mat)
+# 	# frame = cv2.UMat(img)
+# else:
+# 	frame = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
 
 while cnt<int(sys.argv[3]): # outvid
 
