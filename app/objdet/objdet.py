@@ -56,12 +56,18 @@ cnt=0
 tn = time.time()
 
 
-frame=xframe
-resized_frame = imutils.resize(frame, width=300)
+# frame=xframe
+# resized_frame = imutils.resize(frame, width=300)
+# if 'gpu' in gpu:
+# 	frame = cv2.UMat(resized_frame)
+# else:
+# 	frame = resized_frame
 if 'gpu' in gpu:
-	frame = cv2.UMat(resized_frame)
+	img = cv2.UMat(cv2.imread("image.jpg", cv2.IMREAD_COLOR))
+	frame = cv2.UMat(img)
 else:
-	frame = resized_frame
+	frame = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
+
 
 while cnt<int(sys.argv[3]): # outvid
 
@@ -117,11 +123,11 @@ while cnt<int(sys.argv[3]): # outvid
 
 	else:
 
-		if 'gpu' in gpu:
-			img = cv2.UMat(cv2.imread("image.jpg", cv2.IMREAD_COLOR))
-			frame = cv2.UMat(img)
-		else:
-			frame = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
+		# if 'gpu' in gpu:
+		# 	img = cv2.UMat(cv2.imread("image.jpg", cv2.IMREAD_COLOR))
+		# 	frame = cv2.UMat(img)
+		# else:
+		# 	frame = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
 
 		gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 		gray = cv2.GaussianBlur(gray, (7, 7), 1.5)
