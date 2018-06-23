@@ -82,13 +82,13 @@ while cnt<int(sys.argv[3]): # outvid
 
 
 	if 'obj' in obj:
-		meow = vs.read()
-		frame=xframe
-		resized_frame = imutils.resize(frame, width=300)
-		if 'gpu' in gpu:
-			frame = cv2.UMat(resized_frame)
-		else:
-			frame = resized_frame
+		# meow = vs.read()
+		# frame=xframe
+		# resized_frame = imutils.resize(frame, width=300)
+		# if 'gpu' in gpu:
+		# 	frame = cv2.UMat(resized_frame)
+		# else:
+		# 	frame = resized_frame
 
 
 		(h, w) = resized_frame.shape[:2]
