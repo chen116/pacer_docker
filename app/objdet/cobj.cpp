@@ -1,4 +1,6 @@
-
+/* to compile:
+g++ m.cpp -o app `pkg-config --cflags --libs opencv`
+*/
 #include "opencv2/core.hpp"
 #include "opencv2/core/ocl.hpp"
 #include "opencv2/highgui.hpp"
