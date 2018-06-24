@@ -54,11 +54,14 @@ apt-get install -y doxygen
 
 # 3. INSTALL THE LIBRARY
 
-apt-get install -y unzip wget
-wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip
-unzip ${OPENCV_VERSION}.zip
-rm ${OPENCV_VERSION}.zip
-mv opencv-${OPENCV_VERSION} OpenCV
+# apt-get install -y unzip wget
+# wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip
+# unzip ${OPENCV_VERSION}.zip
+# rm ${OPENCV_VERSION}.zip
+# mv opencv-${OPENCV_VERSION} OpenCV
+
+git clone https://github.com/opencv/opencv.git
+mv opencv OpenCV
 cd OpenCV
 mkdir build
 cd build
