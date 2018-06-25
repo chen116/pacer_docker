@@ -70,7 +70,19 @@ VOLUME /foo
 
 #https://github.com/hughperkins/tf-coriander/blob/master/docker/Dockerfile
 RUN apt-get -y install python3-pip python3-dev
-RUN echo $PATH1
+
+RUN echo $PATH
+RUN apt-get install -y cmake
+RUN apt-get install -y qt5-default libvtk6-dev
+RUN apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev
+RUN apt-get install -y libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm libopencore-amrnb-dev libopencore-amrwb-dev libv4l-dev libxine2-dev
+RUN apt-get install -y libtbb-dev libeigen3-dev
+RUN apt-get install -y python-dev python-tk python-numpy python3-dev python3-tk python3-numpy
+RUN apt-get install -y ant default-jdk
+RUN apt-get install -y doxygen
+
+
+
 
 RUN git clone https://github.com/chen116/pacer_docker.git
 # RUN apt -y install python3-pip && pip3 install --upgrade pip && pip install numpy && pip install opencv-python && apt -y install libsm6 libxrender1 libfontconfig1 && apt -y install python3-tk && apt -y install x11-xkb-utils && pip install imutils

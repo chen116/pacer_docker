@@ -17,39 +17,39 @@
 OPENCV_VERSION='3.4.1'
 
 
-# 1. KEEP UBUNTU OR DEBIAN UP TO DATE
+# # 1. KEEP UBUNTU OR DEBIAN UP TO DATE
 
-apt-get -y update
-apt-get -y upgrade
-apt-get -y dist-upgrade
-apt-get -y autoremove
+# apt-get -y update
+# apt-get -y upgrade
+# apt-get -y dist-upgrade
+# apt-get -y autoremove
 
 
-# 2. INSTALL THE DEPENDENCIES
+# # 2. INSTALL THE DEPENDENCIES
 
-# Build tools:
-apt-get install -y build-essential cmake
+# # Build tools:
+# apt-get install -y build-essential cmake
 
-# GUI (if you want to use GTK instead of Qt, replace 'qt5-default' with 'libgtkglext1-dev' and remove '-DWITH_QT=ON' option in CMake):
-apt-get install -y qt5-default libvtk6-dev
+# # GUI (if you want to use GTK instead of Qt, replace 'qt5-default' with 'libgtkglext1-dev' and remove '-DWITH_QT=ON' option in CMake):
+# apt-get install -y qt5-default libvtk6-dev
 
-# Media I/O:
-apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev
+# # Media I/O:
+# apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev
 
-# Video I/O:
-apt-get install -y libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm libopencore-amrnb-dev libopencore-amrwb-dev libv4l-dev libxine2-dev
+# # Video I/O:
+# apt-get install -y libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm libopencore-amrnb-dev libopencore-amrwb-dev libv4l-dev libxine2-dev
 
-# Parallelism and linear algebra libraries:
-apt-get install -y libtbb-dev libeigen3-dev
+# # Parallelism and linear algebra libraries:
+# apt-get install -y libtbb-dev libeigen3-dev
 
-# Python:
-apt-get install -y python-dev python-tk python-numpy python3-dev python3-tk python3-numpy
+# # Python:
+# apt-get install -y python-dev python-tk python-numpy python3-dev python3-tk python3-numpy
 
-# Java:
-apt-get install -y ant default-jdk
+# # Java:
+# apt-get install -y ant default-jdk
 
-# Documentation:
-apt-get install -y doxygen
+# # Documentation:
+# apt-get install -y doxygen
 
 
 # 3. INSTALL THE LIBRARY
@@ -69,7 +69,8 @@ git clone https://github.com/opencv/opencv_contrib.git
 cd OpenCV
 mkdir build
 cd build
-cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -DWITH_OPENCL=ON -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DENABLE_PRECOMPILED_HEADERS=OFF ..
+#cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -DWITH_OPENCL=ON -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DENABLE_PRECOMPILED_HEADERS=OFF ..
+cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -DWITH_OPENCL=ON -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON ..
 make -j4
 make install
 ldconfig
