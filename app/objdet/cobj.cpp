@@ -1,5 +1,5 @@
 /* to compile:
-g++ cobj.cpp -o app `pkg-config --cflags --libs opencv`
+g++ cobj.cpp -o app `pkg-config --cflags --libs opencv` -std=c++11 
 */
 #include "opencv2/core.hpp"
 #include "opencv2/core/ocl.hpp"
