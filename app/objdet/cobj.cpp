@@ -30,8 +30,8 @@ int main(int argc, char** argv)
 	int stop_s=clock();
 	std::cout << "cpu time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
 
-    imshow("edges", gray);
-    waitKey();
+    // imshow("edges", gray);
+    // waitKey();
 
 
 
@@ -46,8 +46,8 @@ int main(int argc, char** argv)
  	int ustop_s=clock();
 	std::cout << "gpu time: " << (ustop_s-ustart_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
 
-    imshow("edges", gray);
-    waitKey();
+    // imshow("edges", gray);
+    // waitKey();
 
 
 
