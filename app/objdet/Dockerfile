@@ -48,7 +48,7 @@ RUN apt -y install cmake-gui
 
 RUN apt -y install nano
 
-RUN git clone https://github.com/smistad/OpenCL-Getting-Started.git && cd OpenCL-Getting-Started && make 
+# RUN git clone https://github.com/smistad/OpenCL-Getting-Started.git && cd OpenCL-Getting-Started && make 
 
 
 VOLUME /foo
@@ -89,7 +89,10 @@ RUN apt-get install -y python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev li
 RUN git clone https://github.com/opencv/opencv_contrib.git
 
 RUN git clone https://github.com/opencv/opencv.git && mv opencv OpenCV && cd OpenCV && mkdir build && cd build && \
-	cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -DWITH_OPENCL=ON -DBUILD_EXAMPLES=ON ..
+	cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -DWITH_OPENCL=ON -DBUILD_EXAMPLES=ON .. && \
+	 	make -j7 && \
+	 		make install && \
+	 			ldconfig	
 
 # ARG OPENCV_VERSION=3.4.1
 # RUN apt-get install -y unzip wget && wget https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip && unzip $OPENCV_VERSION.zip && rm $OPENCV_VERSION.zip && mv opencv-$OPENCV_VERSION OpenCV
