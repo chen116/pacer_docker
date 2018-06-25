@@ -1,5 +1,7 @@
 //https://docs.opencv.org/3.4/d5/de7/tutorial_dnn_googlenet.html
-// g++ cobj.cpp -o app `pkg-config --cflags --libs opencv`
+// g++ cobj.cpp -o app `pkg-config --cflags --libs opencv` -std=c++11 
+//use -std=c++11 or -std=gnu++11
+
 // ./app --model=bvlc_googlenet.caffemodel --config=bvlc_googlenet.prototxt --width=224 --height=224 --classes=classification_classes_ILSVRC2012.txt --input=space_shuttle.jpg --mean="104 117 123"
 #include <fstream>
 #include <sstream>
