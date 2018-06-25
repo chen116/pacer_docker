@@ -63,10 +63,13 @@ mv opencv-${OPENCV_VERSION} OpenCV
 # git clone https://github.com/opencv/opencv.git
 # mv opencv OpenCV
 
+git clone https://github.com/opencv/opencv_contrib.git
+
+
 cd OpenCV
 mkdir build
 cd build
-cmake -DWITH_OPENCL=ON -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DENABLE_PRECOMPILED_HEADERS=OFF ..
+cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules .. -DWITH_OPENCL=ON -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DENABLE_PRECOMPILED_HEADERS=OFF ..
 make -j4
 make install
 ldconfig
