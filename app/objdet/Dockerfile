@@ -88,7 +88,7 @@ RUN git clone https://github.com/opencv/opencv_contrib.git
 
 
 ARG OPENCV_VERSION=3.4.1
-RUN apt-get install -y unzip wget && wget https://github.com/opencv/opencv/archive/OPENCV_VERSION.zip && unzip OPENCV_VERSION.zip && rm OPENCV_VERSION.zip && mv opencv-OPENCV_VERSION OpenCV
+RUN apt-get install -y unzip wget && wget https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip && unzip $OPENCV_VERSION.zip && rm $OPENCV_VERSION.zip && mv opencv-$OPENCV_VERSION OpenCV
 
 
 
