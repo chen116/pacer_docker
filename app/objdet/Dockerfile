@@ -89,11 +89,12 @@ RUN apt-get install -y python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev li
 RUN git clone https://github.com/opencv/opencv_contrib.git
 
 RUN git clone https://github.com/opencv/opencv.git && mv opencv OpenCV && cd OpenCV && mkdir build && cd build && \
-	cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -DWITH_OPENCL=ON -DBUILD_EXAMPLES=ON .. && \
+	cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -DWITH_OPENCL=ON .. && \
 	 	make -j7 && \
 	 		make install && \
 	 			ldconfig	
-
+	 			
+RUN apt-get install -y xorg-dev libglu1-mesa-dev
 # ARG OPENCV_VERSION=3.4.1
 # RUN apt-get install -y unzip wget && wget https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip && unzip $OPENCV_VERSION.zip && rm $OPENCV_VERSION.zip && mv opencv-$OPENCV_VERSION OpenCV
 
@@ -112,7 +113,7 @@ RUN git clone https://github.com/opencv/opencv.git && mv opencv OpenCV && cd Ope
 
 RUN git clone https://github.com/chen116/pacer_docker.git
 # RUN apt -y install python3-pip && pip3 install --upgrade pip && pip install numpy && pip install opencv-python && apt -y install libsm6 libxrender1 libfontconfig1 && apt -y install python3-tk && apt -y install x11-xkb-utils && pip install imutils
-RUN pip3 install --upgrade pip  && pip install imutils
+RUN pip3 install --upgrade pip  && pip install imutils 
 #RUN cd /pacer_docker/app/objdet/ && sh install-opencv.sh
 
 
