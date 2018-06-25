@@ -81,22 +81,26 @@ RUN apt-get install -y python-dev python-tk python-numpy python3-dev python3-tk 
 RUN apt-get install -y ant default-jdk
 RUN apt-get install -y doxygen
 
+RUN apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+RUN apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+
+
 
 RUN git clone https://github.com/opencv/opencv_contrib.git
 
-# RUN git clone https://github.com/opencv/opencv.git && mv opencv OpenCV
+RUN git clone https://github.com/opencv/opencv.git && mv opencv OpenCV && cd OpenCV && mkdir build && cd build && \
+	cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -DWITH_OPENCL=ON -DBUILD_EXAMPLES=ON ..
+
+# ARG OPENCV_VERSION=3.4.1
+# RUN apt-get install -y unzip wget && wget https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip && unzip $OPENCV_VERSION.zip && rm $OPENCV_VERSION.zip && mv opencv-$OPENCV_VERSION OpenCV
 
 
-ARG OPENCV_VERSION=3.4.1
-RUN apt-get install -y unzip wget && wget https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip && unzip $OPENCV_VERSION.zip && rm $OPENCV_VERSION.zip && mv opencv-$OPENCV_VERSION OpenCV
 
-
-
-RUN cd OpenCV && mkdir build && cd build && \
-		cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -DWITH_OPENCL=ON -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DENABLE_PRECOMPILED_HEADERS=OFF .. && \
-		 	make -j4 && \
-		 		make install && \
-		 			ldconfig
+# RUN cd OpenCV && mkdir build && cd build && \
+# 		cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -DWITH_OPENCL=ON -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DENABLE_PRECOMPILED_HEADERS=OFF .. && \
+# 		 	make -j4 && \
+# 		 		make install && \
+# 		 			ldconfig
 
 #cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -DWITH_OPENCL=ON -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON ..
 
