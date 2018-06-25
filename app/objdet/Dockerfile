@@ -82,11 +82,31 @@ RUN apt-get install -y ant default-jdk
 RUN apt-get install -y doxygen
 
 
+RUN git clone https://github.com/opencv/opencv_contrib.git
+
+# RUN git clone https://github.com/opencv/opencv.git && mv opencv OpenCV
+
+
+ARG OPENCV_VERSION=3.4.1
+RUN apt-get install -y unzip wget && wget https://github.com/opencv/opencv/archive/OPENCV_VERSION.zip && unzip OPENCV_VERSION.zip && rm OPENCV_VERSION.zip && mv opencv-OPENCV_VERSION OpenCV
+
+
+
+RUN cd OpenCV && mkdir build && cd build && \
+		cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -DWITH_OPENCL=ON -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DENABLE_PRECOMPILED_HEADERS=OFF .. && \
+		 	make -j4 && \
+		 		make install && \
+		 			ldconfig
+
+#cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -DWITH_OPENCL=ON -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON ..
+
+
 
 
 RUN git clone https://github.com/chen116/pacer_docker.git
 # RUN apt -y install python3-pip && pip3 install --upgrade pip && pip install numpy && pip install opencv-python && apt -y install libsm6 libxrender1 libfontconfig1 && apt -y install python3-tk && apt -y install x11-xkb-utils && pip install imutils
-RUN cd /pacer_docker/app/objdet/ && sh install-opencv.sh
+
+#RUN cd /pacer_docker/app/objdet/ && sh install-opencv.sh
 
 
 # makes heartbeat python module
