@@ -49,9 +49,7 @@ int main( int argc, const char** argv )
     return 0;
 }
 
-    UMat uimg, ugray;
 
-    .copyTo(uimg);
 void udetectAndDisplay( Mat xframe )
 {
 
