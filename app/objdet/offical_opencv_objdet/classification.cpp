@@ -1,3 +1,6 @@
+//g++ cobj.cpp -o app `pkg-config --cflags --libs opencv` -std=c++11 
+
+
 #include <fstream>
 #include <sstream>
 
