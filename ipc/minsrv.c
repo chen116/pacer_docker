@@ -70,7 +70,7 @@ int main(void){
         //     exit(1);
         // }
 
-        // printf("socket listening...call_cnt:%d\n",call_cnt);
+        printf("socket listening...call_cnt:%d\n",call_cnt);
         
         /*********************************/
         /* Accept an incoming connection */
