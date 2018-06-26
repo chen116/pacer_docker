@@ -103,9 +103,9 @@ int main(int argc, const char ** argv)
     cv::namedWindow("Histogram", cv::WINDOW_NORMAL);
     cv::namedWindow("CamShift Demo", cv::WINDOW_NORMAL);
     cv::setMouseCallback("CamShift Demo", onMouse);
-    cv::createTrackbar("Vmin", "CamShift Demo", &vmin, 256);
-    cv::createTrackbar("Vmax", "CamShift Demo", &vmax, 256);
-    cv::createTrackbar("Smin", "CamShift Demo", &smin, 256);
+    // cv::createTrackbar("Vmin", "CamShift Demo", &vmin, 256);
+    // cv::createTrackbar("Vmax", "CamShift Demo", &vmax, 256);
+    // cv::createTrackbar("Smin", "CamShift Demo", &smin, 256);
 
     cv::Mat frame, histimg(200, 320, CV_8UC3, cv::Scalar::all(0));
     cv::UMat hsv, hist, hue, mask, backproj;
