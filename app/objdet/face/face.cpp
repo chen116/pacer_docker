@@ -57,6 +57,8 @@ void udetectAndDisplay( Mat xframe )
 
     UMat frame,frame_gray;
     xframe.copyTo(frame);
+
+
     std::vector<Rect> faces;
     cvtColor( frame, frame_gray, COLOR_BGR2GRAY );
     equalizeHist( frame_gray, frame_gray );
