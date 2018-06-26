@@ -108,9 +108,13 @@ int main(int argc, const char ** argv)
     cv::Mat frame, histimg(200, 320, CV_8UC3, cv::Scalar::all(0));
     cv::UMat hsv, hist, hue, mask, backproj;
     bool paused = false;
+    double t_start= 0;
+
     for ( ; ; )
     {
         auto start = high_resolution_clock::now();
+        t_start = (double)getTickCount();
+
         if (!paused)
         {
             cap >> frame;
@@ -192,6 +196,8 @@ int main(int argc, const char ** argv)
         auto stop = high_resolution_clock::now();
         auto duration = duration_cast<microseconds>(stop - start);
         cout << using_opencl <<" Time taken by function: "<< duration.count() << " microseconds" << endl;
+        t_start = (double)getTickCount() - t_start;    
+        printf( "%d etection time = %g ms\n", using_opencl,t_start*1000/getTickFrequency());
 
         if (selectObject && selection.width > 0 && selection.height > 0)
         {
