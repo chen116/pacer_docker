@@ -1,7 +1,7 @@
 
 
 
-app: 
+app: clean
 	g++ camshift.cpp -o app `pkg-config --cflags --libs opencv` -std=c++11 
 
 
