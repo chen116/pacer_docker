@@ -225,7 +225,7 @@ int main(int argc, const char ** argv)
             break;
         case 'c':
             cv::ocl::setUseOpenCL(!cv::ocl::useOpenCL());
-            using_opencl = ~using_opencl ;
+            using_opencl = !using_opencl ;
         default:
             break;
         }
