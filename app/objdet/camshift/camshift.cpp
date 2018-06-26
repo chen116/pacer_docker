@@ -12,6 +12,8 @@
 #include <chrono>
 using namespace std::chrono;
 using namespace std;
+using namespace cv;
+
 
 
 static cv::UMat image;
