@@ -29,12 +29,12 @@ import threading
 from queue import Queue
 
 
-# mycam = FoscamCamera('65.114.169.151',88,'admin','admin',daemon=False)
+mycam = FoscamCamera('65.114.169.151',88,'admin','admin',daemon=False)
 # mycam = FoscamCamera('65.114.169.139',88,'arittenbach','8mmhamcgt16!',daemon=False)
-# mycam.ptz_reset()
-# vs = VideoStream('rtsp://admin:admin@65.114.169.151:88/videoMain').start() # realvid
+mycam.ptz_reset()
+vs = VideoStream('rtsp://admin:admin@65.114.169.151:88/videoMain').start() # realvid
 # vs = VideoStream('rtsp://arittenbach:8mmhamcgt16!@65.114.169.139:88/videoMain').start() # realvid
-vs= FileVideoStream("walkman.mp4").start() # outvid
+# vs= FileVideoStream("walkman.mp4").start() # outvid
 
 net = cv2.dnn.readNetFromCaffe("MobileNetSSD_deploy.prototxt.txt", "MobileNetSSD_deploy.caffemodel")
 
@@ -60,108 +60,126 @@ cnt=0
 tn = time.time()
 
 
-frame=xframe
-resized_frame = imutils.resize(frame, width=300)
-if 'gpu' in gpu:
 
-	frame = cv2.UMat(resized_frame)
-else:
-	frame = resized_frame
-# if 'gpu' in gpu:
-# 	mat = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
-# 	frame = cv2.UMat(mat)
-# 	# frame = cv2.UMat(img)
-# else:
-# 	frame = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
-
-while cnt<int(sys.argv[3]): # outvid
-
-
-	cnt+=1
+stream = 1
+if stream:
+	while True: 
+		cnt+=1
+		frame = vs.read()
+		resized_frame = imutils.resize(frame, width=300)
+		cv2.imshow("Frame", resized_frame)
+		key = cv2.waitKey(1) & 0xFF
+		# if the `q` key was pressed, break from the loop
+		if key == ord("q"):
+			break
 
 
 
 
 
+else :
+	frame=xframe
+	resized_frame = imutils.resize(frame, width=300)
+	if 'gpu' in gpu:
 
-
-	if 'obj' in obj:
-		# meow = vs.read()
-		# frame=xframe
-		# resized_frame = imutils.resize(frame, width=300)
-		# if 'gpu' in gpu:
-		# 	frame = cv2.UMat(resized_frame)
-		# else:
-		# 	frame = resized_frame
-
-
-		(h, w) = resized_frame.shape[:2]
-		blob = cv2.dnn.blobFromImage(cv2.resize(frame, (300, 300)),0.007843, (300, 300), 127.5)
-		# print("meow")
-
-		net.setInput(blob)
-		# print("meow2")
-
-		detections = net.forward()
-		# print("meow3")
-
-		#print(frame.dtype)
-		# loop over the detections
-		for i in np.arange(0, detections.shape[2]):
-			# extract the confidence (i.e., probability) associated with
-			# the prediction
-			confidence = detections[0, 0, i, 2]
-			idx2 = int(detections[0,0,i,1])
-			# filter out weak detections by ensuring the `confidence` is
-			# greater than the minimum confidence
-			if ((confidence > .5) and (CLASSES[idx2]=='person')):
-				# extract the index of the class label from the
-				# `detections`, then compute the (x, y)-coordinates of
-				# the bounding box for the object
-				idx = int(detections[0, 0, i, 1])
-				box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
-				(startX, startY, endX, endY) = box.astype("int")
-			#	print('startX=',startX)
-			#	print('endX=',endX)
-				label = "{}: {:.2f}%".format(CLASSES[idx],
-					confidence * 100)
-				cv2.rectangle(frame, (startX, startY), (endX, endY),
-					COLORS[idx], 2)
-				y = startY - 15 if startY - 15 > 15 else startY + 15
-				cv2.putText(frame, label, (startX, y),
-					cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLORS[idx], 2)
-		cv2.imshow("Frame", frame)
-
+		frame = cv2.UMat(resized_frame)
 	else:
+		frame = resized_frame
+	# if 'gpu' in gpu:
+	# 	mat = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
+	# 	frame = cv2.UMat(mat)
+	# 	# frame = cv2.UMat(img)
+	# else:
+	# 	frame = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
 
-		# if 'gpu' in gpu:
-		# 	img = cv2.UMat(cv2.imread("image.jpg", cv2.IMREAD_COLOR))
-		# 	frame = cv2.UMat(img)
-		# else:
-		# 	frame = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
-
-		gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-		gray = cv2.GaussianBlur(gray, (7, 7), 1.5)
-		gray = cv2.Canny(gray, 0, 50)
-		cv2.imshow("Frame", gray)
+	while cnt<int(sys.argv[3]): # outvid
 
 
-	# gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-	# gray = cv2.GaussianBlur(gray, (7, 7), 1.5)
-	# gray = cv2.Canny(gray, 0, 50)
-	# cv2.imshow("Frame", gray)
+		cnt+=1
 
 
 
 
-	key = cv2.waitKey(1) & 0xFF
-	# if the `q` key was pressed, break from the loop
-	if key == ord("q"):
-		break
-	hb.heartbeat_beat()
-	print('		hb: gpu exec time:',1/hb.get_instant_heartrate())
-	print(time.time()-tn,'exec time')
-	tn=time.time()
+
+
+
+		if 'obj' in obj:
+			# meow = vs.read()
+			# frame=xframe
+			# resized_frame = imutils.resize(frame, width=300)
+			# if 'gpu' in gpu:
+			# 	frame = cv2.UMat(resized_frame)
+			# else:
+			# 	frame = resized_frame
+
+
+			(h, w) = resized_frame.shape[:2]
+			blob = cv2.dnn.blobFromImage(cv2.resize(frame, (300, 300)),0.007843, (300, 300), 127.5)
+			# print("meow")
+
+			net.setInput(blob)
+			# print("meow2")
+
+			detections = net.forward()
+			# print("meow3")
+
+			#print(frame.dtype)
+			# loop over the detections
+			for i in np.arange(0, detections.shape[2]):
+				# extract the confidence (i.e., probability) associated with
+				# the prediction
+				confidence = detections[0, 0, i, 2]
+				idx2 = int(detections[0,0,i,1])
+				# filter out weak detections by ensuring the `confidence` is
+				# greater than the minimum confidence
+				if ((confidence > .5) and (CLASSES[idx2]=='person')):
+					# extract the index of the class label from the
+					# `detections`, then compute the (x, y)-coordinates of
+					# the bounding box for the object
+					idx = int(detections[0, 0, i, 1])
+					box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
+					(startX, startY, endX, endY) = box.astype("int")
+				#	print('startX=',startX)
+				#	print('endX=',endX)
+					label = "{}: {:.2f}%".format(CLASSES[idx],
+						confidence * 100)
+					cv2.rectangle(frame, (startX, startY), (endX, endY),
+						COLORS[idx], 2)
+					y = startY - 15 if startY - 15 > 15 else startY + 15
+					cv2.putText(frame, label, (startX, y),
+						cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLORS[idx], 2)
+			cv2.imshow("Frame", frame)
+
+		else:
+
+			# if 'gpu' in gpu:
+			# 	img = cv2.UMat(cv2.imread("image.jpg", cv2.IMREAD_COLOR))
+			# 	frame = cv2.UMat(img)
+			# else:
+			# 	frame = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
+
+			gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+			gray = cv2.GaussianBlur(gray, (7, 7), 1.5)
+			gray = cv2.Canny(gray, 0, 50)
+			cv2.imshow("Frame", gray)
+
+
+		# gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+		# gray = cv2.GaussianBlur(gray, (7, 7), 1.5)
+		# gray = cv2.Canny(gray, 0, 50)
+		# cv2.imshow("Frame", gray)
+
+
+
+
+		key = cv2.waitKey(1) & 0xFF
+		# if the `q` key was pressed, break from the loop
+		if key == ord("q"):
+			break
+		hb.heartbeat_beat()
+		print('		hb: gpu exec time:',1/hb.get_instant_heartrate())
+		print(time.time()-tn,'exec time')
+		tn=time.time()
 cv2.destroyAllWindows()
 vs.stop()
 hb.heartbeat_finish()
