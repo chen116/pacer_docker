@@ -7,7 +7,7 @@
 using namespace std;
 using namespace cv;
 void detectAndDisplay( Mat frame );
-void udetectAndDisplay( UMat frame );
+void udetectAndDisplay( Mat frame );
 String face_cascade_name, eyes_cascade_name;
 CascadeClassifier face_cascade;
 CascadeClassifier eyes_cascade;
