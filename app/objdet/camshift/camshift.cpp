@@ -105,7 +105,7 @@ int main(int argc, const char ** argv)
     cv::createTrackbar("Vmax", "CamShift Demo", &vmax, 256);
     cv::createTrackbar("Smin", "CamShift Demo", &smin, 256);
 
-    cv::Mat frame, histimg(400, 640, CV_8UC3, cv::Scalar::all(0));
+    cv::Mat frame, histimg(800, 1280, CV_8UC3, cv::Scalar::all(0));
     cv::UMat hsv, hist, hue, mask, backproj;
     bool paused = false;
     for ( ; ; )
