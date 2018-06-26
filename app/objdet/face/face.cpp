@@ -42,7 +42,7 @@ int main( int argc, const char** argv )
             break;
         }
         //-- 3. Apply the classifier to the frame
-        detectAndDisplay( frame );
+        udetectAndDisplay( frame );
         char c = (char)waitKey(10);
         if( c == 27 ) { break; } // escape
     }
