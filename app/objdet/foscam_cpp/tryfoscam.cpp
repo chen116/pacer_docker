@@ -13,7 +13,7 @@ int main()
 {
     Mat frame;
     namedWindow("video", 1);
-    VideoCapture cap("http://admin:admin@@65.114.169.151:88/videoMain.cgi?resolution=640x360&req_fps=30&.mjpg");
+    VideoCapture cap("rtsp://admin:admin@@65.114.169.151:88/videoMain.cgi?resolution=640x360&req_fps=30&.mjpg");
     // VideoCapture cap("http://65.114.169.151:88/cgi-bin/CGIStream.cgi?cmd=GetMJStream&usr=admin&pwd=admin.mjpg");
 
     if(!cap.isOpened())
