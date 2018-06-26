@@ -20,7 +20,7 @@ int main()
     {
         cout<<"Camera not found"<<endl;
         getchar();
-        return -1;
+        return 0;
     }
 
     cout<<"meow"<<endl;
