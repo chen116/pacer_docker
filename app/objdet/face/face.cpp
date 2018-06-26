@@ -48,7 +48,7 @@ int main( int argc, const char** argv )
         }
         //-- 3. Apply the classifier to the frame
         auto start = high_resolution_clock::now();
-        udetectAndDisplay( frame );
+        detectAndDisplay( frame );
         auto stop = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop - start);
  
