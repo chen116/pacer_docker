@@ -22,6 +22,8 @@ int main()
         getchar();
         return -1;
     }
+
+    cout<<"meow"<<endl;
     while ( cap.isOpened() )
     {
         cap >> frame;
