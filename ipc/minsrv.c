@@ -130,6 +130,7 @@ int main(void){
 
         // printf("Sending data...\n");
         rc = send(client_sock, buf, strlen(buf), 0);
+        call_cnt++;
         // if (rc == -1) {
         //     printf("SEND ERROR: %d", 99);
         //     close(server_sock);
