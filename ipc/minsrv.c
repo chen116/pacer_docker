@@ -142,7 +142,7 @@ int main(void){
         //     // printf("Data sent! from: cnt: %d\n",call_cnt);
         //     call_cnt++;
         // }
-        call_cnt++
+        call_cnt++;
         /******************************/
         /* Close the sockets and exit */
         /******************************/
