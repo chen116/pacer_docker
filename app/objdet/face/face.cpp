@@ -52,8 +52,7 @@ int main( int argc, const char** argv )
         auto stop = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop - start);
  
-    cout << "Time taken by function: "
-         << duration.count() << " microseconds" << endl;
+    cout << "Time taken by function: "<< duration.count() << " microseconds" << endl;
         char c = (char)waitKey(10);
         if( c == 27 ) { break; } // escape
     }

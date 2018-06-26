@@ -8,7 +8,12 @@
 #include <iostream>
 #include <cctype>
 
+
+#include <chrono>
+using namespace std::chrono;
+
 static cv::UMat image;
+static bool using_opencl = true;
 static bool backprojMode = false;
 static bool selectObject = false;
 static int trackObject = 0;
@@ -101,9 +106,9 @@ int main(int argc, const char ** argv)
     cv::Mat frame, histimg(200, 320, CV_8UC3, cv::Scalar::all(0));
     cv::UMat hsv, hist, hue, mask, backproj;
     bool paused = false;
-
     for ( ; ; )
     {
+        auto start = high_resolution_clock::now();
         if (!paused)
         {
             cap >> frame;
@@ -218,9 +223,16 @@ int main(int argc, const char ** argv)
             break;
         case 'c':
             cv::ocl::setUseOpenCL(!cv::ocl::useOpenCL());
+            using_opencl = ~using_opencl ;
         default:
             break;
         }
+        auto stop = high_resolution_clock::now();
+        auto duration = duration_cast<microseconds>(stop - start);
+        cout << using_opencl <<" Time taken by function: "<< duration.count() << " microseconds" << endl;
+
+
+
     }
 
     return EXIT_SUCCESS;
