@@ -19,7 +19,6 @@ int main()
     if(!cap.isOpened())
     {
         cout<<"Camera not found"<<endl;
-        getchar();
         return 0;
     }
 
