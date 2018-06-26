@@ -70,7 +70,7 @@ int main(void){
         //     exit(1);
         // }
 
-        printf("socket listening...call_cnt:%d\n",call_cnt);
+        // printf("socket listening...call_cnt:%d\n",call_cnt);
         
         /*********************************/
         /* Accept an incoming connection */
@@ -130,7 +130,7 @@ int main(void){
 
         // printf("Sending data...\n");
         rc = send(client_sock, buf, strlen(buf), 0);
-        call_cnt++;
+        // call_cnt++;
         // if (rc == -1) {
         //     printf("SEND ERROR: %d", 99);
         //     close(server_sock);
