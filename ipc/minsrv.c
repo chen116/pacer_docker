@@ -147,7 +147,6 @@ int main(void){
         /* Close the sockets and exit */
         /******************************/
 
-        close(client_sock);
     }
 
     close(server_sock);    
