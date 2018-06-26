@@ -2,7 +2,7 @@
 
 
 app: 
-	g++ tryfoscam.cpp.cpp -o app `pkg-config --cflags --libs opencv` -std=c++11 
+	g++ tryfoscam.cpp -o app `pkg-config --cflags --libs opencv` -std=c++11 
 
 
 clean:
