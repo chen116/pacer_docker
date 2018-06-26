@@ -33,7 +33,7 @@ string nestedCascadeName = "/OpenCV/data/haarcascades/haarcascade_eye_tree_eyegl
 
 int main( int argc, const char** argv )
 {
-    cv::ocl::setUseOpenCL(true);
+    cv::ocl::setUseOpenCL();
     VideoCapture capture;
     UMat frame, image;
 
