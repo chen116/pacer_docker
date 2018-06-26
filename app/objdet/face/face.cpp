@@ -31,7 +31,7 @@ int main( int argc, const char** argv )
     if( !face_cascade.load( face_cascade_name ) ){ printf("--(!)Error loading face cascade\n"); return -1; };
     if( !eyes_cascade.load( eyes_cascade_name ) ){ printf("--(!)Error loading eyes cascade\n"); return -1; };
     //-- 2. Read the video stream
-    capture.open('face.avi');
+    capture.open("face.avi");
     if ( ! capture.isOpened() ) { printf("--(!)Error opening video capture\n"); return -1; }
     while ( capture.read(frame) )
     {
