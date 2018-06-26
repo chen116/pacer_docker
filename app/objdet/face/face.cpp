@@ -6,6 +6,11 @@
 #include <stdio.h>
 using namespace std;
 using namespace cv;
+
+
+#include <chrono>
+using namespace std::chrono;
+
 void detectAndDisplay( Mat frame );
 void udetectAndDisplay( Mat frame );
 String face_cascade_name, eyes_cascade_name;
@@ -42,7 +47,13 @@ int main( int argc, const char** argv )
             break;
         }
         //-- 3. Apply the classifier to the frame
+        auto start = high_resolution_clock::now();
         udetectAndDisplay( frame );
+        auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+ 
+    cout << "Time taken by function: "
+         << duration.count() << " microseconds" << endl;
         char c = (char)waitKey(10);
         if( c == 27 ) { break; } // escape
     }
