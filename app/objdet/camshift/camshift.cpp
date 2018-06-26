@@ -11,6 +11,8 @@
 
 #include <chrono>
 using namespace std::chrono;
+using namespace std;
+
 
 static cv::UMat image;
 static bool using_opencl = true;
