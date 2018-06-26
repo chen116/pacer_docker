@@ -105,7 +105,7 @@ int main(int argc, const char ** argv)
     cv::createTrackbar("Vmax", "CamShift Demo", &vmax, 256);
     cv::createTrackbar("Smin", "CamShift Demo", &smin, 256);
 
-    cv::Mat frame, histimg(800, 1280, CV_8UC3, cv::Scalar::all(0));
+    cv::Mat frame, histimg(200, 320, CV_8UC3, cv::Scalar::all(0));
     cv::UMat hsv, hist, hue, mask, backproj;
     bool paused = false;
     for ( ; ; )
@@ -189,6 +189,9 @@ int main(int argc, const char ** argv)
         }
         else if (trackObject < 0)
             paused = false;
+        auto stop = high_resolution_clock::now();
+        auto duration = duration_cast<microseconds>(stop - start);
+        cout << using_opencl <<" Time taken by function: "<< duration.count() << " microseconds" << endl;
 
         if (selectObject && selection.width > 0 && selection.height > 0)
         {
@@ -229,9 +232,6 @@ int main(int argc, const char ** argv)
         default:
             break;
         }
-        auto stop = high_resolution_clock::now();
-        auto duration = duration_cast<microseconds>(stop - start);
-        cout << using_opencl <<" Time taken by function: "<< duration.count() << " microseconds" << endl;
 
 
 
