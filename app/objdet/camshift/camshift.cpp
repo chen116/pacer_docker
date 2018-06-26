@@ -78,7 +78,7 @@ int main(int argc, const char ** argv)
     cv::CommandLineParser parser(argc, argv, keys);
     int camNum = parser.get<int>(0);
 
-    cap.open("../face/face.avi");
+    cap.open("fox.avi");
 
     if (!cap.isOpened())
     {
