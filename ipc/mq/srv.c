@@ -25,7 +25,7 @@ int main (int argc, char **argv)
     mqd_t qd_server, qd_client;   // queue descriptors
     long token_number = 1; // next token to be given to client
 
-    printf ("Server: Hello, World!\n");
+    printf ("Servering: Hello, World!\n");
 
     struct mq_attr attr;
 
@@ -48,23 +48,21 @@ int main (int argc, char **argv)
             exit (1);
         }
 
-        printf ("Server: message received.\n");
+        // printf ("Server: message received.\n");
 
         // send reply message to client
-
         if ((qd_client = mq_open (in_buffer, O_WRONLY)) == 1) {
             perror ("Server: Not able to open client queue");
             continue;
         }
 
-        sprintf (out_buffer, "%ld", token_number);
-
+        // sprintf (out_buffer, "%ld", token_number);
         if (mq_send (qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
             perror ("Server: Not able to send message to client");
             continue;
         }
 
-        printf ("Server: response sent to client.\n");
+        printf ("Server: response sent to client. %d\n",token_number);
         token_number++;
     }
 }
