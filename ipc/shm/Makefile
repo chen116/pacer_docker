@@ -1,7 +1,7 @@
 all: clean
 	-git pull
-	gcc writer.c -o w  -lrt -lpthread
-	gcc reader.c -o r  -lrt -lpthread
+	gcc srv.c -o s  -lrt -lpthread
+	gcc cli.c -o c  -lrt -lpthread
 
 clean:
 	-rm -f w r
