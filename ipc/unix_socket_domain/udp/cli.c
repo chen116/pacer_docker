@@ -15,8 +15,8 @@
 
 
 int main(argc, argv)
-    int argc;
-    char *argv[];
+    // int argc;
+    // char *argv[];
 {
     int sock;
     struct sockaddr_un name;
