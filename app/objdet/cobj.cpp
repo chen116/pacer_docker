@@ -30,6 +30,10 @@ int main(int argc, char** argv)
     int start_s=clock();
     t_start = (double)getTickCount();	
     img = imread("image.jpg", IMREAD_COLOR);
+    imshow("normal", img);
+
+
+    waitKey();
 
 
     cvtColor(img, gray, COLOR_BGR2GRAY);
