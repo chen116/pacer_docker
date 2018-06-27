@@ -39,10 +39,10 @@ int main(int argc, char** argv)
     int stop_s=clock();
     std::cout << "cpu time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
     t_start = (double)getTickCount() - t_start;    
-    printf( "%d detection time = %g ms\n", using_opencl,t_start*1000/getTickFrequency());
+    printf( "%d detection time = %g ms\n", 0,t_start*1000/getTickFrequency());
     imshow("edges", gray);
 
-    
+
     waitKey();
 
 
@@ -60,7 +60,7 @@ int main(int argc, char** argv)
  	int ustop_s=clock();
 	std::cout << "gpu time: " << (ustop_s-ustart_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
     t_start = (double)getTickCount() - t_start;    
-    printf( "%d detection time = %g ms\n", using_opencl,t_start*1000/getTickFrequency());
+    printf( "%d detection time = %g ms\n", 1,t_start*1000/getTickFrequency());
     imshow("edges", ugray);
     waitKey();
 
