@@ -34,8 +34,8 @@ int main(void){
     /**************************************/
     /* Create a UNIX domain stream socket */
     /**************************************/
-    // server_sock = socket(AF_UNIX, SOCK_STREAM, 0);
-    server_sock = socket(AF_UNIX, SOCK_DGRAM, 0);
+    server_sock = socket(AF_UNIX, SOCK_STREAM, 0);
+    // server_sock = socket(AF_UNIX, SOCK_DGRAM, 0);
 
     /***************************************/
     /* Set up the UNIX sockaddr structure  */
