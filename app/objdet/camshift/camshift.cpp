@@ -199,7 +199,7 @@ int main(int argc, const char ** argv)
         auto duration = duration_cast<microseconds>(stop - start);
         cout << using_opencl <<" Time taken by function: "<< duration.count() << " microseconds" << endl;
         t_start = (double)getTickCount() - t_start;    
-        printf( "%d detection time = %g us\n", using_opencl,t_start*1000/getTickFrequency());
+        printf( "%d detection time = %g ms\n", using_opencl,t_start*1000/getTickFrequency());
 
         if (selectObject && selection.width > 0 && selection.height > 0)
         {
