@@ -9,6 +9,7 @@
 #include <semaphore.h>
 
 
+
 #define SHMOBJ_PATH         "/shmjeshu"
 
 sem_t * sem_id;
@@ -28,8 +29,9 @@ void signal_callback_handler(int signum)
          */
         if ( shm_unlink("/shmjeshu") < 0 )
         {
-        	perror("shm_unlink");
+                perror("shm_unlink");
         }
+
         /**
          * Semaphore Close: Close a named semaphore
          */
@@ -45,17 +47,15 @@ void signal_callback_handler(int signum)
         {
         	perror("sem_unlink");
         }
-
    // Terminate program
    exit(signum);
 }
 
-
 int main(int argc, char *argv[]) {
     int shmfd;
-    int vol, cur;
     int shared_seg_size = (1 * sizeof(struct shared_data));   /* want shared segment capable of storing 1 message */
     struct shared_data *shared_msg;      /* the shared segment, and head of the messages list */
+
 
     signal(SIGINT, signal_callback_handler);
 
@@ -77,6 +77,7 @@ int main(int argc, char *argv[]) {
 	 */
 	sem_id=sem_open("/mysem", O_CREAT, S_IRUSR | S_IWUSR, 1);
 
+
     /* requesting the shared segment    --  mmap() */
     shared_msg = (struct shared_data *)mmap(NULL, shared_seg_size, PROT_READ | PROT_WRITE, MAP_SHARED, shmfd, 0);
     if (shared_msg == NULL)
@@ -86,29 +87,23 @@ int main(int argc, char *argv[]) {
     }
     fprintf(stderr, "Shared memory segment allocated correctly (%d bytes).\n", shared_seg_size);
 
-    vol = 10;
-    cur = 0;
     while(1)
     {
-    // sleep(2);
-    printf("Waiting docker \n");
+    sleep(2);
+    printf("Waiting \n");
     sem_wait(sem_id);
     printf("Locked, About to sleep \n");
-    if (shared_msg->var1==-1)
-    	{
-    		shared_msg->var1=1;
-    		printf("posting %d\n",cur);
-    cur++;
-		}
+    printf("The var1 is %d \n",shared_msg->var1);
+    printf("The var2 is %d \n",shared_msg->var2);
+    sleep(2);
     sem_post(sem_id);
-    
-    vol++;
+    printf("posting \n");
     }
 
     if (shm_unlink(SHMOBJ_PATH) != 0) {
         perror("In shm_unlink()");
-        exit(1);
     }
+        exit(1);
     /**
      * Semaphore Close: Close a named semaphore
      */

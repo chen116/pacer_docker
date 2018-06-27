@@ -16,8 +16,15 @@ g++ cobj.cpp -o app `pkg-config --cflags --libs opencv` -std=c++11
 
 using namespace std;
 using namespace cv;
+
+
+
+
 int main(int argc, char** argv)
 {
+
+
+//normal code
     Mat img, gray;
 	
     img = imread("image.jpg", IMREAD_COLOR);
