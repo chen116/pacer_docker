@@ -37,7 +37,7 @@ int main(int argc, char** argv)
     Canny(gray, gray, 0, 50);
 	// the code you wish to time goes here
     int stop_s=clock();
-    std::cout << "cpu time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
+    // std::cout << "cpu time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
     t_start = (double)getTickCount() - t_start;    
     printf( "%d detection time = %g ms\n", 0,t_start*1000/getTickFrequency());
     imshow("edges", gray);
@@ -58,7 +58,7 @@ int main(int argc, char** argv)
     GaussianBlur(ugray, ugray,Size(7, 7), 1.5);
     Canny(ugray, ugray, 0, 50);
  	int ustop_s=clock();
-	std::cout << "gpu time: " << (ustop_s-ustart_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
+	// std::cout << "gpu time: " << (ustop_s-ustart_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
     t_start = (double)getTickCount() - t_start;    
     printf( "%d detection time = %g ms\n", 1,t_start*1000/getTickFrequency());
     imshow("edges", ugray);
