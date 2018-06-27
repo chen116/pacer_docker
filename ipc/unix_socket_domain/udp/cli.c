@@ -38,11 +38,11 @@ int main()
     }
 
 
-    char buf[1024];
+    char buffer[1024];
     /* Read from the socket */
-    if (read(sock, buf, 1024) < 0)
-        perror("receiving datagram packet");
-    printf("-->%s\n", buf);
+    rc = recv(sock, buf, sizeof(buf),MSG_PEEK);
+
+
 
     close(sock);
 }
