@@ -90,17 +90,17 @@ int main(void){
         /****************************************/
         /* Get the name of the connected socket */
         /****************************************/
-        // len = sizeof(client_sockaddr);
-        // rc = getpeername(client_sock, (struct sockaddr *) &client_sockaddr, &len);
-        // if (rc == -1){
-        //     printf("GETPEERNAME ERROR: %d\n", 99);
-        //     close(server_sock);
-        //     close(client_sock);
-        //     exit(1);
-        // }
-        // else {
-        //     printf("Client socket filepath: %s\n", client_sockaddr.sun_path);
-        // }
+        len = sizeof(client_sockaddr);
+        rc = getpeername(client_sock, (struct sockaddr *) &client_sockaddr, &len);
+        if (rc == -1){
+            printf("GETPEERNAME ERROR: %d\n", 99);
+            close(server_sock);
+            close(client_sock);
+            exit(1);
+        }
+        else {
+            printf("Client socket filepath: %s\n", client_sockaddr.sun_path);
+        }
         
         /************************************/
         /* Read and print the data          */
