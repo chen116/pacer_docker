@@ -1,7 +1,8 @@
-app: clean
+app: gitpull clean
 	gcc srv.c -o srv 
 	gcc cli.c -o cli 
-
+gitpull:
+	-git pull
 
 clean:
 	-rm -f srv cli
