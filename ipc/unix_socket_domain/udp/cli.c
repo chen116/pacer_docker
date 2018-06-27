@@ -2,6 +2,8 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <stdio.h>
+#include <stdlib.h>
+
 
 #define DATA "The sea is calm tonight, the tide is full . . ."
 

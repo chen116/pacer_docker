@@ -1,7 +1,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/un.h>
-
+#include <stdlib.h>
 /*
  * In the included file <sys/un.h> a sockaddr_un is defined as follows
  * struct sockaddr_un {
