@@ -14,7 +14,7 @@
  */
 
 
-int main(argc, argv)
+int main()
     // int argc;
     // char *argv[];
 {
@@ -30,7 +30,7 @@ int main(argc, argv)
     }
     /* Construct name of socket to send to. */
     name.sun_family = AF_UNIX;
-    strcpy(name.sun_path, argv[1]);
+    strcpy(name.sun_path, "socket_vic");
     /* Send message. */
     if (sendto(sock, DATA, sizeof(DATA), 0,
         &name, sizeof(struct sockaddr_un)) < 0) {

@@ -14,7 +14,7 @@
 #include <stdio.h>
 
 
-#define NAME "socket"
+#define NAME "socket_vic"
 
 
 #define SERVER_PATH "tpf_unix_sock.server"
