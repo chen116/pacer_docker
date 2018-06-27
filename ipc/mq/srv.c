@@ -63,6 +63,7 @@ int main (int argc, char **argv)
             perror ("Server: Not able to send message to client");
             continue;
         }
+        mq_close(qd_client);
         printf ("Server: response sent to client. %d\n",token_number);
         token_number++;
     }
