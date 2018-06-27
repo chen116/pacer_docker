@@ -40,6 +40,7 @@ int main()
 
     char buf[1024];
     /* Read from the socket */
+    int rc;
     rc = recv(sock, buf, sizeof(buf),MSG_PEEK);
 
 
