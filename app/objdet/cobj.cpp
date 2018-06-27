@@ -26,19 +26,24 @@ int main(int argc, char** argv)
 
 //normal code
     Mat img, gray;
-	
-    img = imread("image.jpg", IMREAD_COLOR);
+    double t_start= 0;
     int start_s=clock();
+    t_start = (double)getTickCount();	
+    img = imread("image.jpg", IMREAD_COLOR);
+
 
     cvtColor(img, gray, COLOR_BGR2GRAY);
     GaussianBlur(gray, gray,Size(7, 7), 1.5);
     Canny(gray, gray, 0, 50);
 	// the code you wish to time goes here
-	int stop_s=clock();
-	std::cout << "cpu time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
+    int stop_s=clock();
+    std::cout << "cpu time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
+    t_start = (double)getTickCount() - t_start;    
+    printf( "%d detection time = %g ms\n", using_opencl,t_start*1000/getTickFrequency());
+    imshow("edges", gray);
 
-    // imshow("edges", gray);
-    // waitKey();
+    
+    waitKey();
 
 
 
@@ -47,14 +52,17 @@ int main(int argc, char** argv)
 
     imread("image.jpg", IMREAD_COLOR).copyTo(uimg);
     int ustart_s=clock();
+    t_start = (double)getTickCount();
+
     cvtColor(uimg, ugray, COLOR_BGR2GRAY);
     GaussianBlur(ugray, ugray,Size(7, 7), 1.5);
     Canny(ugray, ugray, 0, 50);
  	int ustop_s=clock();
 	std::cout << "gpu time: " << (ustop_s-ustart_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
-
-    // imshow("edges", gray);
-    // waitKey();
+    t_start = (double)getTickCount() - t_start;    
+    printf( "%d detection time = %g ms\n", using_opencl,t_start*1000/getTickFrequency());
+    imshow("edges", ugray);
+    waitKey();
 
 
 
