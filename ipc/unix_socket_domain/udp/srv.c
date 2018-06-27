@@ -19,7 +19,7 @@
 
 #define SERVER_PATH "tpf_unix_sock.server"
 #define CLIENT_PATH "tpf_unix_sock.client"
-#define DATA "Hello from client"
+#define DATA "Hello from Server"
 /*
  * This program creates a UNIX domain datagram socket, binds a name to it,
  * then reads from the socket.
@@ -56,6 +56,11 @@ int main()
     if (read(sock, buf, 1024) < 0)
         perror("receiving datagram packet");
     printf("-->%s\n", buf);
+
+    if (sendto(sock, DATA, sizeof(DATA), 0,
+        &name, sizeof(struct sockaddr_un)) < 0) {
+        perror("sending datagram message");
+    }
     close(sock);
     unlink(NAME);
 }

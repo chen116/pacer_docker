@@ -36,5 +36,13 @@ int main()
         &name, sizeof(struct sockaddr_un)) < 0) {
         perror("sending datagram message");
     }
+
+
+    char buf[1024];
+    /* Read from the socket */
+    if (read(sock, buf, 1024) < 0)
+        perror("receiving datagram packet");
+    printf("-->%s\n", buf);
+
     close(sock);
 }
