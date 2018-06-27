@@ -14,7 +14,7 @@ struct shared_data {
 };
 int main(int argc, char *argv[]) {
 	int shared_seg_size = (1 * sizeof(struct shared_data));
-	int shmfd  = shm_open(SHMOBJ_PATH, O_CREAT | O_RDWR, S_IRWU | S_IRWG);
+	int shmfd  = shm_open(SHMOBJ_PATH, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
 	ftruncate(shmfd, shared_seg_size);
 	struct shared_data * shared_msg = (struct shared_data *)
 	mmap(NULL, shared_seg_size, PROT_READ | PROT_WRITE, MAP_SHARED,shmfd, 0);
