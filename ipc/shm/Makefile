@@ -4,6 +4,6 @@ all: clean
 	gcc cli.c -o c  -lrt -lpthread
 
 clean:
-	-rm -f w r
+	-rm -f c s
 
 
