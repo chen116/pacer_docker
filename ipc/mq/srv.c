@@ -42,31 +42,31 @@ int main (int argc, char **argv)
     char out_buffer [MSG_BUFFER_SIZE];
 
     while (1) {
-        // mq_receive (qd_server, in_buffer, MSG_BUFFER_SIZE, NULL);
-        // qd_client = mq_open (in_buffer, O_WRONLY);
-        // mq_send (qd_client, out_buffer, strlen (out_buffer) + 1, 0);
-        // mq_close(qd_client);
+        mq_receive (qd_server, in_buffer, MSG_BUFFER_SIZE, NULL);
+        qd_client = mq_open (in_buffer, O_WRONLY);
+        mq_send (qd_client, out_buffer, strlen (out_buffer) + 1, 0);
+        mq_close(qd_client);
         
 
     
-        // get the oldest message with highest priority
-        if (mq_receive (qd_server, in_buffer, MSG_BUFFER_SIZE, NULL) == -1) {
-            perror ("Server: mq_receive");
-            exit (1);
-        }
-        // printf ("Server: message received.\n");
-        // send reply message to client
-        if ((qd_client = mq_open (in_buffer, O_WRONLY)) == 1) {
-            perror ("Server: Not able to open client queue");
-            continue;
-        }
-        // sprintf (out_buffer, "%ld", token_number);
-        if (mq_send (qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
-            perror ("Server: Not able to send message to client");
-            continue;
-        }
-        mq_close(qd_client);
-        printf ("Server: response sent to client. %d\n",token_number);
-        token_number++;
+        // // get the oldest message with highest priority
+        // if (mq_receive (qd_server, in_buffer, MSG_BUFFER_SIZE, NULL) == -1) {
+        //     perror ("Server: mq_receive");
+        //     exit (1);
+        // }
+        // // printf ("Server: message received.\n");
+        // // send reply message to client
+        // if ((qd_client = mq_open (in_buffer, O_WRONLY)) == 1) {
+        //     perror ("Server: Not able to open client queue");
+        //     continue;
+        // }
+        // // sprintf (out_buffer, "%ld", token_number);
+        // if (mq_send (qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
+        //     perror ("Server: Not able to send message to client");
+        //     continue;
+        // }
+        // mq_close(qd_client);
+        // printf ("Server: response sent to client. %d\n",token_number);
+        // token_number++;
     }
 }
