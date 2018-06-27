@@ -29,16 +29,16 @@ int main(int argc, char** argv)
     img = imread("image.jpg", IMREAD_COLOR);
     imshow("normal", img);
 
-    
+
     double t_start= 0;
     int start_s=clock();
-    t_start = (double)getTickCount();	
+    
 
 
 
     waitKey();
 
-
+    t_start = (double)getTickCount();   
     cvtColor(img, gray, COLOR_BGR2GRAY);
     GaussianBlur(gray, gray,Size(7, 7), 1.5);
     Canny(gray, gray, 0, 50);
