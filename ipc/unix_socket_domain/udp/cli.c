@@ -38,7 +38,7 @@ int main()
     }
 
 
-    char buffer[1024];
+    char buf[1024];
     /* Read from the socket */
     rc = recv(sock, buf, sizeof(buf),MSG_PEEK);
 
