@@ -23,6 +23,7 @@ int main(int argc, char *argv[]) {
 	
 	
 	struct shared_data in_msg;
+	printf("meow\n");
 	
 	
 	sem_wait(sem_id);
