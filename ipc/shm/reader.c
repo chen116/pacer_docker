@@ -9,8 +9,8 @@
 #define SHMOBJ_PATH  "/shm_AOS"
 #define SEM_PATH     "/sem_AOS"
 struct shared_data {
-    char var1[10];
-    int var2;
+	char var1[10];
+	int var2;
 };
 int main(int argc, char *argv[]) {
 	int shared_seg_size = (1 * sizeof(struct shared_data));
@@ -24,8 +24,8 @@ int main(int argc, char *argv[]) {
 	memcpy(&in_msg, shared_msg, sizeof(struct shared_data));
 	sem_post(sem_id);
 	/* Process data… */
-	    shm_unlink(SHMOBJ_PATH);
+	shm_unlink(SHMOBJ_PATH);
 	sem_close(sem_id);
-	    sem_unlink(SEM_PATH);
-	    return 0;
+	sem_unlink(SEM_PATH);
+	return 0;
 }
