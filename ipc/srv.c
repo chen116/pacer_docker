@@ -15,6 +15,7 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 
+
 #define SOCK_PATH  "tpf_unix_sock.server"
 #define DATA "Hello from server"
 
@@ -74,7 +75,7 @@ int main(void){
         //     exit(1);
         // }
 
-        // printf("socket listening...call_cnt:%d\n",call_cnt);
+        printf("socket listening...call_cnt:%d\n",call_cnt);
         
         /*********************************/
         /* Accept an incoming connection */
