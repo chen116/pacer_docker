@@ -18,10 +18,7 @@ int main(int argc, char *argv[]) {
 	int shmfd  = shm_open(SHMOBJ_PATH, O_RDONLY, 0666);
 	printf("meow\n");
 
-	struct shared_data * shared_msg = (struct shared_data *) 
-	printf("meow\n");
-
-	mmap(NULL, shared_seg_size, PROT_READ, MAP_SHARED, shmfd, 0);
+	struct shared_data * shared_msg = (struct shared_data *) mmap(NULL, shared_seg_size, PROT_READ, MAP_SHARED, shmfd, 0);
 	printf("meow\n");
 	
 	sem_t * sem_id = sem_open(SEM_PATH, 0);
