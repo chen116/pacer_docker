@@ -26,11 +26,14 @@ int main(int argc, char** argv)
 
 //normal code
     Mat img, gray;
+    img = imread("image.jpg", IMREAD_COLOR);
+    imshow("normal", img);
+
+    
     double t_start= 0;
     int start_s=clock();
     t_start = (double)getTickCount();	
-    img = imread("image.jpg", IMREAD_COLOR);
-    imshow("normal", img);
+
 
 
     waitKey();
