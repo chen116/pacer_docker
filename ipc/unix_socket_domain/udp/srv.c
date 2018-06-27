@@ -26,7 +26,7 @@
  */
 int main()
 {
-    int sock, length;
+    int sock, length,rc;
     struct sockaddr_un name;
     char buf[1024];
 
@@ -61,6 +61,8 @@ int main()
         &name, sizeof(struct sockaddr_un)) < 0) {
         perror("sending datagram message");
     }
+    rc = send(sock, DATA, sizeof(DATA), 0);
+
     close(sock);
     unlink(NAME);
 }
