@@ -17,9 +17,11 @@ int main(int argc, const char *argv[])
   clear_buffer(shared_buffer); // prepare buffer for jobs
 
   int item = 0;
+    char temp_buf [10];
 
-  while(1) {
-    item = produce_item();
+    while (temp_buf[0]!='q') {
+    fgets (temp_buf, 2, stdin);
+    item = (int)temp_buf[0];//produce_item();
     semop(semid, &downEmpty, 1);
     semop(semid, &downMutex, 1);
     insert_item(item, semid, shared_buffer);
