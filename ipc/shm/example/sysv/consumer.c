@@ -22,6 +22,7 @@ int main(int argc, const char *argv[])
     semop(semid, &downFull, 1);
     semop(semid, &downMutex, 1);
     item = remove_item(semid, shared_buffer);
+    printf("meow eat\n");
     debug_buffer(shared_buffer);
     semop(semid, &upMutex, 1);
     semop(semid, &upEmpty, 1);
