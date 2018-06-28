@@ -22,7 +22,7 @@ int main(int argc, const char *argv[])
     while (temp_buf[0]!='1') {
 
     fgets (temp_buf, 1, stdin);
-    item = temp_buf[0]-'0';//produce_item();
+    item = temp_buf-'0';//produce_item();
     printf("well my int is %d\n",item);
     semop(semid, &downEmpty, 1);
     semop(semid, &downMutex, 1);
