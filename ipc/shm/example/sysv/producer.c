@@ -20,9 +20,8 @@ int main(int argc, const char *argv[])
     char temp_buf[10];
 
     while (temp_buf[0]!='1') {
-
     gets (temp_buf);
-    item = temp_buf[0]-'0';//produce_item();
+    item = (temp_buf[0]-'0') & 0xff;//produce_item();
     printf("well my int is %d\n",item);
     semop(semid, &downEmpty, 1);
     semop(semid, &downMutex, 1);
