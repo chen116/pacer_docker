@@ -1,4 +1,5 @@
-//This is the process main process. Creates the shared memory, places there the integer array and starts integers one by one, blocking if the array is full:
+//This is the process main process. Creates the shared memory, 
+//places there the integer array and starts integers one by one, blocking if the array is full:
 
 #include <boost/interprocess/sync/interprocess_semaphore.hpp>
 
@@ -62,6 +63,8 @@ int main ()
       data->nempty.wait();
       data->mutex.wait();
       data->items[i % shared_memory_buffer::NumItems] = i;
+      printf("wrote: %d\n", i );
+
       data->mutex.post();
       data->nstored.post();
    }
