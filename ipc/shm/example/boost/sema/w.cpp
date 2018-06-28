@@ -40,21 +40,35 @@ int main ()
       ,"MySharedMemory"              //name
       ,read_write  //read-write mode
       );
+   //Create a shared memory object.
+   shared_memory_object vic_shm
+      (create_only                  //only create
+      ,"vic_MySharedMemory"              //name
+      ,read_write  //read-write mode
+      );
 
    //Set size
    shm.truncate(sizeof(shared_memory_buffer));
+   vic_shm.truncate(sizeof(shared_memory_buffer));
 
    //Map the whole shared memory in this process
    mapped_region region
       (shm                       //What to map
       ,read_write //Map it as read-write
       );
+   //Map the whole shared memory in this process
+   mapped_region vic_region
+      (vic_shm                       //What to map
+      ,read_write //Map it as read-write
+      );
 
    //Get the address of the mapped region
    void * addr       = region.get_address();
+   void * vic_addr       = vic_region.get_address();
 
    //Construct the shared structure in memory
    shared_memory_buffer * data = new (addr) shared_memory_buffer;
+   shared_memory_buffer * vic_data = new (vic_addr) shared_memory_buffer;
 
    const int NumMsg = 10;
 
@@ -67,16 +81,16 @@ int main ()
       data->mutex.post();
       data->nstored.post();
    }
-   int extracted_data [NumMsg];
-   
+   int extracted_vic_data [NumMsg];
+
    //Extract the data
    for(int i = 0; i < NumMsg; ++i){
-      data->nstored.wait();
-      data->mutex.wait();
-      extracted_data[i] = data->items[i % shared_memory_buffer::NumItems];
-      printf("extracted_data: %d\n", extracted_data[i] );
-      data->mutex.post();
-      data->nempty.post();
+      vic_data->nstored.wait();
+      vic_data->mutex.wait();
+      extracted_vic_data[i] = vic_data->items[i % shared_memory_buffer::NumItems];
+      printf("extracted_vic_data: %d\n", extracted_vic_data[i] );
+      vic_data->mutex.post();
+      vic_data->nempty.post();
    }
 
    return 0;
