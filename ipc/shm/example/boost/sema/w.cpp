@@ -67,7 +67,8 @@ int main ()
       data->mutex.post();
       data->nstored.post();
    }
-
+   int extracted_data [NumMsg];
+   s
    //Extract the data
    for(int i = 0; i < NumMsg; ++i){
       data->nstored.wait();
