@@ -22,6 +22,7 @@ int main(int argc, const char *argv[])
     while (temp_buf[0]!='q') {
     fgets (temp_buf, 2, stdin);
     item = (int)temp_buf[0];//produce_item();
+    printf("well my int is %d\n",item);
     semop(semid, &downEmpty, 1);
     semop(semid, &downMutex, 1);
     insert_item(item, semid, shared_buffer);
