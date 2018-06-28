@@ -20,7 +20,7 @@ struct shared_memory_buffer
 #include <boost/interprocess/shared_memory_object.hpp>
 #include <boost/interprocess/mapped_region.hpp>
 #include <iostream>
-#include "doc_anonymous_semaphore_shared_data.hpp"
+
 
 using namespace boost::interprocess;
 
