@@ -19,7 +19,7 @@ int main(int argc, const char *argv[])
   int item = 0;
     char temp_buf [10];
 
-    while (temp_buf[0]!='q') {
+    while (temp_buf[0]!='1') {
     fgets (temp_buf, 2, stdin);
     item = temp_buf[0]-'0';//produce_item();
     printf("well my int is %d\n",item);
