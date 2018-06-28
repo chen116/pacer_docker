@@ -69,15 +69,15 @@ int main ()
    }
    int extracted_data [NumMsg];
    
-   //Extract the data
-   for(int i = 0; i < NumMsg; ++i){
-      data->nstored.wait();
-      data->mutex.wait();
-      extracted_data[i] = data->items[i % shared_memory_buffer::NumItems];
-      printf("extracted_data: %d\n", extracted_data[i] );
-      data->mutex.post();
-      data->nempty.post();
-   }
+   // //Extract the data
+   // for(int i = 0; i < NumMsg; ++i){
+   //    data->nstored.wait();
+   //    data->mutex.wait();
+   //    extracted_data[i] = data->items[i % shared_memory_buffer::NumItems];
+   //    printf("extracted_data: %d\n", extracted_data[i] );
+   //    data->mutex.post();
+   //    data->nempty.post();
+   // }
 
    return 0;
 }
