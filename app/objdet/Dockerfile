@@ -130,6 +130,8 @@ RUN cp /opencl-intercept-layer/vic/clintercept.conf ~/
 RUN mv /usr/lib/x86_64-linux-gnu/libOpenCL.so.1.0.0 /usr/lib/x86_64-linux-gnu/real_libOpenCL.so.1.0.0 && ln -sf /opencl-intercept-layer/build/libOpenCL.so.1 /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 && ln -sf /opencl-intercept-layer/build/libOpenCL.so /usr/lib/x86_64-linux-gnu/libOpenCL.so
 
 
+RUN apt install -y libboost-all-dev
+
 WORKDIR /
 
 # CMD ["python3","test.py"]

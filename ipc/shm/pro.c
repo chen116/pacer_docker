@@ -91,8 +91,7 @@ int main(int argc, char *argv[]) {
     int cnt=0;
     while(cnt<=10)
     {
-        cnt++;
-    sleep(2);
+    cnt++;
     printf("Waiting \n");
     sem_wait(sem_id);
     printf("Locked, About to sleep \n");

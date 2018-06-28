@@ -75,6 +75,7 @@ int main(int argc, char *argv[]) {
 	/**
 	 * Semaphore open
 	 */
+    sem_id=sem_open("/mysem", O_CREAT, S_IRUSR | S_IWUSR, 1);
 	sem_id=sem_open("/mysem", O_CREAT, S_IRUSR | S_IWUSR, 1);
 
 
