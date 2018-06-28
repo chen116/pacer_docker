@@ -90,19 +90,19 @@ int main(int argc, char *argv[]) {
     cur = 0;
     while(1)
     {
-    // sleep(2);
-    printf("Waiting docker \n");
+    sleep(2);
+    printf("Waiting \n");
     sem_wait(sem_id);
     printf("Locked, About to sleep \n");
-    if (shared_msg->var1==-1)
-    	{
-    		shared_msg->var1=1;
-    		printf("posting %d\n",cur);
-    cur++;
-		}
+    shared_msg->var1 = vol;
+    shared_msg->var2 = cur;
+    printf("The var1 is %d \n",shared_msg->var1);
+    printf("The var2 is %d \n",shared_msg->var2);
+    sleep(3);
     sem_post(sem_id);
-    
+    printf("posting \n");
     vol++;
+    cur++;
     }
 
     if (shm_unlink(SHMOBJ_PATH) != 0) {
