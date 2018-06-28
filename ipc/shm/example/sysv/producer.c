@@ -25,7 +25,7 @@ int main(int argc, const char *argv[])
     // item = (temp_buf[0]-'0') & 0xff;//produce_item();
     int cnt=10;
     while(cnt>=0){
-      cnt++;
+      cnt--;
     printf("well my int is %d\n",item);
      item = produce_item();
     semop(semid, &downEmpty, 1);
