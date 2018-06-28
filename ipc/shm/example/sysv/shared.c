@@ -19,7 +19,7 @@ void debug_buffer(int *sbuff) {
   for (i = 0; i < BUFFER_SIZE; ++i) {
     if (sbuff[i] == 0xFF) printf("1");
   }
-  printf("\n");
+  printf("debug meow\n");
 }
 
 /**
