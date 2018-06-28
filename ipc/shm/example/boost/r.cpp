@@ -32,7 +32,7 @@ struct trace_queue
 #include <boost/interprocess/sync/scoped_lock.hpp>
 #include <iostream>
 #include <cstring>
-#include "doc_anonymous_condition_shared_data.hpp"
+
 
 using namespace boost::interprocess;
 
