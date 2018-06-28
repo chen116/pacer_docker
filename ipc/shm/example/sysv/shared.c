@@ -17,7 +17,7 @@ int get_buffer_size(int *sbuff) {
 void debug_buffer(int *sbuff) {
   int i = 0;
   for (i = 0; i < BUFFER_SIZE; ++i) {
-    if (sbuff[i] == 0xFF) printf("1");
+    if (sbuff[i] == 0xFF) printf("1\n");
   }
   printf("debug meow\n");
 }
