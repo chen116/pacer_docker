@@ -70,11 +70,11 @@ int main ()
    for(int i = 0; i < NumMsg; ++i){
       data->nempty.wait();
       data->mutex.wait();
-      data->items[i % shared_memory_buffer::NumItems] = i;
+      data->items[i % shared_memory_buffer::NumItems] = i+10;
       printf("wrote: %d\n", i );
       data->mutex.post();
       data->nstored.post();
    }
-   
+
    return 0;
 }
