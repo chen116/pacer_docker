@@ -17,10 +17,11 @@ int main(int argc, const char *argv[])
   clear_buffer(shared_buffer); // prepare buffer for jobs
 
   int item = 0;
-    char temp_buf [10];
+    char temp_buf='0';
 
     while (temp_buf[0]!='1') {
-    fgets (temp_buf, 2, stdin);
+
+    fgets (temp_buf, 1, stdin);
     item = temp_buf[0]-'0';//produce_item();
     printf("well my int is %d\n",item);
     semop(semid, &downEmpty, 1);
