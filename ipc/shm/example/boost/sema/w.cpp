@@ -5,7 +5,7 @@
 
 struct shared_memory_buffer
 {
-   enum { NumItems = 10 };
+   enum { NumItems = 5 };
 
    shared_memory_buffer()
       : mutex(1), nempty(NumItems), nstored(0)
@@ -56,7 +56,7 @@ int main ()
    //Construct the shared structure in memory
    shared_memory_buffer * data = new (addr) shared_memory_buffer;
 
-   const int NumMsg = 100;
+   const int NumMsg = 10;
 
    //Insert data in the array
    for(int i = 0; i < NumMsg; ++i){
@@ -64,7 +64,6 @@ int main ()
       data->mutex.wait();
       data->items[i % shared_memory_buffer::NumItems] = i;
       printf("wrote: %d\n", i );
-
       data->mutex.post();
       data->nstored.post();
    }
