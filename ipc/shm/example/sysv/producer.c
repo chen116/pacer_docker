@@ -19,7 +19,7 @@ int main(int argc, const char *argv[])
   int item = 0;
     char temp_buf='0';
 
-    while (temp_buf[0]!='1') {
+    while (temp_buf!='1') {
 
     fgets (temp_buf, 1, stdin);
     item = temp_buf-'0';//produce_item();
