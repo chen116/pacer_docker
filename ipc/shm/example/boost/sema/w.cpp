@@ -30,8 +30,8 @@ int main ()
    //Remove shared memory on construction and destruction
    struct shm_remove
    {
-      shm_remove() { shared_memory_object::remove("MySharedMemory"); }
-      ~shm_remove(){ shared_memory_object::remove("MySharedMemory"); }
+      shm_remove() { shared_memory_object::remove("MySharedMemory");  shared_memory_object::remove("vic_MySharedMemory"); }
+      ~shm_remove(){ shared_memory_object::remove("MySharedMemory");  shared_memory_object::remove("vic_MySharedMemory"); }
    } remover;
 
    //Create a shared memory object.
