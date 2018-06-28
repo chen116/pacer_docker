@@ -65,5 +65,16 @@ int main ()
       data->mutex.post();
       data->nempty.post();
    }
+
+   //Insert data in the array
+   for(int i = 0; i < NumMsg; ++i){
+      data->nempty.wait();
+      data->mutex.wait();
+      data->items[i % shared_memory_buffer::NumItems] = i;
+      printf("wrote: %d\n", i );
+      data->mutex.post();
+      data->nstored.post();
+   }
+   
    return 0;
 }
