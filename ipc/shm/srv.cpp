@@ -56,7 +56,7 @@ printf(" meow meow\n");
    void * addr       = region.get_address();
 
    //Obtain the shared structure
-   shared_memory_buffer * data = new (vic_addr) shared_memory_buffer;
+   shared_memory_buffer * data = new (addr) shared_memory_buffer;
 
    const int NumMsg = 1;
 
