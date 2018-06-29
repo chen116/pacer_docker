@@ -6,7 +6,7 @@ using namespace std;
 
 struct shared_memory_buffer
 {
-   enum { NumItems = 5 };
+   enum { NumItems = 1 };
 
    shared_memory_buffer()
       : mutex(1), nempty(1), nstored(0)
