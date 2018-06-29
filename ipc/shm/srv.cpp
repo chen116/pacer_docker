@@ -61,6 +61,7 @@ printf("meow\n");
 
    int extracted_data [NumMsg];
    //Extract the data
+   printf("goonna wait now\n");
    data->nstored.wait();
    data->mutex.wait();
    extracted_data[0] = data->items[0];
