@@ -36,7 +36,7 @@ int main ()
 
    //Create a shared memory object.
    shared_memory_object shm
-      (open_only                    //only create
+      (create_only                    //only create
       ,"MySharedMemory"              //name
       ,read_write  //read-write mode
       );
