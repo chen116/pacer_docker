@@ -91,7 +91,7 @@ while(1)
       data->nstored.wait();
       data->mutex.wait();
       extracted_data[i] = data->items[i % shared_memory_buffer::NumItems];
-      printf("got: %d\n",extracted_data[i]);
+      // printf("got: %d\n",extracted_data[i]);
       data->mutex.post();
       data->nempty.post();
    // }
