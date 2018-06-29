@@ -44,13 +44,14 @@ int main ()
       ,"MySharedMemory"              //name
       ,read_write  //read-write mode
       );
-printf("meow\n");
+   //Set size
+   shm.truncate(sizeof(shared_memory_buffer));
+
    //Map the whole shared memory in this process
    mapped_region region
       (shm                       //What to map
       ,read_write //Map it as read-write
       );
-printf(" meow meow\n");
 
    //Get the address of the mapped region
    void * addr       = region.get_address();
