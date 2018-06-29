@@ -17,8 +17,7 @@ g++ cobj.cpp -o app `pkg-config --cflags --libs opencv` -std=c++11
 using namespace std;
 using namespace cv;
 
-int global_x=4;
-
+extern const int global = 4;
 
 int main(int argc, char** argv)
 {
