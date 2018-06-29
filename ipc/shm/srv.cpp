@@ -29,7 +29,7 @@ using namespace boost::interprocess;
 
 int main ()
 {
-   const int NumMsg = 10;
+   const int NumMsg = 1;
 
    struct shm_remove
    {
@@ -83,6 +83,8 @@ int main ()
 
    int extracted_data [NumMsg];
 
+while(1)
+{
 //Extract the data
    for(int i = 0; i < NumMsg; ++i){
       data->nstored.wait();
@@ -102,8 +104,11 @@ int main ()
       vic_data->mutex.post();
       vic_data->nstored.post();
    }
-   int age;
-cin >> age;
+
+}
+
+
+
    return 0;
 }
 
