@@ -74,7 +74,7 @@ int main ()
 
    //Create a shared memory object.
    shared_memory_object docker_shm
-      (open_or_create                  //only create
+      (open_only                  //only create
       ,"docker_MySharedMemory"              //name
       ,read_write  //read-write mode
       );
