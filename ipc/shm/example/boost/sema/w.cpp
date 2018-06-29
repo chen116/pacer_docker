@@ -36,13 +36,13 @@ int main ()
 
    //Create a shared memory object.
    shared_memory_object shm
-      (create_only                  //only create
+      (open_or_create                    //only create
       ,"MySharedMemory"              //name
       ,read_write  //read-write mode
       );
    //Create a shared memory object.
    shared_memory_object vic_shm
-      (create_only                  //only create
+      (open_or_create                    //only create
       ,"vic_MySharedMemory"              //name
       ,read_write  //read-write mode
       );
