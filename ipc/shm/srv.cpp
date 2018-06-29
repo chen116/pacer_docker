@@ -60,7 +60,6 @@ int main ()
    const int NumMsg = 1;
 
    int extracted_data [NumMsg];
-   int i = 0
    //Extract the data
    data->nstored.wait();
    data->mutex.wait();
