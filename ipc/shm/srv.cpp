@@ -40,7 +40,7 @@ int main ()
 
    //Create a shared memory object.
    shared_memory_object shm
-      (create_only                  //only create
+      (open_or_create                  //only create
       ,"MySharedMemory"              //name
       ,read_write  //read-write mode
       );
@@ -73,7 +73,7 @@ printf(" meow meow\n");
 
    //Create a shared memory object.
    shared_memory_object docker_shm
-      (open_only                  //only create
+      (open_or_create                  //only create
       ,"docker_MySharedMemory"              //name
       ,read_write  //read-write mode
       );
