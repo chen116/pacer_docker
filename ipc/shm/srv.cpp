@@ -82,28 +82,29 @@ int main ()
 
 
    int extracted_data [NumMsg];
+   int i=0;
 
 while(1)
 {
 //Extract the data
-   for(int i = 0; i < NumMsg; ++i){
+   // for(int i = 0; i < NumMsg; ++i){
       data->nstored.wait();
       data->mutex.wait();
       extracted_data[i] = data->items[i % shared_memory_buffer::NumItems];
-      printf("got: %d\n",extracted_data[i]);
+      // printf("got: %d\n",extracted_data[i]);
       data->mutex.post();
       data->nempty.post();
-   }
+   // }
 
    //Insert data in the array
-   for(int i = 0; i < NumMsg; ++i){
+   // for(int i = 0; i < NumMsg; ++i){
       vic_data->nempty.wait();
       vic_data->mutex.wait();
       vic_data->items[i % shared_memory_buffer::NumItems] = i+10;
-      printf("wrote: %d\n",i );
+      // printf("wrote: %d\n",i );
       vic_data->mutex.post();
       vic_data->nstored.post();
-   }
+   // }
 
 }
 
