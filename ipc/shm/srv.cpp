@@ -50,12 +50,13 @@ printf("meow\n");
       (shm                       //What to map
       ,read_write //Map it as read-write
       );
+printf(" meow meow\n");
 
    //Get the address of the mapped region
    void * addr       = region.get_address();
 
    //Obtain the shared structure
-   shared_memory_buffer * data = static_cast<shared_memory_buffer*>(addr);
+   shared_memory_buffer * data = new (vic_addr) shared_memory_buffer;
 
    const int NumMsg = 1;
 
