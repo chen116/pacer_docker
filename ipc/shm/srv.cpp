@@ -44,7 +44,7 @@ int main ()
       ,"MySharedMemory"              //name
       ,read_write  //read-write mode
       );
-
+printf("meow\n");
    //Map the whole shared memory in this process
    mapped_region region
       (shm                       //What to map
