@@ -1,9 +1,8 @@
 all: clean
 	-git pull
-	gcc pro.c -o p  -lrt -lpthread
-	gcc con.c -o c  -lrt -lpthread
-
+	g++ srv.cpp -o srv -lrt -lpthread
+	g++ cli.cpp -o cli -lrt -lpthread
 clean:
-	-rm -f p c
+	-rm -f cli srv
 
 
