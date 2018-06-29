@@ -2,6 +2,7 @@
 
 
 app: clean
+	-git pull
 	g++ cobj.cpp -o app `pkg-config --cflags --libs opencv` -std=c++11 
 
 
