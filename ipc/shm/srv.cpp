@@ -29,7 +29,7 @@ using namespace boost::interprocess;
 int main ()
 {
    const int NumMsg = 10;
-   
+
    struct shm_remove
    {
       shm_remove() { shared_memory_object::remove("MySharedMemory"); shared_memory_object::remove("vic_MySharedMemory");}
@@ -80,6 +80,7 @@ int main ()
    shared_memory_buffer * vic_data = static_cast<shared_memory_buffer*>(vic_addr);
 
 
+   int extracted_data [NumMsg];
 
 //Extract the data
    for(int i = 0; i < NumMsg; ++i){
