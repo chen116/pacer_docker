@@ -1,6 +1,7 @@
 // w create 2 mem, w read one, r write anthoer
 //The second process opens the shared memory and copies the received integers to it's own buffer:
-
+#include <iostream>
+using namespace std;
 #include <boost/interprocess/sync/interprocess_semaphore.hpp>
 
 struct shared_memory_buffer
@@ -101,6 +102,8 @@ int main ()
       vic_data->mutex.post();
       vic_data->nstored.post();
    }
+   int age;
+cin >> age;
    return 0;
 }
 
