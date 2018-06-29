@@ -57,7 +57,8 @@ int main ()
    void * addr       = region.get_address();
 
    //Obtain the shared structure
-   shared_memory_buffer * data = new (addr) shared_memory_buffer;
+   // shared_memory_buffer * data = new (addr) shared_memory_buffer;
+   shared_memory_buffer * data = static_cast<shared_memory_buffer*>(addr);
 
    const int NumMsg = 1;
 
