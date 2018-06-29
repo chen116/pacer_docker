@@ -27,8 +27,8 @@ int main(int argc, char** argv)
 //normal code
     Mat img, gray;
     img = imread("image.jpg", IMREAD_COLOR);
-    imshow("normal", img);
-
+    // imshow("normal", img);
+    // waitKey();
 
     double t_start= 0;
     int start_s=clock();
@@ -36,7 +36,7 @@ int main(int argc, char** argv)
 
 
 
-    waitKey();
+
 
     t_start = (double)getTickCount();   
     cvtColor(img, gray, COLOR_BGR2GRAY);
