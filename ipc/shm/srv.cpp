@@ -101,7 +101,7 @@ while(1)
       vic_data->nempty.wait();
       vic_data->mutex.wait();
       vic_data->items[i % shared_memory_buffer::NumItems] = i+10;
-      printf("wrote: %d\n",i );
+      printf("wrote: %d\n",i+10 );
       vic_data->mutex.post();
       vic_data->nstored.post();
    // }
