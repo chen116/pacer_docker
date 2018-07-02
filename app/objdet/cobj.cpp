@@ -23,14 +23,14 @@ int main(int argc, char** argv)
 {
 
 
+    double t_start= 0;
+    int start_s=clock();
 //normal code
     Mat img, gray;
     img = imread("image.jpg", IMREAD_COLOR);
     // imshow("normal", img);
     // waitKey();
 
-    double t_start= 0;
-    int start_s=clock();
     
 
 
@@ -53,12 +53,12 @@ int main(int argc, char** argv)
 
 
 
+    t_start = (double)getTickCount();
 
     UMat uimg, ugray;
 
     imread("image.jpg", IMREAD_COLOR).copyTo(uimg);
     int ustart_s=clock();
-    t_start = (double)getTickCount();
 
     cvtColor(uimg, ugray, COLOR_BGR2GRAY);
     GaussianBlur(ugray, ugray,Size(7, 7), 1.5);
