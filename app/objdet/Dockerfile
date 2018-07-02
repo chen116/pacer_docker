@@ -18,7 +18,7 @@
 # now at vncing:
 # at the vnc window of root@: run $ xhost + local:root
 # sudo docker build  --no-cache -t pyobjdet .  
-# sudo docker run --runtime=nvidia -v /tmp/.X11-unix/:/tmp/.X11-unix:ro -v /root/pacer_docker/ipc/:/foo -e DISPLAY=$DISPLAY --ipc="host" -e "VIC_SHM_ID=1024" -ti --rm pyobjdet /bin/bash
+# sudo docker run --runtime=nvidia -v /tmp/.X11-unix/:/tmp/.X11-unix:ro -v /root/pacer_docker/ipc/soc/tcp:/foo -e DISPLAY=$DISPLAY --ipc="host" -e "VIC_SHM_ID=1024" -ti --rm pyobjdet /bin/bash
 # https://groups.google.com/forum/#!topic/etetoolkit/4SrZk5fRtCM
 # https://github.com/osrf/docker_images/issues/21
 
