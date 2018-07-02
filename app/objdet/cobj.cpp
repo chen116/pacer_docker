@@ -16,11 +16,13 @@ g++ cobj.cpp -o app `pkg-config --cflags --libs opencv` -std=c++11
 
 using namespace std;
 using namespace cv;
-extern int var;
+
+
+
 int main(int argc, char** argv)
 {
 
-    var=33;
+    int var=33;
     double t_start= 0;
     int start_s=clock();
 //normal code
