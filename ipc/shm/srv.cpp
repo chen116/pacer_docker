@@ -81,7 +81,7 @@ int main ()
    printf("cli shm name: %s\n",cli_shm_name );
    //Create a shared memory object.
    shared_memory_object cli_shm
-      (read_only                  //only create
+      (open_only                  //only create
       ,cli_shm_name              //name
       ,read_write  //read-write mode
       );
