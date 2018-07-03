@@ -75,7 +75,7 @@ int main (int argc, char **argv)
 
 
 
-	int cnt = 0
+	int cnt = 0;
     while (1) {
         // mq_receive (qd_server, in_buffer, MSG_BUFFER_SIZE, NULL);
         // qd_client = mq_open (in_buffer, O_WRONLY);
