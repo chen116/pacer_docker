@@ -67,7 +67,10 @@ int main (int argc, char **argv)
 	printf("shmkey %d\n",shmkey);
 	double tempRetVal;
 		int shmid;
-	if ((shmid = shmget(shmkey, 1*sizeof(heartbeat_t), 0666)) < 0) {
+
+
+
+	if ((shmid = shmget(shmkey*2, 1*sizeof(heartbeat_t), 0666)) < 0) {
 	    perror("shmget");
 	    return 0;
 	}
