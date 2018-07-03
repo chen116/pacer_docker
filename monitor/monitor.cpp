@@ -62,7 +62,7 @@ int main (int argc, char **argv)
         }
         int i;
         char bs[1];
-		sscanf(in_buffer, "%*s%d", bs,&i);
+		sscanf(in_buffer, "%s%d", bs,&i);
 		int shmkey = atoi(in_buffer);
 		printf("shmkey %d %d\n",shmkey,i);
 
