@@ -77,7 +77,12 @@ int main ()
    // }
 
 
-
+      data->nempty.wait();
+      data->mutex.wait();
+      data->items[i % shared_memory_buffer::NumItems] = 99;
+      printf("wrote: %d\n",i+10 );
+      data->mutex.post();
+      data->nstored.post();
 
 
    char cli_shm_name [64];  
@@ -105,7 +110,7 @@ int main ()
 
 
 
-   printf("meow\n");
+      printf("meow\n");
       data->nstored.wait();
       data->mutex.wait();
       extracted_data[i] = data->items[i % shared_memory_buffer::NumItems];
