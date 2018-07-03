@@ -60,7 +60,7 @@ int main (int argc, char **argv)
             perror ("Server: Not able to open client queue");
             continue;
         }
-        // sprintf (out_buffer, "%ld", token_number);
+        sprintf (out_buffer, "%ld", token_number);
         if (mq_send (qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
             perror ("Server: Not able to send message to client");
             continue;
