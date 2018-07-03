@@ -26,7 +26,7 @@ int main (int argc, char **argv)
 
 
     // create the client queue for receiving messages from server
-    sprintf (client_queue_name, "/sp-example-client-%d", getpid ());
+    sprintf (client_queue_name, "/pacer-cli-%d", getpid ());
 
     struct mq_attr attr;
 
