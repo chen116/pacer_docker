@@ -3,7 +3,7 @@
 
 app: clean
 	-git pull
-	g++ cobj.cpp -o app `pkg-config --cflags --libs opencv` -std=c++11 
+	g++ cobj.cpp -o app `pkg-config --cflags --libs opencv` -std=c++11 -lhb-shared -lhrm-shared
 
 
 clean:
