@@ -94,7 +94,8 @@ heartbeat(heart, 1);
     // waitKey();
 
 heartbeat(heart, 2);
-
+       printf("heartbeat: windowed rate: %f\n",hb_get_windowed_rate(heart) );
+       printf("heartbeat: instant rate: %f\n",hb_get_instant_rate(heart) );
 
 heartbeat_finish(heart);
 
