@@ -64,7 +64,7 @@ int main (int argc, char **argv)
         char bs[1];
 		sscanf(in_buffer, "%s%d", bs,&i);
 		int shmkey = atoi(in_buffer);
-		printf("shmkey %d %d %s\n",shmkey,i,bs );
+		printf("shmkey %d\n",shmkey);
 
         sprintf (out_buffer, "%d", token_number);
         if (mq_send (qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
