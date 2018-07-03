@@ -105,7 +105,7 @@ int main ()
 
 
 
-   printf("meow%s\n");
+   printf("meow\n");
       data->nstored.wait();
       data->mutex.wait();
       extracted_data[i] = data->items[i % shared_memory_buffer::NumItems];
