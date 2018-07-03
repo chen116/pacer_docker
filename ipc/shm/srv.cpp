@@ -77,12 +77,7 @@ int main ()
    // }
 
 
-      data->nempty.wait();
-      data->mutex.wait();
-      data->items[i % shared_memory_buffer::NumItems] = 99;
-      printf("wrote: %d\n",i+10 );
-      data->mutex.post();
-      data->nstored.post();
+
 
 
    char cli_shm_name [64];  
