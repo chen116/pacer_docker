@@ -62,13 +62,9 @@ int main (int argc, char **argv)
         }
         int i;
         char bs[1];
-		// sscanf(in_buffer, "%d",&i);
 		sscanf(in_buffer, "%s%d", bs,&i);
-		printf("in buffer %s\n",in_buffer );
-		printf("clinet file:%d\n",atoi(in_buffer));
-
 		int shmkey = atoi(in_buffer);
-		printf("shmkey %d\n",shmkey );
+		printf("shmkey %d %d %s\n",shmkey,i,bs );
 
         sprintf (out_buffer, "%d", token_number);
         if (mq_send (qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
