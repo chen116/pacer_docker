@@ -99,11 +99,13 @@ int main ()
    void * cli_addr       = cli_region.get_address();
 
    //Obtain the shared structure
-   shared_memory_buffer * cli_data = static_cast<shared_memory_buffer*>(cli_addr);
+   // shared_memory_buffer * cli_data = static_cast<shared_memory_buffer*>(cli_addr);
+   shared_memory_buffer * cli_data = new (cli_addr) shared_memory_buffer;
 
 
 
 
+   printf("meow%s\n", );
       data->nstored.wait();
       data->mutex.wait();
       extracted_data[i] = data->items[i % shared_memory_buffer::NumItems];
