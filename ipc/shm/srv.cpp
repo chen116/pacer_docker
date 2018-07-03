@@ -104,7 +104,7 @@ int main ()
 
 
 
-
+while(1){
       printf("meow\n");
       data->nstored.wait();
       data->mutex.wait();
@@ -121,9 +121,9 @@ int main ()
       printf("wrote: %d\n",i+10 );
       cli_data->mutex.post();
       cli_data->nstored.post();
-   // }
 
-// }
+
+   }
 
 
 
