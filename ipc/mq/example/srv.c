@@ -14,7 +14,7 @@ https://www.softprayog.in/programming/interprocess-communication-using-posix-mes
 #include <sys/stat.h>
 #include <mqueue.h>
 
-#define SERVER_QUEUE_NAME   "/sp-example-server"
+#define SERVER_QUEUE_NAME   "/pacer-srv-mq"
 #define QUEUE_PERMISSIONS 0660
 #define MAX_MESSAGES 10
 #define MAX_MSG_SIZE 256
