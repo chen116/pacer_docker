@@ -75,6 +75,11 @@ int main ()
       data->mutex.post();
       data->nempty.post();
    // }
+
+
+
+
+
    char cli_shm_name [64];  
 
    sprintf (cli_shm_name, "/pacer-cli-shm-%d", extracted_data[i]);
@@ -96,6 +101,15 @@ int main ()
    //Obtain the shared structure
    shared_memory_buffer * cli_data = static_cast<shared_memory_buffer*>(cli_addr);
 
+
+
+
+      data->nstored.wait();
+      data->mutex.wait();
+      extracted_data[i] = data->items[i % shared_memory_buffer::NumItems];
+      printf("got: %d\n",extracted_data[i]);
+      data->mutex.post();
+      data->nempty.post();
 
    //Insert data in the array
    // for(int i = 0; i < NumMsg; ++i){
