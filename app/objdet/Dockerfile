@@ -125,6 +125,7 @@ RUN cd /pacer_docker/opencl && make && cp *.so /pacer_docker/app/objdet/
 
 
 #OPENCL-INTERPCEPT
+RUN ls /dev/shm
 RUN git clone https://github.com/chen116/opencl-intercept-layer.git && cd opencl-intercept-layer && mkdir build && cd build && cmake .. && make 
 RUN cp /opencl-intercept-layer/vic/clintercept.conf ~/
 RUN mv /usr/lib/x86_64-linux-gnu/libOpenCL.so.1.0.0 /usr/lib/x86_64-linux-gnu/real_libOpenCL.so.1.0.0 && ln -sf /opencl-intercept-layer/build/libOpenCL.so.1 /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 && ln -sf /opencl-intercept-layer/build/libOpenCL.so /usr/lib/x86_64-linux-gnu/libOpenCL.so
