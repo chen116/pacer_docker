@@ -63,7 +63,7 @@ int main (int argc, char **argv)
         int i;
 		sscanf(in_buffer, "%d", &i);
 		printf("clinet file:%d\n",i);
-        sprintf (out_buffer, "%ld", token_number);
+        sprintf (out_buffer, "%d", token_number);
         if (mq_send (qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
             perror ("Server: Not able to send message to client");
             continue;
