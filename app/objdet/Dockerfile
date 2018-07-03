@@ -37,7 +37,7 @@ RUN apt -y install git
 
 
 # HEARTBEATS
-RUN git clone https://github.com/libheartbeats/heartbeats.git
+RUN git clone https://github.com/chen116/heartbeats.git
 #COPY heartbeats /heartbeats
 RUN cd heartbeats && mkdir hbed
 ENV HEARTBEAT_ENABLED_DIR /heartbeats/hbed
