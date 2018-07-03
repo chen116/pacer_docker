@@ -54,7 +54,7 @@ int main (int argc, char **argv)
             perror ("Server: mq_receive");
             exit (1);
         }
-        // printf ("Server: message received.\n");
+        printf ("Server: message received:%s\n",in_buffer);
         // send reply message to client
         if ((qd_client = mq_open (in_buffer, O_WRONLY)) == 1) {
             perror ("Server: Not able to open client queue");
