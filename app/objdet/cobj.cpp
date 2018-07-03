@@ -17,7 +17,19 @@ g++ cobj.cpp -o app `pkg-config --cflags --libs opencv` -std=c++11
 using namespace std;
 using namespace cv;
 
+#include <heartbeats/heartbeat.h>
 
+heartbeat_t* heart;
+
+
+
+
+
+static const int64_t vic_win_size = 10;
+static const int64_t vic_buf_depth = 1000;
+static const char* vic_log_file ="vic.log";
+static const int64_t vic_min_target = 100;
+static const int64_t vic_max_target = 1000;
 
 int main(int argc, char** argv)
 {
@@ -32,6 +44,14 @@ int main(int argc, char** argv)
     // waitKey();
 
     
+heart = heartbeat_init(vic_win_size, vic_buf_depth, vic_log_file, vic_min_target, vic_max_target);
+
+
+
+
+heartbeat(heart, 0);
+
+
 
 
 
@@ -50,6 +70,9 @@ int main(int argc, char** argv)
 
 
     // waitKey();
+heartbeat(heart, 1);
+
+
 
 
 
@@ -70,6 +93,9 @@ int main(int argc, char** argv)
     // imshow("edges", ugray);
     // waitKey();
 
+heartbeat(heart, 2);
 
+
+heartbeat_finish(heart);
 
 }
