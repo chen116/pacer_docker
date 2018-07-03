@@ -19,6 +19,9 @@ https://www.softprayog.in/programming/interprocess-communication-using-posix-mes
 #define MAX_MESSAGES 10
 #define MAX_MSG_SIZE 256
 #define MSG_BUFFER_SIZE MAX_MSG_SIZE + 10
+#include <heartbeats/heartbeat.h>
+
+
 
 int main (int argc, char **argv)
 {
