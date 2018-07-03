@@ -4,4 +4,4 @@ all: clean
 
 
 clean:
-	-rm -f c s
+	-rm -f m
