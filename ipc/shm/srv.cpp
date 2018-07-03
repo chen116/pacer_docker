@@ -117,8 +117,8 @@ while(1){
    // for(int i = 0; i < NumMsg; ++i){
       cli_data->nempty.wait();
       cli_data->mutex.wait();
-      cli_data->items[i % shared_memory_buffer::NumItems] = i+10;
-      printf("wrote: %d\n",i+10 );
+      cli_data->items[i % shared_memory_buffer::NumItems] = i+11;
+      printf("wrote: %d\n",i+11 );
       cli_data->mutex.post();
       cli_data->nstored.post();
 
