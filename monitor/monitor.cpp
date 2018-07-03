@@ -61,7 +61,8 @@ int main (int argc, char **argv)
             continue;
         }
         int i;
-		sscanf(in_buffer, "%d", &i);
+        char bs[1];
+		sscanf(in_buffer, "%s%d", bs,&i);
 		printf("in buffer %s\n",in_buffer );
 		printf("clinet file:%d\n",i);
         sprintf (out_buffer, "%d", token_number);
