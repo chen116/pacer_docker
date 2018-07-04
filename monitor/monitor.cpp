@@ -83,7 +83,7 @@ int main (int argc, char **argv)
 
 
     int shmid_state;
-    if ((shmid_state = shmget(shmkey << 1 | 1, 100*sizeof(HB_global_state_t), 0666)) < 0) {
+    if ((shmid_state = shmget( (shmkey << 1) | 1, sizeof(HB_global_state_t), 0666)) < 0) {
         perror("shmget2");
         return 0;
     }
