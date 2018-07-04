@@ -121,7 +121,7 @@ int main (int argc, char **argv)
 
 
 		printf("hb rec: %f\n",hb_rec->instant_rate );
-        printf("hb_state: counter: %d\n", hb_state->counter);
+        printf("hb_state: counter: %ld\n", hb_state->counter);
         hb_rec++;
 
 
