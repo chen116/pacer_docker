@@ -74,12 +74,20 @@ int main (int argc, char **argv)
 	// }
 	// heartbeat_t* hb = (heartbeat_t*) shmat(shmid, NULL, 0);
 
-	int shmid2;
-	if ((shmid2 = shmget(shmkey*2, 100*sizeof(heartbeat_record_t), 0666)) < 0) {
-	    perror("shmget2");
+	int shmid_rec;
+	if ((shmid_rec = shmget(shmkey << 1, 100*sizeof(heartbeat_record_t), 0666)) < 0) {
+	    perror("shmget_rec");
 	    return 0;
 	}
-	heartbeat_record_t* hb_rec = (heartbeat_record_t*) shmat(shmid2, NULL, 0);
+	heartbeat_record_t* hb_rec = (heartbeat_record_t*) shmat(shmid_rec, NULL, 0);
+
+
+    int shmid_state;
+    if ((shmid_state = shmget(shmkey << 1 | 1, 100*sizeof(HB_global_state_t), 0666)) < 0) {
+        perror("shmget2");
+        return 0;
+    }
+    HB_global_state_t* hb_state = (HB_global_state_t*) shmat(shmid_state, NULL, 0);
 
 
 
@@ -114,6 +122,9 @@ int main (int argc, char **argv)
 		tempRetVal = hb_rec->instant_rate;
         hb_rec++;
 		printf("hb rec: %f\n",tempRetVal );
+        printf("hb_state: counter: %d\n", hb_state->counter);
+
+
 
 		// heartbeat_record_t* meow = hb->log;
 		// printf("hb: %f\n",meow->instant_rate );
