@@ -65,6 +65,7 @@ int main (int argc, char **argv)
 	sscanf(in_buffer, "%s%d", bs,&i);
 	int shmkey = atoi(in_buffer);
 	printf("shmkey %d\n",shmkey);
+    shmkey=1024;
 	double tempRetVal;
 	// int shmid;
 	// if ((shmid = shmget(shmkey, 1*sizeof(heartbeat_t), 0666)) < 0) 
