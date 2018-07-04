@@ -75,11 +75,11 @@ int main (int argc, char **argv)
 	heartbeat_t* hb = (heartbeat_t*) shmat(shmid, NULL, 0);
 
 	int shmid2;
-	if ((shmid2 = shmget(shmkey*2, 100*sizeof(_heartbeat_record_t), 0666)) < 0) {
+	if ((shmid2 = shmget(shmkey*2, 100*sizeof(heartbeat_record_t), 0666)) < 0) {
 	    perror("shmget2");
 	    return 0;
 	}
-	_heartbeat_record_t* hb_rec = (_heartbeat_record_t*) shmat(shmid2, NULL, 0);
+	heartbeat_record_t* hb_rec = (heartbeat_record_t*) shmat(shmid2, NULL, 0);
 
 
 
@@ -114,7 +114,7 @@ int main (int argc, char **argv)
 		tempRetVal = hb_rec->instant_rate;
 		printf("hb rec: %f\n",tempRetVal );
 
-		tempRetVal = hb->state->min_heartrate;
+		tempRetVal = hb->log[0].instant_rate;
 		printf("hb: %f\n",tempRetVal );
 		cnt++;
 
