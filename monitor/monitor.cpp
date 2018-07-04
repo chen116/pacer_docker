@@ -66,15 +66,21 @@ int main (int argc, char **argv)
 	int shmkey = atoi(in_buffer);
 	printf("shmkey %d\n",shmkey);
 	double tempRetVal;
-		int shmid;
+	int shmid;
 
 
-
-	if ((shmid = shmget(shmkey*2, 100*sizeof(heartbeat_t), 0666)) < 0) {
+	if ((shmid = shmget(shmkey, 1*sizeof(heartbeat_t), 0666)) < 0) 
+	{
 	    perror("shmget");
 	    return 0;
 	}
-	_heartbeat_record_t* hb = (_heartbeat_record_t*) shmat(shmid, NULL, 0);
+	heartbeat_t* hb = (heartbeat_t*) shmat(shmid, NULL, 0);
+
+	// if ((shmid = shmget(shmkey*2, 100*sizeof(heartbeat_t), 0666)) < 0) {
+	//     perror("shmget");
+	//     return 0;
+	// }
+	// _heartbeat_record_t* hb = (_heartbeat_record_t*) shmat(shmid, NULL, 0);
 
 
 
@@ -100,11 +106,16 @@ int main (int argc, char **argv)
 	        continue;
 	    }
 
-		tempRetVal = hb++->instant_rate;
+		tempRetVal = hb->log[0].instant_rate;
 		printf("hb: %f\n",tempRetVal );
 		cnt++;
-        sprintf (out_buffer, "%d", token_number);
 
+
+		// tempRetVal = hb++->instant_rate;
+		// printf("hb: %f\n",tempRetVal );
+		// cnt++;
+
+        sprintf (out_buffer, "%d", token_number);
         if (mq_send (qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
             perror ("Server: Not able to send message to client");
             continue;
