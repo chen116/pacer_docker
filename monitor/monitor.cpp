@@ -53,7 +53,7 @@ int main (int argc, char **argv)
         perror ("Server: mq_receive");
         exit (1);
     }
-    printf ("Server: message received:%s\n",in_buffer);
+    printf ("Server: message received in init:%s\n",in_buffer);
     if ((qd_client = mq_open (in_buffer, O_WRONLY)) == 1) {
         perror ("Server: Not able to open client queue");
 
@@ -70,7 +70,7 @@ int main (int argc, char **argv)
 
 
 
-	if ((shmid = shmget(shmkey*2, 1*sizeof(heartbeat_t), 0666)) < 0) {
+	if ((shmid = shmget(shmkey*2+1, 1*sizeof(heartbeat_t), 0666)) < 0) {
 	    perror("shmget");
 	    return 0;
 	}
