@@ -76,7 +76,7 @@ int main (int argc, char **argv)
 
 	int shmid2;
 	if ((shmid2 = shmget(shmkey*2, 100*sizeof(heartbeat_t), 0666)) < 0) {
-	    perror("shmget");
+	    perror("shmget2");
 	    return 0;
 	}
 	_heartbeat_record_t* hb_rec = (_heartbeat_record_t*) shmat(shmid2, NULL, 0);
