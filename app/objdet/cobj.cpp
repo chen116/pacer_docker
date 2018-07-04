@@ -49,10 +49,16 @@ heart = heartbeat_init(vic_win_size, vic_buf_depth, vic_log_file, vic_min_target
     heartbeat(heart, 0);
 sleep(1);
     heartbeat(heart, 1);
-
-
-int cnt=1;
-while (cnt<4)
+sleep(1);
+    heartbeat(heart, 2);
+sleep(1);
+    heartbeat(heart, 3);
+sleep(1);
+    heartbeat(heart, 4);
+sleep(1);
+    heartbeat(heart, 5);
+int cnt=5;
+while (cnt<5+3)
 {
     cnt++;
         t_start = (double)getTickCount();   
