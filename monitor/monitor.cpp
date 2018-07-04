@@ -64,13 +64,13 @@ int main (int argc, char **argv)
     int i;char bs[1];
 	sscanf(in_buffer, "%s%d", bs,&i);
 	int shmkey = atoi(in_buffer);
-	printf("shmkey %d\n",shmkey*2);
+	printf("shmkey %d\n",shmkey);
 	double tempRetVal;
 		int shmid;
 
 
 
-	if ((shmid = shmget(shmkey*2+1, 1*sizeof(heartbeat_t), 0666)) < 0) {
+	if ((shmid = shmget(shmkey, 1*sizeof(heartbeat_t), 0666)) < 0) {
 	    perror("shmget");
 	    return 0;
 	}
