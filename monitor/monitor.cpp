@@ -67,8 +67,6 @@ int main (int argc, char **argv)
 	printf("shmkey %d\n",shmkey);
 	double tempRetVal;
 	int shmid;
-
-
 	if ((shmid = shmget(shmkey, 1*sizeof(heartbeat_t), 0666)) < 0) 
 	{
 	    perror("shmget");
@@ -76,11 +74,12 @@ int main (int argc, char **argv)
 	}
 	heartbeat_t* hb = (heartbeat_t*) shmat(shmid, NULL, 0);
 
-	// if ((shmid = shmget(shmkey*2, 100*sizeof(heartbeat_t), 0666)) < 0) {
-	//     perror("shmget");
-	//     return 0;
-	// }
-	// _heartbeat_record_t* hb = (_heartbeat_record_t*) shmat(shmid, NULL, 0);
+	int shmid2
+	if ((shmid2 = shmget(shmkey*2, 100*sizeof(heartbeat_t), 0666)) < 0) {
+	    perror("shmget");
+	    return 0;
+	}
+	_heartbeat_record_t* hb_rec = (_heartbeat_record_t*) shmat(shmid2, NULL, 0);
 
 
 
@@ -106,14 +105,15 @@ int main (int argc, char **argv)
 	        continue;
 	    }
 
+		tempRetVal = hb_rec->instant_rate;
+		printf("hb rec: %f\n",tempRetVal );
+
 		tempRetVal = hb->log[0].instant_rate;
 		printf("hb: %f\n",tempRetVal );
 		cnt++;
 
 
-		// tempRetVal = hb++->instant_rate;
-		// printf("hb: %f\n",tempRetVal );
-		// cnt++;
+
 
         sprintf (out_buffer, "%d", token_number);
         if (mq_send (qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
