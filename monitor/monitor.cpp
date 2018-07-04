@@ -84,6 +84,12 @@ int main (int argc, char **argv)
 
 
 	int cnt = 0;
+
+
+
+
+
+
     while (1) {
         // mq_receive (qd_server, in_buffer, MSG_BUFFER_SIZE, NULL);
         // qd_client = mq_open (in_buffer, O_WRONLY);
@@ -108,7 +114,7 @@ int main (int argc, char **argv)
 		tempRetVal = hb_rec->instant_rate;
 		printf("hb rec: %f\n",tempRetVal );
 
-		tempRetVal = hb->log[0].instant_rate;
+		tempRetVal = hb->state->min_heartrate;
 		printf("hb: %f\n",tempRetVal );
 		cnt++;
 
