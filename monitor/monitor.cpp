@@ -64,7 +64,7 @@ int main (int argc, char **argv)
     int i;char bs[1];
 	sscanf(in_buffer, "%s%d", bs,&i);
 	int shmkey = atoi(in_buffer);
-	printf("shmkey %d\n",shmkey);
+	printf("shmkey %d\n",shmkey*2);
 	double tempRetVal;
 		int shmid;
 
