@@ -21,7 +21,7 @@ using namespace cv;
 
 heartbeat_t* heart;
 
-
+#include <unistd.h>
 
 
 
@@ -46,9 +46,13 @@ int main(int argc, char** argv)
     
 heart = heartbeat_init(vic_win_size, vic_buf_depth, vic_log_file, vic_min_target, vic_max_target);
 
+    heartbeat(heart, 0);
+sleep(1);
+    heartbeat(heart, 1);
 
-int cnt=0;
-while (cnt<3)
+
+int cnt=1;
+while (cnt<4)
 {
     cnt++;
         t_start = (double)getTickCount();   
