@@ -119,10 +119,10 @@ int main (int argc, char **argv)
 	        continue;
 	    }
 
-		tempRetVal = hb_rec->instant_rate;
-        hb_rec++;
-		printf("hb rec: %f\n",tempRetVal );
+
+		printf("hb rec: %f\n",hb_rec->instant_rate );
         printf("hb_state: counter: %d\n", hb_state->counter);
+        hb_rec++;
 
 
 
