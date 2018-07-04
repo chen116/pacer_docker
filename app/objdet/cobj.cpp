@@ -47,56 +47,51 @@ int main(int argc, char** argv)
 heart = heartbeat_init(vic_win_size, vic_buf_depth, vic_log_file, vic_min_target, vic_max_target);
 
 
+int cnt=0;
+while (cnt<3)
+{
+    cnt++;
+        t_start = (double)getTickCount();   
+        cvtColor(img, gray, COLOR_BGR2GRAY);
+        GaussianBlur(gray, gray,Size(7, 7), 1.5);
+        Canny(gray, gray, 0, 50);
+    	// the code you wish to time goes here
+        int stop_s=clock();
+        // std::cout << "cpu time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
+        t_start = (double)getTickCount() - t_start;    
+        printf( "%d detection time = %g ms\n", 0,t_start*1000/getTickFrequency());
+        // imshow("edges", gray);
 
 
-heartbeat(heart, 0);
-
-
-
-
-
-
-
-    t_start = (double)getTickCount();   
-    cvtColor(img, gray, COLOR_BGR2GRAY);
-    GaussianBlur(gray, gray,Size(7, 7), 1.5);
-    Canny(gray, gray, 0, 50);
-	// the code you wish to time goes here
-    int stop_s=clock();
-    // std::cout << "cpu time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
-    t_start = (double)getTickCount() - t_start;    
-    printf( "%d detection time = %g ms\n", 0,t_start*1000/getTickFrequency());
-    // imshow("edges", gray);
-
-
-    // waitKey();
-heartbeat(heart, 1);
+        // waitKey();
+    heartbeat(heart, cnt);
 
 
 
 
 
-    t_start = (double)getTickCount();
+        t_start = (double)getTickCount();
 
-    UMat uimg, ugray;
+        UMat uimg, ugray;
 
-    imread("image.jpg", IMREAD_COLOR).copyTo(uimg);
-    int ustart_s=clock();
+        imread("image.jpg", IMREAD_COLOR).copyTo(uimg);
+        int ustart_s=clock();
 
-    cvtColor(uimg, ugray, COLOR_BGR2GRAY);
-    GaussianBlur(ugray, ugray,Size(7, 7), 1.5);
-    Canny(ugray, ugray, 0, 50);
- 	int ustop_s=clock();
-	// std::cout << "gpu time: " << (ustop_s-ustart_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
-    t_start = (double)getTickCount() - t_start;    
-    printf( "%d detection time = %g ms\n", 1,t_start*1000/getTickFrequency());
-    // imshow("edges", ugray);
-    // waitKey();
+        cvtColor(uimg, ugray, COLOR_BGR2GRAY);
+        GaussianBlur(ugray, ugray,Size(7, 7), 1.5);
+        Canny(ugray, ugray, 0, 50);
+     	int ustop_s=clock();
+    	// std::cout << "gpu time: " << (ustop_s-ustart_s)/double(CLOCKS_PER_SEC)*1000 << std::endl;
+        t_start = (double)getTickCount() - t_start;    
+        printf( "%d detection time = %g ms\n", 1,t_start*1000/getTickFrequency());
+        // imshow("edges", ugray);
+        // waitKey();
 
-heartbeat(heart, 2);
+
        printf("heartbeat: windowed rate: %f\n",hb_get_windowed_rate(heart) );
        printf("heartbeat: instant rate: %f\n",hb_get_instant_rate(heart) );
 
-heartbeat_finish(heart);
+}
+    heartbeat_finish(heart);
 
 }
