@@ -111,7 +111,7 @@ int main (int argc, char **argv)
 	        continue;
 	    }
 
-		tempRetVal = hb_rec->instant_rate;
+		tempRetVal = hb_rec++->instant_rate;
 		printf("hb rec: %f\n",tempRetVal );
 
 		// heartbeat_record_t* meow = hb->log;
