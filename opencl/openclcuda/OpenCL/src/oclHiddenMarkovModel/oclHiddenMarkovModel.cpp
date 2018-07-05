@@ -43,6 +43,8 @@ int ViterbiCPU(float &viterbiProb,
 int main(int argc, const char **argv)
 {
     heart = heartbeat_init(vic_win_size, vic_buf_depth, vic_log_file, vic_min_target, vic_max_target);
+    heartbeat(heart, 1);
+    
 
     cl_platform_id cpPlatform;      // OpenCL platform
     cl_uint nDevice;                // OpenCL device count
@@ -251,7 +253,7 @@ int main(int argc, const char **argv)
 
     shrEXIT(argc, argv);
     heartbeat_finish(heart);
-    
+
 }
 
 // initialize initial probability, state transition matrix and emission matrix with random 
