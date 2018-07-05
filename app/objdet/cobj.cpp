@@ -74,7 +74,7 @@ while (cnt<5+3)
 
 
         // waitKey();
-    heartbeat(heart, 6);
+    heartbeat(heart, cnt);
 
  cnt++;
 
