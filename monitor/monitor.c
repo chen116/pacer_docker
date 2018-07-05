@@ -47,6 +47,16 @@ int main (int argc, char **argv)
 
 
 
+    // get the oldest message with highest priority
+    if (mq_receive (qd_server, in_buffer, MSG_BUFFER_SIZE, NULL) == -1) {
+        perror ("Server: mq_receive");
+        exit (1);
+    }
+    printf ("Server: message received:%s %ld\n",in_buffer,token_number);
+    if ((qd_client = mq_open (in_buffer, O_WRONLY)) == 1) {
+        perror ("Server: Not able to open client queue");
+        continue;
+    }
 
     int i;char bs[1];
 	sscanf(in_buffer, "%s%d", bs,&i);
