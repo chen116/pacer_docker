@@ -115,8 +115,6 @@ RUN git clone https://github.com/chen116/pacer_docker.git
 RUN pip3 install --upgrade pip  && pip install imutils 
 #RUN cd /pacer_docker/app/objdet/ && sh install-opencv.sh
 
-# makes heartbeat python module
-RUN cd /pacer_docker/opencl && make && cp *.so /pacer_docker/app/objdet/
 
 
 #OPENCL-INTERPCEPT
@@ -132,6 +130,8 @@ RUN git clone https://github.com/chen116/heartbeats.git
 RUN cd heartbeats && mkdir hbed
 ENV HEARTBEAT_ENABLED_DIR /heartbeats/hbed
 RUN cd heartbeats && make clean && make uninstall && make && make install && ldconfig 
+# makes heartbeat python module
+RUN cd /pacer_docker/opencl && make && cp *.so /pacer_docker/app/objdet/
 
 # boost
 RUN apt install -y libboost-all-dev
