@@ -52,7 +52,7 @@ int main (int argc, char **argv)
         perror ("Server: mq_receive");
         exit (1);
     }
-    printf ("Server: message received:%s %ld\n",in_buffer,token_number);
+    printf ("Server: message received init:%s\n",in_buffer);
     if ((qd_client = mq_open (in_buffer, O_WRONLY)) == 1) {
         perror ("Server: Not able to open client queue");
     }
@@ -112,7 +112,7 @@ int main (int argc, char **argv)
             perror ("Server: mq_receive");
             exit (1);
         }
-	    printf ("Server: message received:%s %ld\n",in_buffer,token_number);
+	    printf ("Server: message received:%s %d\n",in_buffer,token_number);
 	    if ((qd_client = mq_open (in_buffer, O_WRONLY)) == 1) {
 	        perror ("Server: Not able to open client queue");
 	        continue;
