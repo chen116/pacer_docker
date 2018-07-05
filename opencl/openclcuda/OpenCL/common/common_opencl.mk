@@ -195,7 +195,7 @@ ifneq ($(DARWIN),)
    LIB += -framework OpenCL -framework OpenGL ${OPENGLLIB} -framework AppKit ${ATF} ${LIB} 
 else
    LIB       := ${USRLIBDIR} -L${OCLLIBDIR} -L$(LIBDIR) -L$(SHAREDDIR)/lib/$(OSLOWER) 
-   LIB += -lrt -lOpenCL ${OPENGLLIB} ${LIB} 
+   LIB += -lOpenCL ${OPENGLLIB} ${LIB} 
 endif
 
 
