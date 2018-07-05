@@ -118,7 +118,7 @@ int main (int argc, char **argv)
                 return 0;
             }
             hb_rec = (heartbeat_record_t*) shmat(shmid_rec, NULL, 0);
-            init_hb_rec = hb_rec
+            init_hb_rec = hb_rec;
 
             int shmid_state;
             if ((shmid_state = shmget( (shmkey << 1) | 1, sizeof(HB_global_state_t), 0666)) < 0) {
