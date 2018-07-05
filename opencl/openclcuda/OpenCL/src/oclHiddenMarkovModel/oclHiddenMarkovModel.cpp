@@ -13,6 +13,16 @@
 #include <shrQATest.h>
 #include "HMM.h"
 
+
+#include <heartbeats/heartbeat.h>
+heartbeat_t* heart;
+static const int64_t vic_win_size = 10;
+static const int64_t vic_buf_depth = 100;
+static const char* vic_log_file ="vic.log";
+static const int64_t vic_min_target = 100;
+static const int64_t vic_max_target = 100;
+
+
 #define MAX_GPU_COUNT 8
 
 // forward declaractions
@@ -32,6 +42,8 @@ int ViterbiCPU(float &viterbiProb,
 //*****************************************************************************
 int main(int argc, const char **argv)
 {
+    heart = heartbeat_init(vic_win_size, vic_buf_depth, vic_log_file, vic_min_target, vic_max_target);
+
     cl_platform_id cpPlatform;      // OpenCL platform
     cl_uint nDevice;                // OpenCL device count
     cl_device_id* cdDevices;        // OpenCL device list    
@@ -185,6 +197,7 @@ int main(int argc, const char **argv)
 
     for (cl_uint iDevice = 0; iDevice < nDevice; iDevice++)
     {
+        heartbeat(heart, 1);
         ciErrNum = clEnqueueReadBuffer(cqCommandQue[iDevice], vPath[iDevice], CL_TRUE, 0, sizeof(int)*nObs, viterbiPathGPU[iDevice], 0, NULL, NULL);
     }
 
@@ -237,6 +250,8 @@ int main(int argc, const char **argv)
     shrQAFinishExit(argc, (const char **)argv, pass ? QA_PASSED : QA_FAILED);
 
     shrEXIT(argc, argv);
+    heartbeat_finish(heart);
+    
 }
 
 // initialize initial probability, state transition matrix and emission matrix with random 

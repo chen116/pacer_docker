@@ -113,15 +113,15 @@ int main (int argc, char **argv)
             perror ("Server: mq_receive");
             exit (1);
         }
-	    printf ("Server: message received:%s\n",in_buffer);
+	    printf ("Server: message received:%s %ld\n",in_buffer,token_number);
 	    if ((qd_client = mq_open (in_buffer, O_WRONLY)) == 1) {
 	        perror ("Server: Not able to open client queue");
 	        continue;
 	    }
 
         hb_rec=    init_hb_rec +      hb_state->counter-1;
-        printf("hb rec: %f\n",hb_rec->instant_rate );
-        printf("hb_state: counter: %ld\n", hb_state->counter-1);
+        printf("hb rec:%s %f\n",in_buffer,hb_rec->instant_rate );
+        printf("hb_state: counter: %s %ld\n", in_buffer, hb_state->counter-1);
 
 
 
