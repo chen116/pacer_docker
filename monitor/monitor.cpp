@@ -56,7 +56,6 @@ int main (int argc, char **argv)
     printf ("Server: message received in init:%s\n",in_buffer);
     if ((qd_client = mq_open (in_buffer, O_WRONLY)) == 1) {
         perror ("Server: Not able to open client queue");
-
     }
 
 
