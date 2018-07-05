@@ -27,15 +27,15 @@
 #include <shrQATest.h>
 
 
-//mq
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <mqueue.h>
+// //mq
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+// #include <sys/types.h>
+// #include <unistd.h>
+// #include <fcntl.h>
+// #include <sys/stat.h>
+// #include <mqueue.h>
 // Name of the file with the source code for the computation kernel
 // *********************************************************************
 const char* cSourceFile = "VectorAdd.cl";
