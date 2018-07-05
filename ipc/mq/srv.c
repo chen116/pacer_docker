@@ -70,7 +70,7 @@ int main (int argc, char **argv)
             continue;
         }
         mq_close(qd_client);
-        printf ("Server: response sent to client. %d\n",token_number);
+        printf ("Server: response sent to client. %ld\n",token_number);
         token_number++;
     }
 }
