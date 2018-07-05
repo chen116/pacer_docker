@@ -61,24 +61,24 @@ int main (int argc, char **argv)
 	// }
 	// heartbeat_t* hb = (heartbeat_t*) shmat(shmid, NULL, 0);
 
-    // int shmid_rec;
-    // if ((shmid_rec = shmget(shmkey << 1, 100*sizeof(heartbeat_record_t), 0666)) < 0) {
-    //     perror("shmget_rec");
-    //     return 0;
-    // }
-    // heartbeat_record_t* hb_rec = (heartbeat_record_t*) shmat(shmid_rec, NULL, 0);
+    int shmid_rec;
+    if ((shmid_rec = shmget(shmkey << 1, 100*sizeof(heartbeat_record_t), 0666)) < 0) {
+        perror("shmget_rec");
+        return 0;
+    }
+    heartbeat_record_t* hb_rec = (heartbeat_record_t*) shmat(shmid_rec, NULL, 0);
 
 
-    // int shmid_state;
-    // if ((shmid_state = shmget( (shmkey << 1) | 1, sizeof(HB_global_state_t), 0666)) < 0) {
-    //     perror("shmget2");
-    //     return 0;
-    // }
-    // HB_global_state_t* hb_state = (HB_global_state_t*) shmat(shmid_state, NULL, 0);
-    // heartbeat_record_t* init_hb_rec = hb_rec;
-    heartbeat_record_t* hb_rec ;
-    heartbeat_record_t* init_hb_rec ;
-    HB_global_state_t* hb_state ;
+    int shmid_state;
+    if ((shmid_state = shmget( (shmkey << 1) | 1, sizeof(HB_global_state_t), 0666)) < 0) {
+        perror("shmget2");
+        return 0;
+    }
+    HB_global_state_t* hb_state = (HB_global_state_t*) shmat(shmid_state, NULL, 0);
+    heartbeat_record_t* init_hb_rec = hb_rec;
+    // heartbeat_record_t* hb_rec ;
+    // heartbeat_record_t* init_hb_rec ;
+    // HB_global_state_t* hb_state ;
 
 
 
@@ -109,26 +109,26 @@ int main (int argc, char **argv)
 	        continue;
 	    }
 
-        if (seen==0)
-        {
-            seen=1;
-            int shmid_rec;
-            if ((shmid_rec = shmget(shmkey << 1, 100*sizeof(heartbeat_record_t), 0666)) < 0) {
-                perror("shmget_rec");
-                return 0;
-            }
-            hb_rec = (heartbeat_record_t*) shmat(shmid_rec, NULL, 0);
-            init_hb_rec = hb_rec;
+        // if (seen==0)
+        // {
+        //     seen=1;
+        //     int shmid_rec;
+        //     if ((shmid_rec = shmget(shmkey << 1, 100*sizeof(heartbeat_record_t), 0666)) < 0) {
+        //         perror("shmget_rec");
+        //         return 0;
+        //     }
+        //     hb_rec = (heartbeat_record_t*) shmat(shmid_rec, NULL, 0);
+        //     init_hb_rec = hb_rec;
 
-            int shmid_state;
-            if ((shmid_state = shmget( (shmkey << 1) | 1, sizeof(HB_global_state_t), 0666)) < 0) {
-                perror("shmget2");
-                return 0;
-            }
-            hb_state = (HB_global_state_t*) shmat(shmid_state, NULL, 0);
+        //     int shmid_state;
+        //     if ((shmid_state = shmget( (shmkey << 1) | 1, sizeof(HB_global_state_t), 0666)) < 0) {
+        //         perror("shmget2");
+        //         return 0;
+        //     }
+        //     hb_state = (HB_global_state_t*) shmat(shmid_state, NULL, 0);
 
 
-        }
+        // }
 
 
 
