@@ -20,5 +20,11 @@ one line uninstall opencl
 mv /usr/lib/x86_64-linux-gnu/real_libOpenCL.so.1.0.0 /usr/lib/x86_64-linux-gnu/libOpenCL.so.1.0.0 && ln -sf /usr/lib/x86_64-linux-gnu/libOpenCL.so.1.0.0 /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 && ln -sf /usr/lib/x86_64-linux-gnu/libOpenCL.so.1.0.0 /usr/lib/x86_64-linux-gnu/libOpenCL.so
 
 heartbeat:
-
 make clean && make uninstall && make && make install && ldconfig 
+
+
+quick docker boot:
+
+cd /opencl-intercept-layer/build && git pull && make && cd /heartbeats/ && git pull && make clean && make uninstall && make && make install && ldconfig  && cd /pacer-docker/ && git pull && cd /pacer-docker/app/objdet && make
+
+
