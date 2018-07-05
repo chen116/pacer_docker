@@ -36,12 +36,6 @@ RUN apt-get update
 RUN apt -y install git
 
 
-# HEARTBEATS
-RUN git clone https://github.com/chen116/heartbeats.git
-#COPY heartbeats /heartbeats
-RUN cd heartbeats && mkdir hbed
-ENV HEARTBEAT_ENABLED_DIR /heartbeats/hbed
-RUN cd heartbeats && make clean && make uninstall && make && make install && ldconfig 
 
 RUN apt -y install cmake-gui
 
@@ -112,13 +106,14 @@ RUN apt-get install -y xorg-dev libglu1-mesa-dev
 #cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -DWITH_OPENCL=ON -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON ..
 
 
+# install openGL
+RUN apt -y install freeglut3-dev
 
 
 RUN git clone https://github.com/chen116/pacer_docker.git
 # RUN apt -y install python3-pip && pip3 install --upgrade pip && pip install numpy && pip install opencv-python && apt -y install libsm6 libxrender1 libfontconfig1 && apt -y install python3-tk && apt -y install x11-xkb-utils && pip install imutils
 RUN pip3 install --upgrade pip  && pip install imutils 
 #RUN cd /pacer_docker/app/objdet/ && sh install-opencv.sh
-
 
 # makes heartbeat python module
 RUN cd /pacer_docker/opencl && make && cp *.so /pacer_docker/app/objdet/
@@ -131,6 +126,14 @@ RUN cp /opencl-intercept-layer/vic/clintercept.conf ~/
 RUN mv /usr/lib/x86_64-linux-gnu/libOpenCL.so.1.0.0 /usr/lib/x86_64-linux-gnu/real_libOpenCL.so.1.0.0 && ln -sf /opencl-intercept-layer/build/libOpenCL.so.1 /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 && ln -sf /opencl-intercept-layer/build/libOpenCL.so /usr/lib/x86_64-linux-gnu/libOpenCL.so
 
 
+# HEARTBEATS
+RUN git clone https://github.com/chen116/heartbeats.git
+#COPY heartbeats /heartbeats
+RUN cd heartbeats && mkdir hbed
+ENV HEARTBEAT_ENABLED_DIR /heartbeats/hbed
+RUN cd heartbeats && make clean && make uninstall && make && make install && ldconfig 
+
+# boost
 RUN apt install -y libboost-all-dev
 
 WORKDIR /
