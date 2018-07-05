@@ -27,15 +27,15 @@ https://www.softprayog.in/programming/interprocess-communication-using-posix-mes
 
 int main (int argc, char **argv)
 {
-    std::vector <int> clients;
-    clients.push_back(1);
-    std::vector<int>::iterator it;
+    // std::vector <int> clients;
+    // clients.push_back(1);
+    // std::vector<int>::iterator it;
 
-    it = find (clients.begin(), clients.end(), 30);
-    if (it != clients.end())
-        std::cout << "Element found in clients: " << *it << '\n';
-    else
-        std::cout << "Element not found in clients\n";
+    // it = find (clients.begin(), clients.end(), 30);
+    // if (it != clients.end())
+    //     std::cout << "Element found in clients: " << *it << '\n';
+    // else
+    //     std::cout << "Element not found in clients\n";
 
 
     mqd_t qd_server, qd_client;   // queue descriptors
