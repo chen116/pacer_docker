@@ -119,17 +119,15 @@ int main (int argc, char **argv)
 	        continue;
 	    }
 
-
-		printf("hb rec: %f\n",hb_rec->instant_rate );
+        hb_rec+=hb_state->counter;
+        printf("hb rec: %f\n",hb_rec->instant_rate );
         printf("hb_state: counter: %ld\n", hb_state->counter);
-        hb_rec++;
 
 
 
-		// heartbeat_record_t* meow = hb->log;
-		// printf("hb: %f\n",meow->instant_rate );
-		cnt++;
-
+        // heartbeat_record_t* meow = hb->log;
+        // printf("hb: %f\n",meow->instant_rate );
+        cnt++;
 
 
 
