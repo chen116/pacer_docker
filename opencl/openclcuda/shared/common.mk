@@ -144,7 +144,7 @@ GENCODE_SM30 := -gencode=arch=compute_30,code=\"sm_30,compute_30\"
 CXXFLAGS  += $(CXXWARN_FLAGS) $(CXX_ARCH_FLAGS)
 CFLAGS    += $(CWARN_FLAGS) $(CXX_ARCH_FLAGS)
 LINKFLAGS +=
-LINK      += $(LINKFLAGS) $(CXX_ARCH_FLAGS) -lrt
+LINK      += $(LINKFLAGS) $(CXX_ARCH_FLAGS) -lrtddd
 
 # This option for Mac allows CUDA applications to work without requiring to set DYLD_LIBRARY_PATH
 ifneq ($(DARWIN),)
