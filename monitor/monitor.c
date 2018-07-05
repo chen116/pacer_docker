@@ -142,7 +142,7 @@ int main (int argc, char **argv)
 
 
 
-        hb_rec=    init_hb_rec +      hb_state->counter-1;
+        hb_rec=    init_hb_rec +      (hb_state->buffer_index-1) ;
         printf("hb rec:%s %f\n",in_buffer,hb_rec->instant_rate );
         printf("hb_state: counter: %s %ld\n", in_buffer, hb_state->counter-1);
 
