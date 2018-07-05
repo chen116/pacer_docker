@@ -45,20 +45,20 @@ int main(int argc, char** argv)
 
     
 heart = heartbeat_init(vic_win_size, vic_buf_depth, vic_log_file, vic_min_target, vic_max_target);
+int cnt =0;
 
-    heartbeat(heart, 0);
+    heartbeat(heart, 1);
 sleep(1);
     heartbeat(heart, 1);
 sleep(1);
-    heartbeat(heart, 2);
+    heartbeat(heart, 1);
 sleep(1);
-    heartbeat(heart, 3);
+    heartbeat(heart, 1);
 sleep(1);
-    heartbeat(heart, 4);
+    heartbeat(heart, 1);
 sleep(1);
-    heartbeat(heart, 5);
-int cnt=5;
-while (cnt<5+3)
+    heartbeat(heart, 1);
+while (cnt<3)
 {
    
         t_start = (double)getTickCount();   
@@ -74,7 +74,7 @@ while (cnt<5+3)
 
 
         // waitKey();
-    heartbeat(heart, cnt);
+    heartbeat(heart, 1);
 
  cnt++;
 

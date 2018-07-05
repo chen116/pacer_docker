@@ -119,9 +119,9 @@ int main (int argc, char **argv)
 	        continue;
 	    }
 
-        hb_rec+=hb_state->counter;
+        hb_rec+=hb_state->counter-1;
         printf("hb rec: %f\n",hb_rec->instant_rate );
-        printf("hb_state: counter: %ld\n", hb_state->counter);
+        printf("hb_state: counter: %ld\n", hb_state->counter-1);
 
 
 
