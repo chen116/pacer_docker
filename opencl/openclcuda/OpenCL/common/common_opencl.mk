@@ -197,7 +197,8 @@ else
    LIB       := ${USRLIBDIR} -L${OCLLIBDIR} -L$(LIBDIR) -L$(SHAREDDIR)/lib/$(OSLOWER) 
    LIB += -lOpenCL ${OPENGLLIB} ${LIB} 
 endif
-LIB += -lrt
+#meow
+LIB += -lrt -lhb-shared -lhrm-shared
 
 # Lib/exe configuration
 ifneq ($(STATIC_LIB),)
