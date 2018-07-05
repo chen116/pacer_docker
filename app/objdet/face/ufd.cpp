@@ -7,6 +7,15 @@
 using namespace std;
 using namespace cv;
 
+
+#include <heartbeats/heartbeat.h>
+heartbeat_t* heart;
+static const int64_t vic_win_size = 10;
+static const int64_t vic_buf_depth = 100;
+static const char* vic_log_file ="vic.log";
+static const int64_t vic_min_target = 100;
+static const int64_t vic_max_target = 100;
+
 static void help()
 {
     cout << "\nThis program demonstrates the cascade recognizer. Now you can use Haar or LBP features.\n"
@@ -33,6 +42,9 @@ string nestedCascadeName = "/OpenCV/data/haarcascades/haarcascade_eye_tree_eyegl
 
 int main( int argc, const char** argv )
 {
+  
+    heart = heartbeat_init(vic_win_size, vic_buf_depth, vic_log_file, vic_min_target, vic_max_target);
+
     // cv::ocl::SetUseOpenCL(true);
     VideoCapture capture;
     UMat frame, image;
@@ -100,6 +112,9 @@ int main( int argc, const char** argv )
         cout << "Video capturing has been started ..." << endl;
         for(;;)
         {
+            heartbeat(heart,1);
+       printf("heartbeat: windowed rate: %f\n",hb_get_windowed_rate(heart) );
+       printf("heartbeat: instant rate: %f\n",hb_get_instant_rate(heart) );
             capture >> frame;
             if( frame.empty() )
                 break;
@@ -151,6 +166,7 @@ int main( int argc, const char** argv )
             }
         }
     }
+    heartbeat_finish(heart);
 
     return 0;
 }

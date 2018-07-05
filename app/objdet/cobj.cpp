@@ -17,14 +17,13 @@ g++ cobj.cpp -o app `pkg-config --cflags --libs opencv` -std=c++11
 using namespace std;
 using namespace cv;
 
-#include <heartbeats/heartbeat.h>
 
-heartbeat_t* heart;
 
 #include <unistd.h>
 
 
-
+#include <heartbeats/heartbeat.h>
+heartbeat_t* heart;
 static const int64_t vic_win_size = 10;
 static const int64_t vic_buf_depth = 100;
 static const char* vic_log_file ="vic.log";

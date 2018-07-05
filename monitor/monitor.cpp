@@ -22,10 +22,22 @@ https://www.softprayog.in/programming/interprocess-communication-using-posix-mes
 #include <heartbeats/heartbeat.h>
 #include <sys/shm.h>
 
+#include <vector>
 
 
 int main (int argc, char **argv)
 {
+    std::vector <int> clients;
+    clients.push_back(1);
+    std::vector<int>::iterator it;
+
+    it = find (clients.begin(), clients.end(), 30);
+    if (it != clients.end())
+        std::cout << "Element found in clients: " << *it << '\n';
+    else
+        std::cout << "Element not found in clients\n";
+
+
     mqd_t qd_server, qd_client;   // queue descriptors
     int token_number = 1; // next token to be given to client
 
