@@ -308,7 +308,7 @@ endif
 ifeq ($(USECUSPARSE),1)
   LIB += -lcusparse
 endif
-LIB += -lrt
+
 # Lib/exe configuration
 # Lib/exe configuration
 # Lib/exe configuration
