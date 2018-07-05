@@ -95,7 +95,7 @@ int main (int argc, char **argv)
 
 
 
-
+    heartbeat_record_t* init_hb_rec = hb_rec;
 
 
     while (1) {
@@ -119,7 +119,7 @@ int main (int argc, char **argv)
 	        continue;
 	    }
 
-        hb_rec+=hb_state->counter-1;
+        hb_rec=    init_hb_rec +      hb_state->counter-1;
         printf("hb rec: %f\n",hb_rec->instant_rate );
         printf("hb_state: counter: %ld\n", hb_state->counter-1);
 
