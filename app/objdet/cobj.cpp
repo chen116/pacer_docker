@@ -60,7 +60,7 @@ sleep(1);
 int cnt=5;
 while (cnt<5+3)
 {
-    cnt++;
+   
         t_start = (double)getTickCount();   
         cvtColor(img, gray, COLOR_BGR2GRAY);
         GaussianBlur(gray, gray,Size(7, 7), 1.5);
@@ -74,9 +74,9 @@ while (cnt<5+3)
 
 
         // waitKey();
-    heartbeat(heart, cnt);
+    heartbeat(heart, 6);
 
-
+ cnt++;
 
 
 
