@@ -178,12 +178,15 @@ public:
                     printf("closing client with pid %d\n",pid);
                     mq_close(map[pid].qd_client);
 
-                    if (shmdt(map[pid].init_hb_rec)==0 && shmctl(pid << 1, IPC_RMID, NULL)==0)
+                    if (shmdt(map[pid].init_hb_rec)<0)// && shmctl(pid << 1, IPC_RMID, NULL)==0)
                     {
+                        perror("hbrec shmdt");
                         printf("shmdt hb_rec success\n");
                     }
-                    if (shmdt(map[pid].hb_state)==0 && shmctl((pid << 1) | 1, IPC_RMID, NULL)==0)
+                    if (shmdt(map[pid].hb_state)<0 )//&& shmctl((pid << 1) | 1, IPC_RMID, NULL)==0)
                     {
+                        perror("hbstate shmdt");
+
                         printf("shmdt hb_state success\n");
                     }
                     map.erase(pid);
