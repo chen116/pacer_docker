@@ -25,6 +25,6 @@ make clean && make uninstall && make && make install && ldconfig
 
 quick docker boot:
 
-cd /opencl-intercept-layer/build && git pull && make && cd /heartbeats/ && git pull && make clean && make uninstall && make && make install && ldconfig  && cd /pacer_docker/ && git pull && cd /pacer_docker/app/objdet && make
+cd /opencl-intercept-layer/build && git pull && make && cd /heartbeats/ && git pull && make clean && make uninstall && make && make install && ldconfig  && cd /pacer_docker/ && git pull && cd /pacer_docker/app/hog && make
 
 
