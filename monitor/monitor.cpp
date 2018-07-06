@@ -31,16 +31,18 @@ struct client {
   HB_global_state_t* hb_state;
   mqd_t qd_client;
 } ;
+std::unordered_map<int, client> map; 
 
  
 class Monitor{
 private:
-    std::unordered_map<int, client> _map;
+    // std::unordered_map<int, client> _map;
     boost::mutex * _mutex;
     mqd_t _qd_server;
 
 public:
-    Monitor (std::unordered_map<int, client> map, boost::mutex* mutex) : _map(map), _mutex(mutex)
+    // Monitor (std::unordered_map<int, client> map, boost::mutex* mutex) : _map(map), _mutex(mutex)
+    Monitor ( boost::mutex* mutex) :  _mutex(mutex)
     {
         struct mq_attr attr;
         attr.mq_flags = 0;
@@ -77,9 +79,9 @@ public:
             if (pid>0)
             {
                 boost::mutex::scoped_lock lock(*_mutex);
-                if(_map.find (pid)!=_map.end())
+                if(map.find (pid)!=map.end())
                 {
-                    client* cli = &_map[pid];
+                    client* cli = &map[pid];
                     cli->hb_rec=     cli->init_hb_rec +      (cli->hb_state->buffer_index-1) ;
                     printf("hb rec:%d %f\n",pid,cli->hb_rec->instant_rate );
                     printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
@@ -101,12 +103,13 @@ public:
 }; 
 class Gate{
 private:
-    std::unordered_map<int, client> _map;
+    // std::unordered_map<int, client> _map;
     boost::mutex * _mutex;
     mqd_t _qd_server;
 
 public:
-    Gate (std::unordered_map<int, client> map, boost::mutex* mutex) : _map(map), _mutex(mutex)
+    // Gate (std::unordered_map<int, client> map, boost::mutex* mutex) : _map(map), _mutex(mutex)
+    Gate (boost::mutex* mutex) : _mutex(mutex)
     {
         struct mq_attr attr;
         attr.mq_flags = 0;
@@ -143,7 +146,7 @@ public:
             if (pid>0)
             {
                 boost::mutex::scoped_lock lock(*_mutex);
-                if (_map.find(pid)==_map.end())
+                if (map.find(pid)==map.end())
                 {   
                     printf("new client with pid %d\n",pid);
                     client c;
@@ -167,14 +170,14 @@ public:
 
                     }
                     c.hb_state = (HB_global_state_t*) shmat(shmid_state, NULL, 0);
-                    _map[pid]= c;
-                    printf("new id: %d\n",_map[pid].pid);
+                    map[pid]= c;
+                    printf("new id: %d\n",map[pid].pid);
                 }
                 else
                 {   
                     printf("closing client with pid %d\n",pid);
-                    mq_close(_map[pid].qd_client);
-                    _map.erase(pid);
+                    mq_close(map[pid].qd_client);
+                    map.erase(pid);
                 }
             }
 
@@ -187,14 +190,13 @@ public:
     }
 };
 
-std::unordered_map<int, client> map; 
 int main()
 {
 
     boost::mutex mutex;
     // typedef std::unordered_map<int, client> clients_map;
-    Gate gate(map, &mutex);
-    Monitor monitor(map, &mutex);
+    Gate gate( &mutex);
+    Monitor monitor( &mutex);
     
     boost::thread th1(&Gate::run, &gate); 
     boost::thread th2(&Monitor::run, &monitor); 
