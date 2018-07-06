@@ -170,7 +170,7 @@ public:
                 }
                 else
                 {   
-                    mq_close(_map.find(pid)->qd_client);
+                    mq_close(_map[pid].qd_client);
                     _map.erase(pid);
                 }
             }
