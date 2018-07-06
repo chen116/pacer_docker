@@ -16,6 +16,14 @@
 using namespace std;
 using namespace cv;
 
+#include <heartbeats/heartbeat.h>
+heartbeat_t* heart;
+static const int64_t vic_win_size = 10;
+static const int64_t vic_buf_depth = 100;
+static const char* vic_log_file ="vic.log";
+static const int64_t vic_min_target = 100;
+static const int64_t vic_max_target = 100;
+
 class App
 {
 public:
@@ -57,6 +65,8 @@ private:
 
 int main(int argc, char** argv)
 {
+    heart = heartbeat_init(vic_win_size, vic_buf_depth, vic_log_file, vic_min_target, vic_max_target);
+
     const char* keys =
         "{ h help      |                | print help message }"
         "{ i input     |                | specify input image}"
@@ -89,6 +99,8 @@ int main(int argc, char** argv)
     {
         return cout << "unknown exception" << endl, 1;
     }
+    heartbeat_finish(heart);
+
     return EXIT_SUCCESS;
 }
 
@@ -182,6 +194,9 @@ void App::run()
         while (running && !frame.empty())
         {
             workBegin();
+            heartbeat(heart, 1);
+            printf("hb rec:%s %f\n",in_buffer,hb_rec->instant_rate );
+            printf("hb_state: counter: %s %ld\n", in_buffer, hb_state->counter-1);
 
             // Change format of the image
             if (make_gray) cvtColor(frame, img_aux, COLOR_BGR2GRAY );
@@ -214,8 +229,8 @@ void App::run()
             }
 
             putText(img_to_show, ocl::useOpenCL() ? "Mode: OpenCL"  : "Mode: CPU", Point(5, 25), FONT_HERSHEY_SIMPLEX, 1., Scalar(255, 100, 0), 2);
-            putText(img_to_show, "FPS (HOG only): " + hogWorkFps(), Point(5, 65), FONT_HERSHEY_SIMPLEX, 1., Scalar(255, 100, 0), 2);
-            putText(img_to_show, "FPS (total): " + workFps(), Point(5, 105), FONT_HERSHEY_SIMPLEX, 1., Scalar(255, 100, 0), 2);
+            putText(img_to_show, "FPS (HOG only): " + hogWorkFps() + " "+std::to_string(hb_get_instant_rate(heart)) , Point(5, 65), FONT_HERSHEY_SIMPLEX, 1., Scalar(255, 100, 0), 2);
+            putText(img_to_show, "FPS (total): " + workFps()+ " "+std::to_string(hb_get_windowed_rate(heart)), Point(5, 105), FONT_HERSHEY_SIMPLEX, 1., Scalar(255, 100, 0), 2);
             imshow("opencv_hog", img_to_show);
             if (vdo_source!="" || camera_id!=-1) vc >> frame;
 
