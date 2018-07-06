@@ -1,6 +1,6 @@
 all: clean
 	-git pull
-	gcc monitor.cpp -o mcpp -std=c++11 -lhb-shared -lhrm-shared -lrt -lboost_thread -lboost_system
+	g++ monitor.cpp -o mcpp -std=c++11 -lhb-shared -lhrm-shared -lrt -lboost_thread -lboost_system
 	gcc monitor.c -o m -lhb-shared -lhrm-shared -lrt 
 
 
