@@ -29,7 +29,7 @@ struct client {
   HB_global_state_t* hb_state;
   mqd_t qd_client;
 } ;
-typedef boost::unordered_map<int, client> clients_map;
+
 
  
 class Monitor{
@@ -56,7 +56,7 @@ public:
     ~Monitor()
     {
         mq_close (_qd_server);
-        mq_unlink (_qd_server); 
+        mq_unlink ("/pacer-srv-mq"); 
     }
     void run()
     {
@@ -186,6 +186,7 @@ public:
 int main(){
 
     boost::mutex mutex;
+    typedef boost::unordered_map<int, client> clients_map;
     clients_map map;
     Gate gate(map, &mutex);
     Monitor monitor(map, &mutex);
