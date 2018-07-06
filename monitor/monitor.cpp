@@ -180,14 +180,13 @@ public:
 
                     if (shmdt(map[pid].init_hb_rec)==0 && shmctl(shmget(pid << 1, 100*sizeof(heartbeat_record_t), 0666), IPC_RMID, NULL)==0 )
                     {
-                        perror("hbrec shmdt");
-                        printf("shmdt hb_rec success\n");
+                        printf("shmdt/ctl hb_rec success\n");
                     }
                     if (shmdt(map[pid].hb_state)==0 && shmctl(shmget( (pid << 1) | 1, sizeof(HB_global_state_t), 0666), IPC_RMID, NULL)==0 )
                     {
                         perror("hbstate shmdt");
 
-                        printf("shmdt hb_state success\n");
+                        printf("shmdt/ctl hb_state success\n");
                     }
                     map.erase(pid);
                 }
