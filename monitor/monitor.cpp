@@ -168,6 +168,7 @@ public:
                     }
                     c.hb_state = (HB_global_state_t*) shmat(shmid_state, NULL, 0);
                     _map[pid]= c;
+                    printf("new id: %d\n",_map[pid].pid);
                 }
                 else
                 {   
