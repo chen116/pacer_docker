@@ -48,6 +48,7 @@ int main (int argc, char **argv)
 
 
 
+
     // get the oldest message with highest priority
     if (mq_receive (qd_server, in_buffer, MSG_BUFFER_SIZE, NULL) == -1) {
         perror ("Server: mq_receive");
@@ -58,18 +59,19 @@ int main (int argc, char **argv)
         perror ("Server: Not able to open client queue");
     }
 
+
+    // char msg[10];
+    // int pid;
+    // sscanf(in_buffer, "%d %s",&pid,msg);
+    // printf("init:get:  pid: %d msg: %s\n",pid, msg );
+    // int shmkey=pid;
+
+
     int i;char bs[1];
     sscanf(in_buffer, "%s%d", bs,&i);
     int shmkey = atoi(in_buffer);
     printf("shmkey %d\n",shmkey);
     double tempRetVal;
-    // int shmid;
-    // if ((shmid = shmget(shmkey, 1*sizeof(heartbeat_t), 0666)) < 0) 
-    // {
-    //     perror("shmget");
-    //     return 0;
-    // }
-    // heartbeat_t* hb = (heartbeat_t*) shmat(shmid, NULL, 0);
 
     int shmid_rec;
     if ((shmid_rec = shmget(shmkey << 1, 100*sizeof(heartbeat_record_t), 0666)) < 0) {
