@@ -29,6 +29,7 @@ struct client {
   HB_global_state_t* hb_state;
   mqd_t qd_client;
 } ;
+typedef boost::unordered_map<int, client> clients_map;
 
 
  
@@ -183,8 +184,8 @@ public:
     }
 };
  
-int main(){
-
+int main()
+{
     boost::mutex mutex;
     typedef boost::unordered_map<int, client> clients_map;
     clients_map map;
