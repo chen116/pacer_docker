@@ -57,7 +57,7 @@ sleep(1);
     heartbeat(heart, 1);
 sleep(1);
     heartbeat(heart, 1);
-while (cnt<3)
+while (cnt<1)
 {
    
         t_start = (double)getTickCount();   
