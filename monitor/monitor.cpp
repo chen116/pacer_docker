@@ -186,13 +186,13 @@ public:
 
     }
 };
- 
+
+std::unordered_map<int, client> map; 
 int main()
 {
 
     boost::mutex mutex;
     // typedef std::unordered_map<int, client> clients_map;
-    std::unordered_map<int, client> map;
     Gate gate(map, &mutex);
     Monitor monitor(map, &mutex);
     
