@@ -195,8 +195,6 @@ void App::run()
         {
             workBegin();
             heartbeat(heart, 1);
-            printf("hb rec:%s %f\n",in_buffer,hb_rec->instant_rate );
-            printf("hb_state: counter: %s %ld\n", in_buffer, hb_state->counter-1);
 
             // Change format of the image
             if (make_gray) cvtColor(frame, img_aux, COLOR_BGR2GRAY );
