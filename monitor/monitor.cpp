@@ -22,13 +22,7 @@
 
 
 
-struct client {
-  int pid;
-  heartbeat_record_t* hb_rec;
-  heartbeat_record_t* init_hb_rec;
-  HB_global_state_t* hb_state;
-  mqd_t qd_client;
-} ;
+
 // typedef boost::unordered_map<int, client> clients_map;
 
 
@@ -186,6 +180,13 @@ public:
  
 int main()
 {
+struct client {
+  int pid;
+  heartbeat_record_t* hb_rec;
+  heartbeat_record_t* init_hb_rec;
+  HB_global_state_t* hb_state;
+  mqd_t qd_client;
+} ;
     boost::mutex mutex;
     // typedef boost::unordered_map<int, client> clients_map;
     boost::unordered_map<int, client> map;
