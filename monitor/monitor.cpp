@@ -29,18 +29,18 @@ struct client {
   HB_global_state_t* hb_state;
   mqd_t qd_client;
 } ;
-typedef boost::unordered_map<int, client> clients_map;
+// typedef boost::unordered_map<int, client> clients_map;
 
 
  
 class Monitor{
 private:
-    clients_map _map;
+    boost::unordered_map<int, client> _map;
     boost::mutex * _mutex;
     mqd_t _qd_server;
 
 public:
-    Monitor (clients_map map, boost::mutex* mutex) : _map(map), _mutex(mutex)
+    Monitor (boost::unordered_map<int, client> map, boost::mutex* mutex) : _map(map), _mutex(mutex)
     {
         struct mq_attr attr;
         attr.mq_flags = 0;
@@ -77,7 +77,7 @@ public:
             if (pid>0)
             {
                 boost::mutex::scoped_lock lock(*_mutex);
-                clients_map::const_iterator cli_pt = _map.find (pid);
+                boost::unordered_map<int, client>::const_iterator cli_pt = _map.find (pid);
                 if(cli_pt!=_map.end())
                 {
                     cli_pt->hb_rec=     cli_pt->init_hb_rec +      (cli_pt->hb_state->buffer_index-1) ;
@@ -101,12 +101,12 @@ public:
 }; 
 class Gate{
 private:
-    clients_map _map;
+    boost::unordered_map<int, client> _map;
     boost::mutex * _mutex;
     mqd_t _qd_server;
 
 public:
-    Gate (clients_map map, boost::mutex* mutex) : _map(map), _mutex(mutex)
+    Gate (boost::unordered_map<int, client> map, boost::mutex* mutex) : _map(map), _mutex(mutex)
     {
         struct mq_attr attr;
         attr.mq_flags = 0;
@@ -187,8 +187,8 @@ public:
 int main()
 {
     boost::mutex mutex;
-    typedef boost::unordered_map<int, client> clients_map;
-    clients_map map;
+    // typedef boost::unordered_map<int, client> clients_map;
+    boost::unordered_map<int, client> map;
     Gate gate(map, &mutex);
     Monitor monitor(map, &mutex);
     
