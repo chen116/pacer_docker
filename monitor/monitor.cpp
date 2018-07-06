@@ -18,7 +18,7 @@
 
 #include <iostream>
 #include <boost/thread.hpp>
-
+#include <unordered_map>
 
 
 
@@ -145,7 +145,7 @@ public:
                 boost::mutex::scoped_lock lock(*_mutex);
                 if (_map.find(pid)==_map.end())
                 {   
-                    printf("new client with pid%\n",pid);
+                    printf("new client with pid %d\n",pid);
                     client c;
                     c.pid = pid;
                     char msg[16];
@@ -171,7 +171,7 @@ public:
                 }
                 else
                 {   
-                    printf("closing client with pid%\n",pid);
+                    printf("closing client with pid %d\n",pid);
                     mq_close(_map[pid].qd_client);
                     _map.erase(pid);
                 }
