@@ -23,7 +23,7 @@
 
 
 
-// typedef boost::unordered_map<int, client> clients_map;
+// typedef std::unordered_map<int, client> clients_map;
 struct client {
   int pid;
   heartbeat_record_t* hb_rec;
@@ -35,12 +35,12 @@ struct client {
  
 class Monitor{
 private:
-    boost::unordered_map<int, client> _map;
+    std::unordered_map<int, client> _map;
     boost::mutex * _mutex;
     mqd_t _qd_server;
 
 public:
-    Monitor (boost::unordered_map<int, client> map, boost::mutex* mutex) : _map(map), _mutex(mutex)
+    Monitor (std::unordered_map<int, client> map, boost::mutex* mutex) : _map(map), _mutex(mutex)
     {
         struct mq_attr attr;
         attr.mq_flags = 0;
@@ -101,12 +101,12 @@ public:
 }; 
 class Gate{
 private:
-    boost::unordered_map<int, client> _map;
+    std::unordered_map<int, client> _map;
     boost::mutex * _mutex;
     mqd_t _qd_server;
 
 public:
-    Gate (boost::unordered_map<int, client> map, boost::mutex* mutex) : _map(map), _mutex(mutex)
+    Gate (std::unordered_map<int, client> map, boost::mutex* mutex) : _map(map), _mutex(mutex)
     {
         struct mq_attr attr;
         attr.mq_flags = 0;
@@ -190,8 +190,8 @@ int main()
 {
 
     boost::mutex mutex;
-    // typedef boost::unordered_map<int, client> clients_map;
-    boost::unordered_map<int, client> map;
+    // typedef std::unordered_map<int, client> clients_map;
+    std::unordered_map<int, client> map;
     Gate gate(map, &mutex);
     Monitor monitor(map, &mutex);
     
