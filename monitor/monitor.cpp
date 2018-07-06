@@ -154,7 +154,7 @@ public:
                     int shmid_rec;
                     if ((shmid_rec = shmget(pid << 1, 100*sizeof(heartbeat_record_t), 0666)) < 0) {
                         perror("shmget_rec");
-                        return 0;
+
                     }
                     c.hb_rec = (heartbeat_record_t*) shmat(shmid_rec, NULL, 0);
                     c.init_hb_rec = c.hb_rec;
@@ -162,14 +162,14 @@ public:
                     int shmid_state;
                     if ((shmid_state = shmget( (pid << 1) | 1, sizeof(HB_global_state_t), 0666)) < 0) {
                         perror("shmget2");
-                        return 0;
+
                     }
                     c.hb_state = (HB_global_state_t*) shmat(shmid_state, NULL, 0);
                     _map[pid]= c;
                 }
                 else
                 {   
-                    mq_close(c.qd_client);
+                    mq_close(_map.find(pid)->qd_client);
                     _map.erase(pid);
                 }
             }
