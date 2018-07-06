@@ -183,7 +183,7 @@ public:
                         perror("hbrec shmdt");
                         printf("shmdt hb_rec success\n");
                     }
-                    if (shmdt(map[pid].hb_state)<0 )//&& shmctl((pid << 1) | 1, IPC_RMID, NULL)==0)
+                    if (shmdt(map[pid].hb_state)==0 )//&& shmctl((pid << 1) | 1, IPC_RMID, NULL)==0)
                     {
                         perror("hbstate shmdt");
 
