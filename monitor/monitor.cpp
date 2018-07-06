@@ -77,7 +77,7 @@ public:
             if (pid>0)
             {
                 boost::mutex::scoped_lock lock(*_mutex);
-                boost::unordered_map<int, client>::const_iterator cli_pt = _map.find (pid);
+                boost::unordered_map<int, client>::iterator cli_pt = _map.find (pid);
                 if(cli_pt!=_map.end())
                 {
                     cli_pt->hb_rec=     cli_pt->init_hb_rec +      (cli_pt->hb_state->buffer_index-1) ;
