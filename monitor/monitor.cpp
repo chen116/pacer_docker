@@ -77,15 +77,15 @@ public:
             if (pid>0)
             {
                 boost::mutex::scoped_lock lock(*_mutex);
-                boost::unordered_map<int, client>::iterator cli_pt = _map.find (pid);
-                if(cli_pt!=_map.end())
+                if(_map.find (pid)!=_map.end())
                 {
-                    cli_pt->hb_rec=     cli_pt->init_hb_rec +      (cli_pt->hb_state->buffer_index-1) ;
-                    printf("hb rec:%d %f\n",pid,cli_pt->hb_rec->instant_rate );
-                    printf("hb_state: counter: %d %ld\n", pid, cli_pt->hb_state->counter-1);
+                    client* cli = &_map[pid];
+                    cli->hb_rec=     cli->init_hb_rec +      (cli->hb_state->buffer_index-1) ;
+                    printf("hb rec:%d %f\n",pid,cli->hb_rec->instant_rate );
+                    printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
                     char out_buffer[16];
                     sprintf (out_buffer, "%d", token);
-                    if (mq_send (cli_pt->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
+                    if (mq_send (cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
                         perror ("Server: Not able to send message to client");
                         continue;
                     }
