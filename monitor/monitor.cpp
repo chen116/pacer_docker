@@ -123,7 +123,7 @@ public:
     ~Gate()
     {
         mq_close (_qd_server);
-        mq_unlink (_qd_server); 
+        mq_unlink ("/pacer-srv-mq-gate"); 
     }
     void run()
     {
