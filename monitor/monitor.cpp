@@ -145,6 +145,7 @@ public:
                 boost::mutex::scoped_lock lock(*_mutex);
                 if (_map.find(pid)==_map.end())
                 {   
+                    printf("new client with pid%\n",pid);
                     client c;
                     c.pid = pid;
                     char msg[16];
@@ -170,6 +171,7 @@ public:
                 }
                 else
                 {   
+                    printf("closing client with pid%\n",pid);
                     mq_close(_map[pid].qd_client);
                     _map.erase(pid);
                 }
