@@ -25,7 +25,6 @@
 
 // typedef std::unordered_map<int, client> clients_map;
 struct client {
-  int pid;
   heartbeat_record_t* hb_rec;
   heartbeat_record_t* init_hb_rec;
   HB_global_state_t* hb_state;
@@ -150,7 +149,6 @@ public:
                 {   
                     printf("new client with pid %d\n",pid);
                     client c;
-                    c.pid = pid;
                     char msg[16];
                     sprintf(msg,"/%d",pid);
                     if ((c.qd_client = mq_open (msg, O_WRONLY)) == 1) {
@@ -171,7 +169,7 @@ public:
                     }
                     c.hb_state = (HB_global_state_t*) shmat(shmid_state, NULL, 0);
                     map[pid]= c;
-                    printf("new id: %d\n",map[pid].pid);
+                    printf("new id: %d\n",pid);
                 }
                 else
                 {   
@@ -180,16 +178,18 @@ public:
 
                     if (shmdt(map[pid].init_hb_rec)==0 && shmctl(shmget(pid << 1, 100*sizeof(heartbeat_record_t), 0666), IPC_RMID, NULL)==0 )
                     {
-                        printf("shmdt/ctl hb_rec success\n");
+                        perror("shmdt/ctl hb_rec ");
+
                     }
                     if (shmdt(map[pid].hb_state)==0 && shmctl(shmget( (pid << 1) | 1, sizeof(HB_global_state_t), 0666), IPC_RMID, NULL)==0 )
                     {
-                        perror("hbstate shmdt");
-
-                        printf("shmdt/ctl hb_state success\n");
+                        perror("shmdt/ctl hb_state ");
                     }
                     map.erase(pid);
                 }
+                printf("map conatins:\n");
+                for ( auto it = map.begin(); it != map.end(); ++it )
+                    printf("        %d\n",it->first );
             }
 
 
