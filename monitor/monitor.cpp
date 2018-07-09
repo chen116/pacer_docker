@@ -93,7 +93,7 @@ public:
                 }
                 else
                 {
-                    printf("badddd\n");
+                    printf("pid not found in map\n");
                 }
             }
 
@@ -154,26 +154,41 @@ public:
                     if ((c.qd_client = mq_open (msg, O_WRONLY)) == 1) {
                         perror ("Server: Not able to open client queue");
                     }
-                    int shmid_rec;
-                    if ((shmid_rec = shmget(pid << 1, 100*sizeof(heartbeat_record_t), 0666)) < 0) {
-                        perror("shmget_rec");
-
+                    
+                    int shmid_rec=-1;
+                    int shmid_state=-1;                    
+                    while (shmid_rec< 0)
+                    {
+                        shmid_rec = shmget(pid << 1, 100*sizeof(heartbeat_record_t), 0666);
                     }
+                    while (shmid_state<0)
+                    {
+                        shmid_state = shmget( (pid << 1) | 1, sizeof(HB_global_state_t), 0666);
+                    }
+
+
+
+                    // int shmid_rec;
+                    // if ((shmid_rec = shmget(pid << 1, 100*sizeof(heartbeat_record_t), 0666)) < 0) {
+                    //     perror("shmget_rec");
+
+                    // }
+                    // int shmid_state;
+                    // if ((shmid_state = shmget( (pid << 1) | 1, sizeof(HB_global_state_t), 0666)) < 0) {
+                    //     perror("shmget2");
+
+                    // }
+
+
                     c.hb_rec = (heartbeat_record_t*) shmat(shmid_rec, NULL, 0);
                     c.init_hb_rec = c.hb_rec;
-
-                    int shmid_state;
-                    if ((shmid_state = shmget( (pid << 1) | 1, sizeof(HB_global_state_t), 0666)) < 0) {
-                        perror("shmget2");
-
-                    }
                     c.hb_state = (HB_global_state_t*) shmat(shmid_state, NULL, 0);
                     map[pid]= c;
-                    printf("new id: %d\n",pid);
+                    printf("new id inited!: %d\n",pid);
                 }
                 else
                 {   
-                    printf("closing client with pid %d\n",pid);
+                    printf("closing client shm with pid %d\n",pid);
                     mq_close(map[pid].qd_client);
 
                     if (shmdt(map[pid].init_hb_rec)==0 && shmctl(shmget(pid << 1, 100*sizeof(heartbeat_record_t), 0666), IPC_RMID, NULL)==0 )
