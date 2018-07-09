@@ -25,6 +25,7 @@
 
 // typedef std::unordered_map<int, client> clients_map;
 struct client {
+    int cnt;
   heartbeat_record_t* hb_rec;
   heartbeat_record_t* init_hb_rec;
   HB_global_state_t* hb_state;
@@ -62,16 +63,16 @@ public:
     }
     void run()
     {
-        int token=0;
+
         while(1)
         {
-            token++;
+            
             char in_buffer [MSG_BUFFER_SIZE];
             if (mq_receive (_qd_server, in_buffer, MSG_BUFFER_SIZE, NULL) == -1) {
                 perror ("Server: mq_receive");
                 exit (1);
             }
-            printf ("Server: message received monitor:%s %d\n",in_buffer,token);
+            printf ("Server: message received monitor:%s\n",in_buffer);
             int pid;
             sscanf(in_buffer, "%d",&pid);
 
@@ -80,12 +81,14 @@ public:
                 boost::mutex::scoped_lock lock(*_mutex);
                 if(map.find (pid)!=map.end())
                 {
+
                     client* cli = &map[pid];
                     cli->hb_rec=     cli->init_hb_rec +      (cli->hb_state->buffer_index-1) ;
-                    printf("hb rec:%d %f\n",pid,cli->hb_rec->instant_rate );
+                    printf("hb rec instant rate:%d %f\n",pid,cli->hb_rec->instant_rate );
                     printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
                     char out_buffer[16];
-                    sprintf (out_buffer, "%d", token);
+                    sprintf (out_buffer, "%d", cli->cnt);
+                    cli->cnt++;
                     if (mq_send (cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
                         perror ("Server: Not able to send message to client");
                         continue;
@@ -137,7 +140,7 @@ public:
                 perror ("Server: mq_receive");
                 exit (1);
             }
-            printf ("Server: message received init:%s\n",in_buffer);
+            printf ("Server gate thread: message received:%s\n",in_buffer);
 
             int pid;
             sscanf(in_buffer, "%d",&pid);
@@ -183,7 +186,9 @@ public:
                     c.hb_rec = (heartbeat_record_t*) shmat(shmid_rec, NULL, 0);
                     c.init_hb_rec = c.hb_rec;
                     c.hb_state = (HB_global_state_t*) shmat(shmid_state, NULL, 0);
+                    c.cnt=0;
                     map[pid]= c;
+
                     printf("new id inited!: %d\n",pid);
                 }
                 else

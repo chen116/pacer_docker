@@ -10,6 +10,95 @@
 
  Go read Dockerfile to see how to run
 
+===========================
+
+parboil benchmark:
+
+download from website:
+http://impact.crhc.illinois.edu/parboil/parboil.aspx
+
+
+
+u will get three dir:
+
+benchamrks
+datasets
+parboil
+
+put benchmarks and datasets into parboil:
+
+cd into parboil
+
+chmod u+x ./parboil
+chmod u+x benchmarks/*/tools/compare-output
+
+before compile:
+
+create this new file parboil/common/Makefile.conf with content:
+
+OPENCL_PATH=/usr/lib/x86_64-linux-gnu
+OPENCL_LIB_PATH=/usr/lib/x86_64-linux-gnu
+
+
+go to ./parboil/common/platform/
+
+edit in this line in opencl*.mk:
+
+PLATFORM_LDFLAGS = -lrt -lm -lpthread -lhb-shared -lhrm-shared
+
+(you can get most info ("version" and "dataset" options) in ./parboil describe)
+
+now you can do compile like this:
+
+./parboil compile bfs opencl_base
+
+to run:
+
+./parboil run bfs opencl_base 1M
+
+
+(rmb to put in heartbeat stuff before compile)
+
+===========================
+
+
+cuda opencl:
+
+to compile:
+
+go to OpenCL/common/common_opencl.mk
+
+put in 
+
+LIB += -lrt -lhb-shared -lhrm-shared
+
+after the # Libs section, around line 200
+
+now go to OpenCL and type make, 
+
+executables are in OpenCL/bin
+
+
+(rmb to put in heartbeat stuff before compile)
+
+
+===========================
+
+intel opencl:
+
+downlonad from https://software.intel.com/en-us/intel-opencl-support/code-samples
+
+(https://software.intel.com/sites/default/files/managed/41/64/intel_ocl_samples.zip)
+
+go into folders, add in libs in Makefile  # -lrt -lhb-shared -lhrm-shared
+
+to run, 
+
+./app -p CUDA or ./app -p NVIDIA
+
+
+===========================
+
 
 one line install opencl
 
