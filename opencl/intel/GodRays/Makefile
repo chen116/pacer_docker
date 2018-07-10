@@ -13,7 +13,8 @@ endif
 all: godrays
 
 godrays: $(HEADERS) $(SOURCES) Makefile
-	g++ $(SOURCES) -I../common -lOpenCL -oGodRays -std=gnu++0x $(OPT)
+	g++ $(SOURCES) -I../common -lOpenCL -oGodRays -std=gnu++0x $(OPT) -lrt -lhb-shared -lhrm-shared
+
 
 clean:
 	rm -f GodRays
