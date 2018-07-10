@@ -12,6 +12,22 @@
 
 ===========================
 
+#include <heartbeats/heartbeat.h>
+heartbeat_t* heart;
+static const int64_t vic_win_size = 10;
+static const int64_t vic_buf_depth = 100;
+static const char* vic_log_file ="vic.log";
+static const int64_t vic_min_target = 100;
+static const int64_t vic_max_target = 100;
+heart = heartbeat_init(vic_win_size, vic_buf_depth, vic_log_file, vic_min_target, vic_max_target);
+heartbeat(heart, 1);
+heartbeat_finish(heart);
+
+
+
+
+===========================
+
 parboil benchmark:
 
 download from website:
@@ -62,7 +78,7 @@ to run:
 ===========================
 
 
-cuda opencl:
+cuda opencl benchmark:
 
 to compile:
 
@@ -84,7 +100,7 @@ executables are in OpenCL/bin
 
 ===========================
 
-intel opencl:
+intel opencl benchmark:
 
 downlonad from https://software.intel.com/en-us/intel-opencl-support/code-samples
 
