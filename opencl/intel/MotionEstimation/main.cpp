@@ -32,7 +32,7 @@ static const int64_t vic_max_target = 100;
 #include <sstream>
 #include <fstream>
 #include <algorithm>
-#include <CL/cl.h>
+#include <CL/cl.hpp>
 #include <CL/cl_ext.h>
 
 #include "yuv_utils.h"
