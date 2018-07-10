@@ -13,7 +13,8 @@ endif
 all: montecarlo
 
 montecarlo: $(HEADERS) $(SOURCES) Makefile
-	g++ $(SOURCES) -I../common -lOpenCL -oMonteCarlo -std=gnu++0x $(OPT)
+	g++ $(SOURCES) -I../common -lOpenCL -oMonteCarlo -std=gnu++0x $(OPT) -lrt -lhb-shared -lhrm-shared
+
 
 clean:
 	rm -f MonteCarlo
