@@ -116,7 +116,7 @@ public:
                         if(finish==0)
                         {
                             std::multimap<double,client*>::iterator it = clients_task_queue.begin();
-                            sclient* popped_cli  = (*it).second;
+                            client* popped_cli  = (*it).second;
                             char out_buffer[16];
                             sprintf (out_buffer, "%d", popped_cli->cnt);
                             popped_cli->cnt++;
