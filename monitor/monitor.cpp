@@ -103,7 +103,7 @@ public:
 
 
                     if (busy==0)
-                        {
+                    {
                         char out_buffer[16];
                         sprintf (out_buffer, "%d", cli->cnt);
                         cli->cnt++;
@@ -134,6 +134,7 @@ public:
                                 }
                                 busy=popped_cli->pid;
                                 clients_task_queue.erase(it);
+                                printf("next task: %d\n",busy );
                             }
                         }
                         else
