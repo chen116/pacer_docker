@@ -135,6 +135,9 @@ public:
                                 busy=popped_cli->pid;
                                 clients_task_queue.erase(it);
                                 printf("next task: %d\n",busy );
+                                printf("meow map conatins:\n");
+                                for ( auto itt = clients_map.begin(); itt != clients_map.end(); ++itt )
+                                    printf("        %d\n",itt->first );
                             }
                         }
                         else
