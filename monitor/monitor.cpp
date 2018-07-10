@@ -72,9 +72,15 @@ public:
                 perror ("Server: mq_receive");
                 exit (1);
             }
-            printf ("Server: message received monitor:%s\n",in_buffer);
+            // printf ("Server: message received monitor:%s\n",in_buffer);
             int pid;
-            sscanf(in_buffer, "%d",&pid);
+            int finish;
+
+
+            sscanf(in_buffer, "%d %d",&pid,&finish);
+
+            printf ("Server: message received monitor: pid:%d, finish:%d\n",pid,finish);
+
 
             if (pid>0)
             {
@@ -238,11 +244,14 @@ int main()
     // typedef std::unordered_map<int, client> clients_map;
     Gate gate( &mutex);
     Monitor monitor( &mutex);
-    
+
+
     boost::thread th1(&Gate::run, &gate); 
     boost::thread th2(&Monitor::run, &monitor); 
+
     th1.join();
     th2.join();    
+
     return 0;
 }
 
