@@ -45,7 +45,7 @@ private:
     boost::mutex * _mutex;
     mqd_t _qd_server;
     std::multimap<double,client*> clients_task_queue;
-
+    int busy=0;
 
 
 public:
@@ -102,8 +102,8 @@ public:
 
 
 
-                    if (clients_task_queue.size()==0)
-                    {
+                    if (busy==0)
+                        {
                         char out_buffer[16];
                         sprintf (out_buffer, "%d", cli->cnt);
                         cli->cnt++;
@@ -111,21 +111,30 @@ public:
                             perror ("Server: Not able to send message to client");
                             continue;
                         }
+                        busy=pid;
                     }
                     else
                     {
                         if(finish==1)
                         {
-                            std::multimap<double,client*>::iterator it = clients_task_queue.begin();
-                            client* popped_cli  = (*it).second;
-                            char out_buffer[16];
-                            sprintf (out_buffer, "%d", popped_cli->cnt);
-                            popped_cli->cnt++;
-                            if (mq_send (popped_cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
-                                perror ("Server: Not able to send message to client");
-                                continue;
+                            if (clients_task_queue.size()==0)
+                            {
+                                busy=0;
                             }
-                            clients_task_queue.erase(it);
+                            else
+                            {
+                                std::multimap<double,client*>::iterator it = clients_task_queue.begin();
+                                client* popped_cli  = (*it).second;
+                                char out_buffer[16];
+                                sprintf (out_buffer, "%d", popped_cli->cnt);
+                                popped_cli->cnt++;
+                                if (mq_send (popped_cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
+                                    perror ("Server: Not able to send message to client");
+                                    continue;
+                                }
+                                busy=popped_cli->pid;
+                                clients_task_queue.erase(it);
+                            }
                         }
                         else
                         {
