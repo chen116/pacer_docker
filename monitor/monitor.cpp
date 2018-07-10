@@ -114,7 +114,7 @@ public:
                     }
                     else
                     {
-                        if(finish==0)
+                        if(finish==1)
                         {
                             std::multimap<double,client*>::iterator it = clients_task_queue.begin();
                             client* popped_cli  = (*it).second;
