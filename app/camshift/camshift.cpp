@@ -1,3 +1,12 @@
+#include <heartbeats/heartbeat.h>
+heartbeat_t* heart;
+static const int64_t vic_win_size = 10;
+static const int64_t vic_buf_depth = 100;
+static const char* vic_log_file ="vic.log";
+static const int64_t vic_min_target = 100;
+static const int64_t vic_max_target = 100;
+
+
 #include "opencv2/core/utility.hpp"
 #include "opencv2/core/ocl.hpp"
 #include "opencv2/video/tracking.hpp"
@@ -76,6 +85,8 @@ static void help()
 
 int main(int argc, const char ** argv)
 {
+    heart = heartbeat_init(vic_win_size, vic_buf_depth, vic_log_file, vic_min_target, vic_max_target);
+
     help();
 
     cv::VideoCapture cap;
@@ -114,6 +125,8 @@ int main(int argc, const char ** argv)
 
     for ( ; ; )
     {
+        heartbeat(heart, 1);
+
         auto start = high_resolution_clock::now();
         t_start = (double)getTickCount();
 
@@ -245,5 +258,6 @@ int main(int argc, const char ** argv)
 
     }
 
+heartbeat_finish(heart);
     return EXIT_SUCCESS;
 }
