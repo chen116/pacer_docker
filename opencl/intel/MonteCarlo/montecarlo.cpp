@@ -289,7 +289,7 @@ void mc (
     {
         // Here we start measurings host time for kernel execution
         double start = time_stamp();
-
+heartbeat(heart, 1);
         err = clEnqueueNDRangeKernel(
             oclobjects.queue,
             executable.kernel,
