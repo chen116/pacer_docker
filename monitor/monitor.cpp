@@ -133,7 +133,7 @@ public:
                             printf("GPU busy:\n");
                             for (std::multimap<double,client*>::iterator it = clients_task_queue.begin();it != clients_task_queue.end();++it)
                             {
-                                printf("%hb: , pid:%d\n", (*it).first ,(*it).second->pid);
+                                printf("hb: %f , pid:%d\n", (*it).first ,(*it).second->pid);
                             }
 
                         }
