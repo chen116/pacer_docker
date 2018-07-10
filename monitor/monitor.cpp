@@ -26,6 +26,7 @@
 // typedef std::unordered_map<int, client> clients_map;
 struct client {
   int cnt;
+  int pid;
   heartbeat_record_t* hb_rec;
   heartbeat_record_t* init_hb_rec;
   HB_global_state_t* hb_state;
@@ -129,6 +130,12 @@ public:
                         else
                         {
                             clients_task_queue.insert ( std::pair<double,client*>(cli->hb_rec->instant_rate,cli) );
+                            printf("GPU busy:\n");
+                            for (std::multimap<double,client*>::iterator it = clients_task_queue.begin();it != clients_task_queue.end();++it)
+                            {
+                                printf("%hb: , pid:%d\n", (*it).first ,(*it).second->pid);
+                            }
+
                         }
                     }
 
@@ -248,6 +255,7 @@ public:
                     c.init_hb_rec = c.hb_rec;
                     c.hb_state = (HB_global_state_t*) shmat(shmid_state, NULL, 0);
                     c.cnt=0;
+                    c.pid=pid;
                     clients_map[pid]= c;
 
                     printf("new id inited!: %d\n",pid);
