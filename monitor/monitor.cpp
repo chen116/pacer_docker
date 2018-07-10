@@ -19,7 +19,7 @@
 #include <iostream>
 #include <boost/thread.hpp>
 #include <unordered_map>
-
+#include <map>
 
 
 
@@ -31,7 +31,11 @@ struct client {
   HB_global_state_t* hb_state;
   mqd_t qd_client;
 } ;
-std::unordered_map<int, client> map; 
+std::unordered_map<int, client> clients_map; 
+
+
+
+
 
  
 class Monitor{
@@ -39,6 +43,9 @@ private:
     // std::unordered_map<int, client> _map;
     boost::mutex * _mutex;
     mqd_t _qd_server;
+    std::multimap<double,client*> clients_task_queue;
+
+
 
 public:
     // Monitor (std::unordered_map<int, client> map, boost::mutex* mutex) : _map(map), _mutex(mutex)
@@ -80,15 +87,13 @@ public:
             sscanf(in_buffer, "%d %d",&pid,&finish);
 
             printf ("Server: message received monitor: pid:%d, finish:%d\n",pid,finish);
-
-
             if (pid>0)
             {
                 boost::mutex::scoped_lock lock(*_mutex);
-                if(map.find (pid)!=map.end())
+                if(clients_map.find (pid)!=clients_map.end())
                 {
 
-                    client* cli = &map[pid];
+                    client* cli = &clients_map[pid];
                     cli->hb_rec=     cli->init_hb_rec +      (cli->hb_state->buffer_index-1) ;
                     printf("hb rec instant rate:%d %f\n",pid,cli->hb_rec->instant_rate );
                     printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
@@ -96,14 +101,54 @@ public:
 
 
 
-
-                    char out_buffer[16];
-                    sprintf (out_buffer, "%d", cli->cnt);
-                    cli->cnt++;
-                    if (mq_send (cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
-                        perror ("Server: Not able to send message to client");
-                        continue;
+                    if (clients_task_queue.size()==0)
+                    {
+                        char out_buffer[16];
+                        sprintf (out_buffer, "%d", cli->cnt);
+                        cli->cnt++;
+                        if (mq_send (cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
+                            perror ("Server: Not able to send message to client");
+                            continue;
+                        }
                     }
+                    else
+                    {
+                        if(finish==0)
+                        {
+                            std::multimap<double,client*>::iterator it = clients_task_queue.begin();
+                            sclient* popped_cli  = (*it).second;
+                            char out_buffer[16];
+                            sprintf (out_buffer, "%d", popped_cli->cnt);
+                            popped_cli->cnt++;
+                            if (mq_send (popped_cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
+                                perror ("Server: Not able to send message to client");
+                                continue;
+                            }
+                            clients_task_queue.erase(it);
+                        }
+                        else
+                        {
+                            clients_task_queue.insert ( std::pair<double,client*>(cli->hb_rec->instant_rate,cli) );
+                        }
+                    }
+
+
+
+
+
+
+
+                    // client* cli = &clients_map[pid];
+                    // cli->hb_rec=     cli->init_hb_rec +      (cli->hb_state->buffer_index-1) ;
+                    // printf("hb rec instant rate:%d %f\n",pid,cli->hb_rec->instant_rate );
+                    // printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
+                    // char out_buffer[16];
+                    // sprintf (out_buffer, "%d", cli->cnt);
+                    // cli->cnt++;
+                    // if (mq_send (cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
+                    //     perror ("Server: Not able to send message to client");
+                    //     continue;
+                    // }
 
 
 
@@ -164,7 +209,7 @@ public:
             if (pid>0)
             {
                 boost::mutex::scoped_lock lock(*_mutex);
-                if (map.find(pid)==map.end())
+                if (clients_map.find(pid)==clients_map.end())
                 {   
                     printf("new client with pid %d\n",pid);
                     client c;
@@ -203,28 +248,28 @@ public:
                     c.init_hb_rec = c.hb_rec;
                     c.hb_state = (HB_global_state_t*) shmat(shmid_state, NULL, 0);
                     c.cnt=0;
-                    map[pid]= c;
+                    clients_map[pid]= c;
 
                     printf("new id inited!: %d\n",pid);
                 }
                 else
                 {   
                     printf("closing client shm with pid %d\n",pid);
-                    mq_close(map[pid].qd_client);
+                    mq_close(clients_map[pid].qd_client);
 
-                    if (shmdt(map[pid].init_hb_rec)==0 && shmctl(shmget(pid << 1, 100*sizeof(heartbeat_record_t), 0666), IPC_RMID, NULL)==0 )
+                    if (shmdt(clients_map[pid].init_hb_rec)==0 && shmctl(shmget(pid << 1, 100*sizeof(heartbeat_record_t), 0666), IPC_RMID, NULL)==0 )
                     {
                         perror("shmdt/ctl hb_rec ");
 
                     }
-                    if (shmdt(map[pid].hb_state)==0 && shmctl(shmget( (pid << 1) | 1, sizeof(HB_global_state_t), 0666), IPC_RMID, NULL)==0 )
+                    if (shmdt(clients_map[pid].hb_state)==0 && shmctl(shmget( (pid << 1) | 1, sizeof(HB_global_state_t), 0666), IPC_RMID, NULL)==0 )
                     {
                         perror("shmdt/ctl hb_state ");
                     }
-                    map.erase(pid);
+                    clients_map.erase(pid);
                 }
                 printf("map conatins:\n");
-                for ( auto it = map.begin(); it != map.end(); ++it )
+                for ( auto it = clients_map.begin(); it != clients_map.end(); ++it )
                     printf("        %d\n",it->first );
             }
 
