@@ -18,6 +18,15 @@
 // Intel Corporation is the author of the Materials, and requests that all
 // problem reports or change requests be submitted to it directly
 
+#include <heartbeats/heartbeat.h>
+heartbeat_t* heart;
+static const int64_t vic_win_size = 10;
+static const int64_t vic_buf_depth = 100;
+static const char* vic_log_file ="vic.log";
+static const int64_t vic_min_target = 100;
+static const int64_t vic_max_target = 100;
+
+
 
 #include <iostream>
 #include <ctime>
@@ -372,6 +381,9 @@ void mc (
 
 int main (int argc, const char** argv)
 {
+    heart = heartbeat_init(vic_win_size, vic_buf_depth, vic_log_file, vic_min_target, vic_max_target);
+heartbeat(heart, 1);
+
     try
     {
         CmdParserMC cmdparser(argc, argv);
@@ -446,4 +458,7 @@ int main (int argc, const char** argv)
         cerr << "[ ERROR ] Unknown/internal error happened.\n";
         return EXIT_FAILURE;
     }
+
+
+heartbeat_finish(heart);
 }
