@@ -120,6 +120,8 @@ public:
                             if (clients_task_queue.size()==0)
                             {
                                 busy=0;
+                                char out_buffer[16];
+                                sprintf (out_buffer, "%d", cli->cnt);
                                 if (mq_send (cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
                                     perror ("Server: Not able to send message to client");
                                     continue;
