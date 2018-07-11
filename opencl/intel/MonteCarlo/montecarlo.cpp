@@ -382,7 +382,7 @@ heartbeat(heart, 1);
 int main (int argc, const char** argv)
 {
     heart = heartbeat_init(vic_win_size, vic_buf_depth, vic_log_file, vic_min_target, vic_max_target);
-heartbeat(heart, 1);
+
 
     try
     {
