@@ -163,17 +163,17 @@ public:
 
 
 
-                    // client* cli = &clients_map[pid];
-                    // cli->hb_rec=     cli->init_hb_rec +      (cli->hb_state->buffer_index-1) ;
-                    // printf("hb rec instant rate:%d %f\n",pid,cli->hb_rec->instant_rate );
-                    // printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
-                    // char out_buffer[16];
-                    // sprintf (out_buffer, "%d", cli->cnt);
-                    // cli->cnt++;
-                    // if (mq_send (cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
-                    //     perror ("Server: Not able to send message to client");
-                    //     continue;
-                    // }
+                    client* cli = &clients_map[pid];
+                    cli->hb_rec=     cli->init_hb_rec +      (cli->hb_state->buffer_index-1) ;
+                    printf("hb rec instant rate:%d %f\n",pid,cli->hb_rec->instant_rate );
+                    printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
+                    char out_buffer[16];
+                    sprintf (out_buffer, "%d", cli->cnt);
+                    cli->cnt++;
+                    if (mq_send (cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
+                        perror ("Server: Not able to send message to client");
+                        continue;
+                    }
 
 
 
