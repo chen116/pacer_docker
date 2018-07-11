@@ -94,87 +94,90 @@ public:
                 if(clients_map.find (pid)!=clients_map.end())
                 {
 
-                    // client* cli = &clients_map[pid];
-                    // cli->hb_rec=     cli->init_hb_rec +      (cli->hb_state->buffer_index-1) ;
-                    // printf("hb rec instant rate:%d %f\n",pid,cli->hb_rec->instant_rate );
-                    // printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
-
-
-
-
-                    // if (busy==0)
-                    // {
-                    //     char out_buffer[16];
-                    //     sprintf (out_buffer, "%d", cli->cnt);
-                    //     cli->cnt++;
-                    //     if (mq_send (cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
-                    //         perror ("Server: Not able to send message to client");
-                    //         continue;
-                    //     }
-                    //     busy=pid;
-                    // }
-                    // else
-                    // {
-                    //     if(finish==1)
-                    //     {
-                    //         if (clients_task_queue.size()==0)
-                    //         {
-                    //             busy=0;
-                    //             char out_buffer[16];
-                    //             sprintf (out_buffer, "%d", cli->cnt);
-                    //             if (mq_send (cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
-                    //                 perror ("Server: Not able to send message to client");
-                    //                 continue;
-                    //             }
-                    //         }
-                    //         else
-                    //         {
-                    //             std::multimap<double,client*>::iterator it = clients_task_queue.begin();
-                    //             client* popped_cli  = (*it).second;
-                    //             char out_buffer[16];
-                    //             sprintf (out_buffer, "%d", popped_cli->cnt);
-                    //             popped_cli->cnt++;
-                    //             if (mq_send (popped_cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
-                    //                 perror ("Server: Not able to send message to client");
-                    //                 continue;
-                    //             }
-                    //             busy=popped_cli->pid;
-                    //             clients_task_queue.erase(it);
-                    //             printf("next task: %d\n",busy );
-                    //             printf("meow map conatins:\n");
-                    //             for ( auto itt = clients_map.begin(); itt != clients_map.end(); ++itt )
-                    //                 printf("        %d\n",itt->first );
-                    //         }
-                    //     }
-                    //     else
-                    //     {
-                    //         clients_task_queue.insert ( std::pair<double,client*>(cli->hb_rec->instant_rate,cli) );
-                    //         printf("GPU busy:\n");
-                    //         for (std::multimap<double,client*>::iterator it = clients_task_queue.begin();it != clients_task_queue.end();++it)
-                    //         {
-                    //             printf("hb: %f , pid:%d\n", (*it).first ,(*it).second->pid);
-                    //         }
-
-                    //     }
-                    // }
-
-
-
-
-
-
-
                     client* cli = &clients_map[pid];
                     cli->hb_rec=     cli->init_hb_rec +      (cli->hb_state->buffer_index-1) ;
                     printf("hb rec instant rate:%d %f\n",pid,cli->hb_rec->instant_rate );
                     printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
-                    char out_buffer[16];
-                    sprintf (out_buffer, "%d", cli->cnt);
-                    cli->cnt++;
-                    if (mq_send (cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
-                        perror ("Server: Not able to send message to client");
-                        continue;
+
+
+
+
+                    if (busy==0)
+                    {
+                        if (finish==0)
+                        {
+                            char out_buffer[16];
+                            sprintf (out_buffer, "%d", cli->cnt);
+                            cli->cnt++;
+                            if (mq_send (cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
+                                perror ("Server: Not able to send message to client");
+                                continue;
+                            }
+                            busy=pid;
+                        }
                     }
+                    else
+                    {
+                        if(finish==1)
+                        {
+                            if (clients_task_queue.size()==0)
+                            {
+                                busy=0;
+                                // char out_buffer[16];
+                                // sprintf (out_buffer, "%d", cli->cnt);
+                                // if (mq_send (cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
+                                //     perror ("Server: Not able to send message to client");
+                                //     continue;
+                                // }
+                            }
+                            else
+                            {
+                                std::multimap<double,client*>::iterator it = clients_task_queue.begin();
+                                client* popped_cli  = (*it).second;
+                                char out_buffer[16];
+                                sprintf (out_buffer, "%d", popped_cli->cnt);
+                                popped_cli->cnt++;
+                                if (mq_send (popped_cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
+                                    perror ("Server: Not able to send message to client");
+                                    continue;
+                                }
+                                busy=popped_cli->pid;
+                                clients_task_queue.erase(it);
+                                printf("next task: %d\n",busy );
+                                printf("meow map conatins:\n");
+                                for ( auto itt = clients_map.begin(); itt != clients_map.end(); ++itt )
+                                    printf("        %d\n",itt->first );
+                            }
+                        }
+                        else
+                        {
+                            clients_task_queue.insert (std::pair<double,client*>(cli->hb_rec->instant_rate,cli) );
+                            printf("GPU busy:\n");
+                            for (std::multimap<double,client*>::iterator it = clients_task_queue.begin();it != clients_task_queue.end();++it)
+                            {
+                                printf("hb: %f , pid:%d\n", (*it).first ,(*it).second->pid);
+                            }
+
+                        }
+                    }
+
+
+
+
+
+
+
+                    // client* cli = &clients_map[pid];
+                    // cli->hb_rec=     cli->init_hb_rec +      (cli->hb_state->buffer_index-1) ;
+                    // printf("hb rec instant rate:%d %f\n",pid,cli->hb_rec->instant_rate );
+                    // printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
+                    // char out_buffer[16];
+                    // sprintf (out_buffer, "%d", cli->cnt);
+                    // cli->cnt++;
+                    // if (mq_send (cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
+                    //     perror ("Server: Not able to send message to client");
+                    //     continue;
+                    // }
 
 
 
