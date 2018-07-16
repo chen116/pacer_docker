@@ -83,8 +83,6 @@ public:
             // printf ("Server: message received monitor:%s\n",in_buffer);
             int pid;
             int finish;
-
-
             sscanf(in_buffer, "%d %d",&pid,&finish);
 
             printf ("Server: message received monitor: pid:%d, finish:%d\n",pid,finish);
@@ -99,9 +97,6 @@ public:
                     printf("hb rec instant rate:%d %f\n",pid,cli->hb_rec->instant_rate );
                     printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
 
-
-
-
                     if (busy==0)
                     {
                         if (finish==0)
@@ -113,7 +108,7 @@ public:
                                 perror ("Server: Not able to send message to client");
                                 continue;
                             }
-                            busy=pid;
+                            busy=0;//pid;
                         }
                     }
                     else
