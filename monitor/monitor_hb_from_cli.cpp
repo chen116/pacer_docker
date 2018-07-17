@@ -31,9 +31,6 @@ struct client {
   heartbeat_record_t* init_hb_rec;
   HB_global_state_t* hb_state;
   mqd_t qd_client;
-heartbeat_t* heart;
-
-
 } ;
 std::unordered_map<int, client> clients_map; 
 
@@ -96,8 +93,6 @@ public:
                 {
 
                     client* cli = &clients_map[pid];
-                    heartbeat(cli->heart,1);
-
                     cli->hb_rec=     cli->init_hb_rec +      (cli->hb_state->buffer_index-1) ;
                     printf("hb rec instant rate:%d %f\n",pid,cli->hb_rec->instant_rate );
                     printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
@@ -239,7 +234,7 @@ public:
             if (pid>0)
             {
                 boost::mutex::scoped_lock lock(*_mutex);
-                if (clients_map.find(pid)==clients_map.end()) // first time, create client
+                if (clients_map.find(pid)==clients_map.end())
                 {   
                     printf("new client with pid %d\n",pid);
                     client c;
@@ -248,11 +243,7 @@ public:
                     if ((c.qd_client = mq_open (msg, O_WRONLY)) == 1) {
                         perror ("Server: Not able to open client queue");
                     }
-
-                    char hb_log_file[16];
-                    sprintf(hb_log_file,"log%d",pid);
-                    c.heart = heartbeat_init(10, 100, hb_log_file, 100, 100 , pid);
-                    heartbeat(c.heart,1);
+                    
                     int shmid_rec=-1;
                     int shmid_state=-1;                    
                     while (shmid_rec< 0)
@@ -287,12 +278,10 @@ public:
 
                     printf("new id inited!: %d\n",pid);
                 }
-                else // second time, closing client
+                else
                 {   
                     printf("closing client shm with pid %d\n",pid);
                     mq_close(clients_map[pid].qd_client);
-
-                    heartbeat_finish(clients_map[pid].heart);
 
                     if (shmdt(clients_map[pid].init_hb_rec)==0 && shmctl(shmget(pid << 1, 100*sizeof(heartbeat_record_t), 0666), IPC_RMID, NULL)==0 )
                     {
