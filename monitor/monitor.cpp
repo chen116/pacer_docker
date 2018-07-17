@@ -251,7 +251,7 @@ public:
 
                     char hb_log_file[16];
                     sprintf(hb_log_file,"log%d",pid);
-                    c.heart = heartbeat_init(10, 100, hb_log_file, 100, 100 , pid);
+                    c.heart = heartbeat_init(10, 100, hb_log_file, 100, 100 );
                     heartbeat(c.heart,1);
                     int shmid_rec=-1;
                     int shmid_state=-1;                    
