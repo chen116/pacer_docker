@@ -82,10 +82,10 @@ public:
             }
             // printf ("Server: message received monitor:%s\n",in_buffer);
             int pid;
-            int finish;
-            sscanf(in_buffer, "%d %d",&pid,&finish);
+            int finished;
+            sscanf(in_buffer, "%d %d",&pid,&finished);
 
-            printf ("Server: message received monitor: pid:%d, finish:%d\n",pid,finish);
+            printf ("Server: message received monitor: pid:%d, finished:%d\n",pid,finished);
             if (pid>0)
             {
                 boost::mutex::scoped_lock lock(*_mutex);
@@ -96,10 +96,11 @@ public:
                     cli->hb_rec=     cli->init_hb_rec +      (cli->hb_state->buffer_index-1) ;
                     printf("hb rec instant rate:%d %f\n",pid,cli->hb_rec->instant_rate );
                     printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
+                    printf("tag: counter: %d %ld\n", pid, cli->hb_state->tag);
 
-                    if (busy==0)
+                    if (!busy)
                     {
-                        if (finish==0)
+                        if (!finished)
                         {
                             char out_buffer[16];
                             sprintf (out_buffer, "%d", cli->cnt);
@@ -113,7 +114,7 @@ public:
                     }
                     else
                     {
-                        if(finish==1)
+                        if(finished)
                         {
                             if (clients_task_queue.size()==0)
                             {
