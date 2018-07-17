@@ -108,7 +108,7 @@ public:
                                 perror ("Server: Not able to send message to client");
                                 continue;
                             }
-                            busy=0;//pid;
+                            busy=0;
                         }
                     }
                     else
