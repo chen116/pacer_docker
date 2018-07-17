@@ -96,7 +96,7 @@ public:
                     cli->hb_rec=     cli->init_hb_rec +      (cli->hb_state->buffer_index-1) ;
                     printf("hb rec instant rate:%d %f\n",pid,cli->hb_rec->instant_rate );
                     printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
-                    printf("tag: counter: %d %ld\n", pid, cli->hb_state->tag);
+                    printf("tag: counter: %d %ld\n", pid, cli->hb_rec->tag);
 
                     if (!busy)
                     {
