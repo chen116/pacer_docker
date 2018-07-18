@@ -49,7 +49,7 @@ private:
     mqd_t _qd_server;
     std::multimap<double,client*> clients_task_queue; //<< heartbeat , client>
     int busy=0;
-    boost::fibonacci_heap<float, client*> Q(N, cmp);
+
 
 
 public:
