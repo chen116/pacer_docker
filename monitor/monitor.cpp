@@ -111,8 +111,10 @@ public:
                     //update_priority()
                     for (auto update_it = clients_map.begin(); update_it != clients_map.end(); ++update_it) 
                     {
-                        std::cout << update_it->first << ", " << update_it->second.pid << '\n';
+                        std::cout << update_it->first << ", " << update_it->second.pid ;
                         update_it->second.priority = update_it->second.last_hr / (1+ hbr_get_timestamp(cli->hb_rec)- update_it->second.last_ts);
+
+                        std::cout << update_it->second.priority << '\n';
                     }
                     cli->priority = hb_get_instant_rate(cli->heart);
                     cli->last_ts = hbr_get_timestamp(cli->hb_rec);
@@ -161,6 +163,7 @@ public:
 
                                 for ( auto itt = clients_map.begin(); itt != clients_map.end(); ++itt )
                                 {
+                                    printf("priority when gpu busy: %f\n",itt->second.pid );
                                     if (itt->second.priority<smallest_pri)
                                     {
                                         pid_get_to_run = itt->second.pid;
