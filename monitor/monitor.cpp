@@ -35,7 +35,7 @@ heartbeat_t* heart;
 double priority=0;
 double last_ts=0;
 double last_hr=0;
-int pri_index = 0;
+int pri_index = 1;
 
 
 } ;
@@ -306,7 +306,8 @@ public:
                 {   
                     printf("new client with pid %d\n",pid);
                     client c;
-                    c.pri_index = pid % 2;
+                    if (clients_map.size() ==0 )
+                        c.pri_index=2;
                     char msg[16];
                     sprintf(msg,"/%d",pid);
                     if ((c.qd_client = mq_open (msg, O_WRONLY)) == 1) {
