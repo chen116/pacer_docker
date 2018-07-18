@@ -19,7 +19,7 @@
 // problem reports or change requests be submitted to it directly
 
 #include <heartbeats/heartbeat.h>
-// heartbeat_t* heart;
+heartbeat_t* heart;
 static const int64_t vic_win_size = 10;
 static const int64_t vic_buf_depth = 100;
 static const char* vic_log_file ="vic.log";
@@ -289,7 +289,7 @@ void mc (
     {
         // Here we start measurings host time for kernel execution
         double start = time_stamp();
-        // heartbeat(heart, 1);
+        heartbeat(heart, 1);
         err = clEnqueueNDRangeKernel(
             oclobjects.queue,
             executable.kernel,
@@ -381,7 +381,7 @@ void mc (
 
 int main (int argc, const char** argv)
 {
-    // heart = heartbeat_init(vic_win_size, vic_buf_depth, vic_log_file, vic_min_target, vic_max_target);
+    heart = heartbeat_init(vic_win_size, vic_buf_depth, vic_log_file, vic_min_target, vic_max_target);
 
 
     try
@@ -460,5 +460,5 @@ int main (int argc, const char** argv)
     }
 
 
-// heartbeat_finish(heart);
+heartbeat_finish(heart);
 }
