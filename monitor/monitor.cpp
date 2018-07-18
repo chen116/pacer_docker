@@ -116,7 +116,11 @@ public:
 
                         printf(" updated ittt:: pid :%d ,$dcli->pri %f, cli->last_ts %f, cli->last_hr %f",update_it->first ,update_it->second.priority, update_it->second.last_ts,update_it->second.last_hr );
 
-                        update_it->second.priority = update_it->second.last_hr / (1+ cur_ts- update_it->second.last_ts);
+                        update_it->second.priority = update_it->second.last_hr / (1+ cur_ts - update_it->second.last_ts);
+                        if (update_it->second.priority < 0 )
+                        {
+                            printf(" neggggggg %f %f \n",cur_ts ,update_it->second.last_ts  );
+                        }
 
                         printf(" cli-> new priority %f \n",update_it->second.priority);
                     }
