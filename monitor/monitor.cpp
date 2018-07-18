@@ -50,7 +50,7 @@ private:
     // std::unordered_map<int, client> _map;
     boost::mutex * _mutex;
     mqd_t _qd_server;
-    std::multimap<double,client*> clients_task_queue; //<< heartbeat , client>
+    std::multimap<int,client*> clients_task_queue; //<< pid , client>
     int busy=0;
 
 
@@ -155,18 +155,18 @@ public:
                                 int pid_get_to_run = 0;
                                 double smallest_pri = 9999999;
                                 client* popped_cli ;
-                                std::multimap<double,client*>::iterator it_get_to_run;
+                                // std::multimap<double,client*>::iterator it_get_to_run;
 
 
 
-                                for ( std::multimap<double,client*>::iterator itt = clients_map.begin(); itt != clients_map.end(); ++itt )
+                                for ( auto itt = clients_map.begin(); itt != clients_map.end(); ++itt )
                                 {
                                     if (itt->second->priority<smallest_pri)
                                     {
                                         pid_get_to_run = itt->second->pid;
                                         smallest_pri = itt->second->priority;
                                         popped_cli =  (itt->second);
-                                        it_get_to_run = itt;
+                                        // it_get_to_run = itt;
                                     }
                                 }
                                 printf("popped_cli: %d , pri: %f\n", popped_cli->pid,popped_cli->priority);
@@ -187,11 +187,11 @@ public:
                                     continue;
                                 }
                                 busy=popped_cli->pid;
-                                clients_task_queue.erase(it_get_to_run);
+                                clients_task_queue.erase(pid_get_to_run);
                                 printf("next running task: %d\n",busy );
                                 printf("meow map conatins:\n");
                                 for ( auto itt = clients_map.begin(); itt != clients_map.end(); ++itt )
-                                    printf("        %d, pri: %f\n",itt->first , itt->second.priority );
+                                    printf("      pid  %d, pri: %f\n",itt->first , itt->second.priority );
                             }
                         }
                         else
@@ -199,11 +199,11 @@ public:
 
                             //insert the cli that requested gpu
 
-                            clients_task_queue.insert (std::pair<double,client*>(cli->hb_rec->instant_rate,cli) );
+                            clients_task_queue.insert (std::pair<int,client*>(cli->hb_rec->instant_rate,cli) );
                             printf("GPU busy:\n");
-                            for (std::multimap<double,client*>::iterator it = clients_task_queue.begin();it != clients_task_queue.end();++it)
+                            for (std::multimap<int,client*>::iterator it = clients_task_queue.begin();it != clients_task_queue.end();++it)
                             {
-                                printf("hb: %f , pid:%d\n", (*it).first ,(*it).second->pid);
+                                printf("pid: %d , pri:%d\n", (*it).first ,(*it).second->priority);
                             }
 
                         }
