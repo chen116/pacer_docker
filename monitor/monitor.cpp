@@ -309,7 +309,7 @@ public:
                     client c;
                     if (clients_map.size() ==0 )
                     {
-                        c.pri_index=1000;
+                        c.pri_index=1;
                         printf(" pri_index = %d\n", c.pri_index);
                     }
                     char msg[16];
