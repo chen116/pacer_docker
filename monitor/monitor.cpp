@@ -32,6 +32,9 @@ struct client {
   HB_global_state_t* hb_state;
   mqd_t qd_client;
 heartbeat_t* heart;
+double priority;
+double last_ts;
+double last_hr;
 
 
 } ;
@@ -106,11 +109,15 @@ public:
                     printf("tag: counter: %d %ld\n", pid, cli->hb_rec->tag);
 
                     //update_priority()
-                    for (auto update_it = clients_map.begin(); update_it != clients_map.end(); ++update_it) {
+                    for (auto update_it = clients_map.begin(); update_it != clients_map.end(); ++update_it) 
+                    {
                         std::cout << update_it->first << ", " << update_it->second.pid << '\n';
+                        update_it->second.priority = update_it->second.last_hr / (1+ hbr_get_timestamp(cli->heart)- update_it->second.last_ts);
+                    }
+                    cli->priority = hb_get_instant_rate(cli->heart);
+                    cli->last_ts = hbr_get_timestamp(cli->heart);
+                    cli->last_hr = hb_get_instant_rate(cli->heart);
 
-
-                      }
 
 
                     if (!busy)
@@ -143,11 +150,39 @@ public:
                             }
                             else
                             {
-                                std::multimap<double,client*>::iterator it = clients_task_queue.begin();
-                                client* popped_cli  = (*it).second;
-                                char out_buffer[16];
-                                sprintf (out_buffer, "%d", popped_cli->cnt);
-                                popped_cli->cnt++;
+
+                                // who got to run based on who has smallest priorty:
+                                int pid_get_to_run = 0;
+                                double smallest_pri = 9999999;
+                                client* popped_cli ;
+
+
+
+                                for ( auto itt = clients_map.begin(); itt != clients_map.end(); ++itt )
+                                {
+                                    if (itt->second.priority<smallest_pri)
+                                    {
+                                        pid_get_to_run = itt->second.pid;
+                                        smallest_pri = itt->second.priority;
+                                        popped_cli = itt->second;
+                                    }
+                                }
+                                printf("popped_cli: %d , pri: %f\n", popped_cli->pid,popped_cli->priority);
+
+
+
+
+
+
+
+                                // std::multimap<double,client*>::iterator it = clients_task_queue.begin();
+                                // client* popped_cli  = (*it).second;
+                                // char out_buffer[16];
+                                // sprintf (out_buffer, "%d", popped_cli->cnt);
+                                // popped_cli->cnt++;
+
+
+
                                 if (mq_send (popped_cli->qd_client, out_buffer, strlen (out_buffer) + 1, 0) == -1) {
                                     perror ("Server: Not able to send message to client");
                                     continue;
@@ -157,13 +192,13 @@ public:
                                 printf("next running task: %d\n",busy );
                                 printf("meow map conatins:\n");
                                 for ( auto itt = clients_map.begin(); itt != clients_map.end(); ++itt )
-                                    printf("        %d\n",itt->first );
+                                    printf("        %d, pri: %f\n",itt->first , itt->second->priority );
                             }
                         }
                         else
                         {
 
-
+                            //insert the cli that requested gpu
 
                             clients_task_queue.insert (std::pair<double,client*>(cli->hb_rec->instant_rate,cli) );
                             printf("GPU busy:\n");
