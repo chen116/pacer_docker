@@ -32,9 +32,9 @@ struct client {
   HB_global_state_t* hb_state;
   mqd_t qd_client;
 heartbeat_t* heart;
-double priority;
-double last_ts;
-double last_hr;
+double priority=0;
+double last_ts=0;
+double last_hr=0;
 
 
 } ;
@@ -111,7 +111,9 @@ public:
                     //update_priority()
                     for (auto update_it = clients_map.begin(); update_it != clients_map.end(); ++update_it) 
                     {
-                        std::cout << update_it->first << ", " << update_it->second.pid << ", ";
+
+                        printf(" updated ittt:: cli->pri %f, cli->last_ts %f, cli->last_hr %f\n",update_it->second.priority, update_it->second.last_ts,update_it->second.last_hr );
+
                         update_it->second.priority = update_it->second.last_hr / (1+ hbr_get_timestamp(cli->hb_rec)- update_it->second.last_ts);
 
                         std::cout << update_it->second.priority << '\n';
