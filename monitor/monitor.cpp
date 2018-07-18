@@ -307,7 +307,10 @@ public:
                     printf("new client with pid %d\n",pid);
                     client c;
                     if (clients_map.size() ==0 )
-                        c.pri_index=2;
+                    {
+                        c.pri_index=10;
+                        printf(" pri_index = %d\n", c.pri_index);
+                    }
                     char msg[16];
                     sprintf(msg,"/%d",pid);
                     if ((c.qd_client = mq_open (msg, O_WRONLY)) == 1) {
