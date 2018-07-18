@@ -106,7 +106,7 @@ public:
                     cli->hb_rec=     cli->init_hb_rec +      (cli->hb_state->buffer_index-1) ;
                     printf("hb rec instant rate:%d %f\n",pid,cli->hb_rec->instant_rate );
                     printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
-                    printf("tag: counter: %d %ld\n", pid, cli->hb_rec->tag);
+                    printf("tag: counter: %d %d\n", pid, cli->hb_rec->tag);
 
                     //update_priority()
                     for (auto update_it = clients_map.begin(); update_it != clients_map.end(); ++update_it) 
@@ -165,7 +165,7 @@ public:
                                     {
                                         pid_get_to_run = itt->second.pid;
                                         smallest_pri = itt->second.priority;
-                                        popped_cli =  (itt->second);
+                                        popped_cli =  &(itt->second);
                                         // it_get_to_run = itt;
                                     }
                                 }
@@ -203,7 +203,7 @@ public:
                             printf("GPU busy:\n");
                             for (std::multimap<int,client*>::iterator it = clients_task_queue.begin();it != clients_task_queue.end();++it)
                             {
-                                printf("pid: %d , pri:%d\n", (*it).first ,(*it).second->priority);
+                                printf("pid: %d , pri:%f\n", (*it).first ,(*it).second->priority);
                             }
 
                         }
