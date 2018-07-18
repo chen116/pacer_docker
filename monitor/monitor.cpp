@@ -163,9 +163,10 @@ public:
                                 {
                                     if (itt->second.priority<smallest_pri)
                                     {
-                                        pid_get_to_run = itt->second.pid;
-                                        smallest_pri = itt->second.priority;
-                                        popped_cli = & (itt->second);
+                                        pid_get_to_run = itt->second->pid;
+                                        smallest_pri = itt->second->priority;
+                                        popped_cli =  (itt->second);
+                                        it_get_to_run = itt;
                                     }
                                 }
                                 printf("popped_cli: %d , pri: %f\n", popped_cli->pid,popped_cli->priority);
