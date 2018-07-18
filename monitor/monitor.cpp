@@ -97,6 +97,7 @@ public:
 
                     client* cli = &clients_map[pid];
                     heartbeat(cli->heart,1);
+                    printf("instant_rate from heart %f\n", hb_get_instant_rate(cli->heart));
 
                     cli->hb_rec=     cli->init_hb_rec +      (cli->hb_state->buffer_index-1) ;
                     printf("hb rec instant rate:%d %f\n",pid,cli->hb_rec->instant_rate );
@@ -254,20 +255,14 @@ public:
                     c.heart = heartbeat_init(10, 100, hb_log_file, 100, 100 );
                     printf("hb inited at monitor!\n");
                     heartbeat(c.heart,1);
-                        printf("hb first heartbeat at monitor!\n");
-
                     int shmid_rec=-1;
                     int shmid_state=-1;                    
                     while (shmid_rec< 0)
                     {
-                        printf("hb inited at monitor2!\n");
-
                         shmid_rec = shmget(pid << 1, 100*sizeof(heartbeat_record_t), 0666);
                     }
                     while (shmid_state<0)
                     {
-                    printf("hb inited at monitor3!\n");
-
                         shmid_state = shmget( (pid << 1) | 1, sizeof(HB_global_state_t), 0666);
                     }
 
