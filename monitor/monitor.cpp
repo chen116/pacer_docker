@@ -109,6 +109,7 @@ public:
                     printf("tag: counter: %d %d\n", pid, cli->hb_rec->tag);
 
                     double cur_ts = hbr_get_timestamp(cli->hb_rec)/1000000000;
+                    printf("cur_ts %f\n", cur_ts);
 
                     //update_priority()
                     for (auto update_it = clients_map.begin(); update_it != clients_map.end(); ++update_it) 
