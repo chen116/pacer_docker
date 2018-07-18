@@ -159,14 +159,13 @@ public:
 
 
 
-                                for ( auto itt = clients_map.begin(); itt != clients_map.end(); ++itt )
+                                for ( std::multimap<double,client*>::iterator itt = clients_map.begin(); itt != clients_map.end(); ++itt )
                                 {
                                     if (itt->second.priority<smallest_pri)
                                     {
                                         pid_get_to_run = itt->second.pid;
                                         smallest_pri = itt->second.priority;
                                         popped_cli = & (itt->second);
-                                        it_get_to_run=itt;
                                     }
                                 }
                                 printf("popped_cli: %d , pri: %f\n", popped_cli->pid,popped_cli->priority);
@@ -191,7 +190,7 @@ public:
                                 printf("next running task: %d\n",busy );
                                 printf("meow map conatins:\n");
                                 for ( auto itt = clients_map.begin(); itt != clients_map.end(); ++itt )
-                                    printf("        %d, pri: %f\n",itt->first , itt->second->priority );
+                                    printf("        %d, pri: %f\n",itt->first , itt->second.priority );
                             }
                         }
                         else
