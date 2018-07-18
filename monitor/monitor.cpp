@@ -111,7 +111,7 @@ public:
                     //update_priority()
                     for (auto update_it = clients_map.begin(); update_it != clients_map.end(); ++update_it) 
                     {
-                        std::cout << update_it->first << ", " << update_it->second.pid ;
+                        std::cout << update_it->first << ", " << update_it->second.pid << ", ";
                         update_it->second.priority = update_it->second.last_hr / (1+ hbr_get_timestamp(cli->hb_rec)- update_it->second.last_ts);
 
                         std::cout << update_it->second.priority << '\n';
