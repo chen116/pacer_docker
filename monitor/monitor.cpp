@@ -21,7 +21,7 @@
 #include <unordered_map>
 #include <map>
 
-
+# include <boost/heap/fibonacci_heap.hpp>
 
 // typedef std::unordered_map<int, client> clients_map;
 struct client {
@@ -35,7 +35,7 @@ heartbeat_t* heart;
 
 
 } ;
-std::unordered_map<int, client> clients_map; 
+std::unordered_map<int, client> clients_map;  //<pid, client>
 
 
 
@@ -47,8 +47,9 @@ private:
     // std::unordered_map<int, client> _map;
     boost::mutex * _mutex;
     mqd_t _qd_server;
-    std::multimap<double,client*> clients_task_queue;
+    std::multimap<double,client*> clients_task_queue; //<< heartbeat , client>
     int busy=0;
+    boost::fibonacci_heap<float, client*> Q(N, cmp);
 
 
 public:
@@ -104,6 +105,14 @@ public:
                     printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
                     printf("tag: counter: %d %ld\n", pid, cli->hb_rec->tag);
 
+                    //update_priority()
+                    for (auto update_it = clients_map.begin(); update_it != clients_map.end(); ++update_it) {
+                        std::cout << update_it->first << ", " << update_it->second.pid << '\n';
+                        
+
+                      }
+
+
                     if (!busy)
                     {
                         if (!finished)
@@ -153,6 +162,9 @@ public:
                         }
                         else
                         {
+
+
+
                             clients_task_queue.insert (std::pair<double,client*>(cli->hb_rec->instant_rate,cli) );
                             printf("GPU busy:\n");
                             for (std::multimap<double,client*>::iterator it = clients_task_queue.begin();it != clients_task_queue.end();++it)
