@@ -108,18 +108,20 @@ public:
                     printf("hb_state: counter: %d %ld\n", pid, cli->hb_state->counter-1);
                     printf("tag: counter: %d %d\n", pid, cli->hb_rec->tag);
 
+                    double cur_ts = hbr_get_timestamp(cli->hb_rec)/1000000000;
+
                     //update_priority()
                     for (auto update_it = clients_map.begin(); update_it != clients_map.end(); ++update_it) 
                     {
 
                         printf(" updated ittt:: cli->pri %f, cli->last_ts %f, cli->last_hr %f",update_it->second.priority, update_it->second.last_ts,update_it->second.last_hr );
 
-                        update_it->second.priority = update_it->second.last_hr / (1+ hbr_get_timestamp(cli->hb_rec)- update_it->second.last_ts);
+                        update_it->second.priority = update_it->second.last_hr / (1+ cur_ts- update_it->second.last_ts);
 
                         printf(" cli-> new priority %f \n",update_it->second.priority);
                     }
                     cli->priority = hb_get_instant_rate(cli->heart);
-                    cli->last_ts = hbr_get_timestamp(cli->hb_rec);
+                    cli->last_ts = cur_ts;
                     cli->last_hr = hb_get_instant_rate(cli->heart);
                     printf(" updated: cli->pri %f, cli->last_ts %f, cli->last_hr %f\n",cli->priority,cli->last_ts,cli->last_hr );
 
