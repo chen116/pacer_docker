@@ -110,14 +110,14 @@ public:
 
 
                     //update_priority()
-                    if(finished)
+                    if(!finished)
                     {
                         double cur_ts = hbr_get_timestamp(cli->hb_rec)/1000000000;
                         printf("cur_ts %f\n", cur_ts);
                         for (auto update_it = clients_map.begin(); update_it != clients_map.end(); ++update_it) 
                         {
 
-                            printf(" updated ittt:: pid :%d ,$dcli->pri %f, cli->last_ts %f, cli->last_hr %f\n",update_it->first ,update_it->second.priority, update_it->second.last_ts,update_it->second.last_hr );
+                            printf(" updated ittt:: pid :%d ,cli->pri %f, cli->last_ts %f, cli->last_hr %f\n",update_it->first ,update_it->second.priority, update_it->second.last_ts,update_it->second.last_hr );
 
                             update_it->second.priority = update_it->second.last_hr / (1+ cur_ts - update_it->second.last_ts);
                             if (update_it->second.priority < 0 )
