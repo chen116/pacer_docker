@@ -264,6 +264,7 @@ public:
                     {
                         shmid_state = shmget( (pid << 1) | 1, sizeof(HB_global_state_t), 0666);
                     }
+                    printf("hb inited at monitor2!\n");
 
 
 
