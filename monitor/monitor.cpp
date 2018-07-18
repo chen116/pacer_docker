@@ -258,13 +258,16 @@ public:
                     int shmid_state=-1;                    
                     while (shmid_rec< 0)
                     {
+                        printf("hb inited at monitor2!\n");
+
                         shmid_rec = shmget(pid << 1, 100*sizeof(heartbeat_record_t), 0666);
                     }
                     while (shmid_state<0)
                     {
+                    printf("hb inited at monitor3!\n");
+
                         shmid_state = shmget( (pid << 1) | 1, sizeof(HB_global_state_t), 0666);
                     }
-                    printf("hb inited at monitor2!\n");
 
 
 
