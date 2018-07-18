@@ -251,7 +251,7 @@ public:
 
                     char hb_log_file[16];
                     sprintf(hb_log_file,"log_%d",pid);
-                    c.heart = heartbeat_init(10, 100, hb_log_file, 100, 100 , pid );
+                    c.heart = heartbeat_init(10, 100, hb_log_file, 100, 100 );
                     printf("hb inited at monitor!\n");
                     heartbeat(c.heart,1);
                         printf("hb first heartbeat at monitor!\n");
