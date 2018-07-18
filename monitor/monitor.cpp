@@ -161,7 +161,7 @@ public:
 
                                 for ( std::multimap<double,client*>::iterator itt = clients_map.begin(); itt != clients_map.end(); ++itt )
                                 {
-                                    if (itt->second.priority<smallest_pri)
+                                    if (itt->second->priority<smallest_pri)
                                     {
                                         pid_get_to_run = itt->second->pid;
                                         smallest_pri = itt->second->priority;
