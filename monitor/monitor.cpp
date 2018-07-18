@@ -114,7 +114,7 @@ public:
                     for (auto update_it = clients_map.begin(); update_it != clients_map.end(); ++update_it) 
                     {
 
-                        printf(" updated ittt:: cli->pri %f, cli->last_ts %f, cli->last_hr %f",update_it->second.priority, update_it->second.last_ts,update_it->second.last_hr );
+                        printf(" updated ittt:: pid :%d ,$dcli->pri %f, cli->last_ts %f, cli->last_hr %f",update_it->first ,update_it->second.priority, update_it->second.last_ts,update_it->second.last_hr );
 
                         update_it->second.priority = update_it->second.last_hr / (1+ cur_ts- update_it->second.last_ts);
 
@@ -168,7 +168,7 @@ public:
 
                                 for ( auto itt = clients_map.begin(); itt != clients_map.end(); ++itt )
                                 {
-                                    printf("priority when gpu busy: %f\n",itt->second.pid );
+                                    printf("priority when gpu busy: %d\n",itt->second.pid );
                                     if (itt->second.priority<smallest_pri)
                                     {
                                         pid_get_to_run = itt->second.pid;
