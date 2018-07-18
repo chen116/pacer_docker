@@ -166,14 +166,14 @@ public:
 
 
 
-                                for ( auto itt = clients_map.begin(); itt != clients_map.end(); ++itt )
+                                for ( auto itt = clients_task_queue.begin(); itt != clients_task_queue.end(); ++itt )
                                 {
-                                    printf("priority when gpu busy: %d\n",itt->second.pid );
+                                    printf("priority when gpu busy: %d\n",itt->second->pid );
                                     if (itt->second.priority<smallest_pri)
                                     {
-                                        pid_get_to_run = itt->second.pid;
-                                        smallest_pri = itt->second.priority;
-                                        popped_cli =  &(itt->second);
+                                        pid_get_to_run = itt->second->pid;
+                                        smallest_pri = itt->second->priority;
+                                        popped_cli =  (itt->second);
                                         // it_get_to_run = itt;
                                     }
                                 }
@@ -207,7 +207,7 @@ public:
 
                             //insert the cli that requested gpu
 
-                            clients_task_queue.insert (std::pair<int,client*>(cli->hb_rec->instant_rate,cli) );
+                            clients_task_queue.insert (std::pair<int,client*>(cli->pid,cli) );
                             printf("GPU busy:\n");
                             for (std::multimap<int,client*>::iterator it = clients_task_queue.begin();it != clients_task_queue.end();++it)
                             {
