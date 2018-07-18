@@ -254,6 +254,8 @@ public:
                     c.heart = heartbeat_init(10, 100, hb_log_file, 100, 100 );
                     printf("hb inited at monitor!\n");
                     heartbeat(c.heart,1);
+                        printf("hb first heartbeat at monitor!\n");
+
                     int shmid_rec=-1;
                     int shmid_state=-1;                    
                     while (shmid_rec< 0)
