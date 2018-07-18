@@ -169,7 +169,7 @@ public:
                                 for ( auto itt = clients_task_queue.begin(); itt != clients_task_queue.end(); ++itt )
                                 {
                                     printf("priority when gpu busy: %d\n",itt->second->pid );
-                                    if (itt->second.priority<smallest_pri)
+                                    if (itt->second->priority<smallest_pri)
                                     {
                                         pid_get_to_run = itt->second->pid;
                                         smallest_pri = itt->second->priority;
