@@ -128,7 +128,7 @@ public:
 
                             printf(" cli-> new priority %f \n",update_it->second.priority);
                         }
-                        cli->priority = hb_get_instant_rate(cli->heart)/update_it->second.pri_index;
+                        cli->priority = hb_get_instant_rate(cli->heart)/cli->pri_index;
                         cli->last_ts = cur_ts;
                         cli->last_hr = hb_get_instant_rate(cli->heart);
                         printf(" updated: cli->pri %f, cli->last_ts %f, cli->last_hr %f\n",cli->priority,cli->last_ts,cli->last_hr );
