@@ -119,6 +119,7 @@ public:
                     cli->priority = hb_get_instant_rate(cli->heart);
                     cli->last_ts = hbr_get_timestamp(cli->hb_rec);
                     cli->last_hr = hb_get_instant_rate(cli->heart);
+                    printf(" updated: cli->pri %d, cli->last_ts %f, cli->last_hr %f\n",cli->priority,cli->last_ts,cli->last_hr );
 
 
 
