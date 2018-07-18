@@ -118,7 +118,8 @@ public:
                         for (auto update_it = clients_map.begin(); update_it != clients_map.end(); ++update_it) 
                         {
 
-                            printf(" updated ittt:: pid :%d ,cli->pri %f, cli->last_ts %f, cli->last_hr %f\n",update_it->first ,update_it->second.priority, update_it->second.last_ts,update_it->second.last_hr );
+                            printf(" updated ittt:: pid :%d ,cli->pri %f, cli->last_ts %f, cli->last_hr %f,pri_index %d \n"
+                                ,update_it->first ,update_it->second.priority, update_it->second.last_ts,update_it->second.last_hr ,update_it->second.pri_index);
 
                             update_it->second.priority = (update_it->second.last_hr / (1+ cur_ts - update_it->second.last_ts))/update_it->second.pri_index;
                             if (update_it->second.priority < 0 )
@@ -308,7 +309,7 @@ public:
                     client c;
                     if (clients_map.size() ==0 )
                     {
-                        c.pri_index=10;
+                        c.pri_index=1000;
                         printf(" pri_index = %d\n", c.pri_index);
                     }
                     char msg[16];
