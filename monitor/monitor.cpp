@@ -35,6 +35,7 @@ heartbeat_t* heart;
 double priority=0;
 double last_ts=0;
 double last_hr=0;
+int pri_index = 0;
 
 
 } ;
@@ -119,7 +120,7 @@ public:
 
                             printf(" updated ittt:: pid :%d ,cli->pri %f, cli->last_ts %f, cli->last_hr %f\n",update_it->first ,update_it->second.priority, update_it->second.last_ts,update_it->second.last_hr );
 
-                            update_it->second.priority = update_it->second.last_hr / (1+ cur_ts - update_it->second.last_ts);
+                            update_it->second.priority = (update_it->second.last_hr / (1+ cur_ts - update_it->second.last_ts))/update_it->second.pri_index;
                             if (update_it->second.priority < 0 )
                             {
                                 printf(" neggggggg %f %f \n",cur_ts ,update_it->second.last_ts  );
@@ -127,7 +128,7 @@ public:
 
                             printf(" cli-> new priority %f \n",update_it->second.priority);
                         }
-                        cli->priority = hb_get_instant_rate(cli->heart);
+                        cli->priority = hb_get_instant_rate(cli->heart)/update_it->second.pri_index;
                         cli->last_ts = cur_ts;
                         cli->last_hr = hb_get_instant_rate(cli->heart);
                         printf(" updated: cli->pri %f, cli->last_ts %f, cli->last_hr %f\n",cli->priority,cli->last_ts,cli->last_hr );
@@ -215,7 +216,7 @@ public:
                             //insert the cli that requested gpu
 
                             clients_task_queue.insert (std::pair<int,client*>(cli->pid,cli) );
-                            printf("GPU busy:\n");
+                            printf("GPU busy, clients_task_queue contains:\n");
                             for (std::multimap<int,client*>::iterator it = clients_task_queue.begin();it != clients_task_queue.end();++it)
                             {
                                 printf("pid: %d , pri:%f\n", (*it).first ,(*it).second->priority);
@@ -305,6 +306,7 @@ public:
                 {   
                     printf("new client with pid %d\n",pid);
                     client c;
+                    c.pri_index = pid % 2;
                     char msg[16];
                     sprintf(msg,"/%d",pid);
                     if ((c.qd_client = mq_open (msg, O_WRONLY)) == 1) {
