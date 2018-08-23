@@ -8,7 +8,28 @@
  Go version:   go1.9.5
 
 
- Go read Dockerfile to see how to run
+
+
+
+
+
+How to build docker image and run with dockerfile to access vnc:
+
+# at vnc window:
+# at the vnc window of root@: run $ xhost + local:root
+# sudo docker build  --no-cache -t pyobjdet .  
+# sudo docker run --runtime=nvidia -v /tmp/.X11-unix/:/tmp/.X11-unix:ro -v /root/pacer_docker/ipc/soc/tcp:/foo -e DISPLAY=$DISPLAY --ipc="host" -e "VIC_SHM_ID=1024" -ti --rm pyobjdet /bin/bash
+# https://groups.google.com/forum/#!topic/etetoolkit/4SrZk5fRtCM
+# https://github.com/osrf/docker_images/issues/21
+
+
+
+example opencl Dockerfile:
+
+pacer_docker/app/objdet/Dockerfile
+
+
+
 
 ===========================
 
@@ -75,7 +96,7 @@ to run:
 
 (rmb to put in heartbeat stuff before compile)
 
-===========================
+================================
 
 
 cuda opencl benchmark:
